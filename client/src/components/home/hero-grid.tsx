@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import heroImage from "@assets/generated_images/professional_lifestyle_vaping_shot_dark_moody.png";
+import heroImage from "@assets/generated_images/hand_holding_premium_pod_vape_dark_background.png";
 
 export function HeroGrid() {
   return (
