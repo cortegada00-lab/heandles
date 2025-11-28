@@ -88,19 +88,25 @@ export function HeroGrid() {
                         alt="Hero Slide" 
                         className="w-full h-full object-cover opacity-80 animate-in fade-in duration-1000"
                         />
-                        {/* Overlay Gradient */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent"></div>
+                        {/* Overlay Gradient - Stronger on mobile/left for text readability */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/60 to-black/20 md:to-transparent"></div>
+                        {/* Extra blur for Slide 2 background to focus on product */}
+                        {/* @ts-ignore */}
+                        {slide.bottleImage && <div className="absolute inset-0 backdrop-blur-[2px]"></div>}
                     </div>
                     
-                    {/* Optional Bottle Overlay for Slide 2 */}
+                    {/* Optional Bottle Overlay for Slide 2 - Floating Hero Style */}
                     {/* @ts-ignore */}
                     {slide.bottleImage && (
-                      <div className="absolute bottom-0 right-[10%] md:right-[15%] lg:right-[20%] z-10 w-[180px] md:w-[240px] lg:w-[300px] transform translate-y-[10%] rotate-3 drop-shadow-2xl filter brightness-90">
+                      <div className="absolute top-1/2 right-4 md:right-16 lg:right-32 -translate-y-1/2 z-20 w-[200px] md:w-[300px] lg:w-[380px] h-[300px] md:h-[450px] lg:h-[550px] flex items-center justify-center pointer-events-none">
+                          {/* Atmospheric Glow */}
+                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-tr from-pink-500/20 to-blue-500/20 blur-[60px] rounded-full"></div>
+                          
                           <img 
                             /* @ts-ignore */
                             src={slide.bottleImage} 
                             alt="Premium E-Liquid Bottle" 
-                            className="w-full h-auto object-contain animate-in slide-in-from-bottom-10 fade-in duration-1000 delay-300"
+                            className="relative z-10 w-full h-full object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.5)] animate-in zoom-in-95 fade-in slide-in-from-bottom-8 duration-1000 ease-out"
                           />
                       </div>
                     )}
