@@ -58,101 +58,103 @@ export function Navbar() {
 
       {/* Main Header */}
       <header className="py-4 md:py-6 bg-white relative z-50 sticky top-0 shadow-sm md:shadow-none">
-        <div className="container-custom flex items-center justify-between gap-4 md:gap-8">
+        <div className="container-custom flex items-center justify-between gap-0 md:gap-8">
           
-          {/* Mobile Menu - Nike Style */}
-          <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-            <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon" className="shrink-0">
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-full sm:w-[400px] p-0 border-l border-gray-100 bg-white overflow-y-auto">
-              <SheetHeader className="p-6 flex flex-row justify-between items-center border-b border-transparent">
-                 {/* Empty title for accessibility or hidden */}
-                 <SheetTitle className="hidden">Menú</SheetTitle>
-                 <div className="w-8"></div> {/* Spacer for balance if needed, or just rely on Close button */}
-              </SheetHeader>
-              
-              <div className="px-8 pb-8 flex flex-col h-full">
-                {/* Main Categories - Big & Bold */}
-                <div className="space-y-6 mb-12">
-                  <Link href="/ofertas" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-red-600">
-                    Black Friday Ofertas
-                    <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-red-600 transition-colors" />
-                  </Link>
-                  <Link href="/novedades" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
-                    Novedades
-                    <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
-                  </Link>
-                  <Link href="/eliquids" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
-                    E-Liquids
-                    <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
-                  </Link>
-                  <Link href="/disposables" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
-                    Desechables
-                    <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
-                  </Link>
-                  <Link href="/kits" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
-                    Vape Kits
-                    <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
-                  </Link>
-                  <Link href="/coils" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
-                    Resistencias
-                    <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
-                  </Link>
+          <div className="flex items-center lg:hidden shrink-0 mr-auto">
+            {/* Mobile Menu - Nike Style */}
+            <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+              <SheetTrigger asChild className="lg:hidden">
+                <Button variant="ghost" size="icon" className="shrink-0 -ml-2">
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-full sm:w-[400px] p-0 border-l border-gray-100 bg-white overflow-y-auto">
+                <SheetHeader className="p-6 flex flex-row justify-between items-center border-b border-transparent">
+                   {/* Empty title for accessibility or hidden */}
+                   <SheetTitle className="hidden">Menú</SheetTitle>
+                   <div className="w-8"></div> {/* Spacer for balance if needed, or just rely on Close button */}
+                </SheetHeader>
+                
+                <div className="px-8 pb-8 flex flex-col h-full">
+                  {/* Main Categories - Big & Bold */}
+                  <div className="space-y-6 mb-12">
+                    <Link href="/ofertas" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-red-600">
+                      Black Friday Ofertas
+                      <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-red-600 transition-colors" />
+                    </Link>
+                    <Link href="/novedades" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
+                      Novedades
+                      <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
+                    </Link>
+                    <Link href="/eliquids" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
+                      E-Liquids
+                      <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
+                    </Link>
+                    <Link href="/disposables" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
+                      Desechables
+                      <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
+                    </Link>
+                    <Link href="/kits" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
+                      Vape Kits
+                      <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
+                    </Link>
+                    <Link href="/coils" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
+                      Resistencias
+                      <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
+                    </Link>
+                  </div>
+
+                  {/* Secondary / Brands Section */}
+                  <div className="space-y-4 mb-12 pl-1">
+                     <div className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <Sparkles className="w-5 h-5" /> Marcas Top
+                     </div>
+                     <Link href="/vaporesso" onClick={() => setIsMenuOpen(false)} className="block text-lg font-medium text-gray-500 hover:text-black transition-colors">Vaporesso</Link>
+                     <Link href="/voopoo" onClick={() => setIsMenuOpen(false)} className="block text-lg font-medium text-gray-500 hover:text-black transition-colors">Voopoo</Link>
+                     <Link href="/elfbar" onClick={() => setIsMenuOpen(false)} className="block text-lg font-medium text-gray-500 hover:text-black transition-colors">ElfBar</Link>
+                     <Link href="/tiendas" onClick={() => setIsMenuOpen(false)} className="block text-lg font-medium text-gray-500 hover:text-black transition-colors mt-6 flex items-center gap-2">
+                        <MapPin className="w-5 h-5" /> Tiendas Físicas
+                     </Link>
+                  </div>
+
+                  {/* Contact & Auth Section - No Club/Points */}
+                  <div className="mt-auto pt-8 border-t border-gray-100">
+                     <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-lg font-medium text-gray-600 hover:text-black mb-8">
+                        <span className="flex items-center gap-2"><Phone className="w-5 h-5" /> Contacto y Ayuda</span>
+                        <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-black transition-colors" />
+                     </Link>
+
+                     <p className="text-gray-500 text-base leading-relaxed mb-6">
+                        Regístrate para gestionar tus pedidos y direcciones de envío fácilmente.
+                     </p>
+                     <div className="flex gap-3">
+                        <Link href="/register" onClick={() => setIsMenuOpen(false)} className="flex-1">
+                          <Button className="w-full rounded-full h-12 bg-black hover:bg-gray-800 text-white font-bold text-base">
+                             Registrarse
+                          </Button>
+                        </Link>
+                        <Link href="/login" onClick={() => setIsMenuOpen(false)} className="flex-1">
+                           <Button variant="outline" className="w-full rounded-full h-12 border-gray-300 text-black font-bold text-base hover:bg-gray-50">
+                             Iniciar sesión
+                           </Button>
+                        </Link>
+                     </div>
+                  </div>
+
                 </div>
+              </SheetContent>
+            </Sheet>
 
-                {/* Secondary / Brands Section */}
-                <div className="space-y-4 mb-12 pl-1">
-                   <div className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                      <Sparkles className="w-5 h-5" /> Marcas Top
-                   </div>
-                   <Link href="/vaporesso" onClick={() => setIsMenuOpen(false)} className="block text-lg font-medium text-gray-500 hover:text-black transition-colors">Vaporesso</Link>
-                   <Link href="/voopoo" onClick={() => setIsMenuOpen(false)} className="block text-lg font-medium text-gray-500 hover:text-black transition-colors">Voopoo</Link>
-                   <Link href="/elfbar" onClick={() => setIsMenuOpen(false)} className="block text-lg font-medium text-gray-500 hover:text-black transition-colors">ElfBar</Link>
-                   <Link href="/tiendas" onClick={() => setIsMenuOpen(false)} className="block text-lg font-medium text-gray-500 hover:text-black transition-colors mt-6 flex items-center gap-2">
-                      <MapPin className="w-5 h-5" /> Tiendas Físicas
-                   </Link>
-                </div>
-
-                {/* Contact & Auth Section - No Club/Points */}
-                <div className="mt-auto pt-8 border-t border-gray-100">
-                   <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-lg font-medium text-gray-600 hover:text-black mb-8">
-                      <span className="flex items-center gap-2"><Phone className="w-5 h-5" /> Contacto y Ayuda</span>
-                      <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-black transition-colors" />
-                   </Link>
-
-                   <p className="text-gray-500 text-base leading-relaxed mb-6">
-                      Regístrate para gestionar tus pedidos y direcciones de envío fácilmente.
-                   </p>
-                   <div className="flex gap-3">
-                      <Link href="/register" onClick={() => setIsMenuOpen(false)} className="flex-1">
-                        <Button className="w-full rounded-full h-12 bg-black hover:bg-gray-800 text-white font-bold text-base">
-                           Registrarse
-                        </Button>
-                      </Link>
-                      <Link href="/login" onClick={() => setIsMenuOpen(false)} className="flex-1">
-                         <Button variant="outline" className="w-full rounded-full h-12 border-gray-300 text-black font-bold text-base hover:bg-gray-50">
-                           Iniciar sesión
-                         </Button>
-                      </Link>
-                   </div>
-                </div>
-
-              </div>
-            </SheetContent>
-          </Sheet>
-
-          {/* Logo - Centered on mobile if needed, but usually left aligned is fine */}
-          <Link href="/" className="shrink-0 mr-auto lg:mr-0 flex flex-col">
-            <img 
-              src={ivapeoLogo} 
-              alt="IVAPEO" 
-              className="h-8 md:h-12 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity block"
-            />
-            <span className="text-[8px] md:text-[10px] text-gray-500 font-medium -mt-1 block leading-tight">Tienda de cigarrillos electrónicos iVapeo</span>
-          </Link>
+            {/* Logo - Centered on mobile if needed, but usually left aligned is fine */}
+            <Link href="/" className="shrink-0 flex flex-col">
+              <img 
+                src={ivapeoLogo} 
+                alt="IVAPEO" 
+                className="h-8 md:h-12 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity block"
+              />
+              <span className="text-[8px] md:text-[10px] text-gray-500 font-medium -mt-1 block leading-tight">Tienda de cigarrillos electrónicos iVapeo</span>
+            </Link>
+          </div>
 
           {/* Smart Search - Desktop: Centered & Wide. Mobile: Icon Trigger */}
           <div className="hidden lg:block flex-1 max-w-3xl mx-4">
