@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "buildCommand": "npx vite build",
+  "outputDirectory": "dist/public",
+  "framework": "vite",
+  "cleanUrls": true
+}

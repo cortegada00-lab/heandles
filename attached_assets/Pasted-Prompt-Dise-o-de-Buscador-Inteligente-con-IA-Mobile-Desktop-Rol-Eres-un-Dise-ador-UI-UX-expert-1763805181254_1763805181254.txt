@@ -1,0 +1,95 @@
+Prompt: Diseño de Buscador Inteligente con IA (Mobile & Desktop)
+Rol: Eres un Diseñador UI/UX experto en E-commerce y conversión móvil (CRO). Objetivo: Rediseñar la experiencia de búsqueda de iVapeo.com para transformarla de un buscador pasivo a un Asistente de Ventas Activo con IA. Contexto: El 90% del tráfico es móvil. El espacio es crítico.
+
+1. Arquitectura General (UX)
+El buscador deja de ser un simple campo de texto.
+
+En Móvil: Al pulsar la lupa, se abre un Overlay a Pantalla Completa (Full Screen Takeover) con fondo blanco, cubriendo toda la interfaz actual.
+
+En Desktop: Al hacer clic en el input, se despliega un Mega-Dropdown ancho (tipo caja flotante) debajo de la barra.
+
+2. Estado A: "Zero-Query" (Pantalla inicial antes de escribir)
+Objetivo: Guiar y facilitar clics rápidos sin usar el teclado.
+
+Componentes Visuales:
+
+Chips de Navegación (Scroll Horizontal):
+
+Justo debajo de la barra de búsqueda.
+
+Estilo: Botones ovalados (píldoras) gris claro con texto oscuro.
+
+Lógica: Mezclar historial y tendencias.
+
+Ejemplo: [↺ Oxva (Historial)] [🔥 Ofertas Flash (Tendencia)] [☁️ Pods].
+
+Sección "Tus Habituales" (Personalización):
+
+Solo si el usuario está logueado.
+
+Carrusel horizontal de productos que compra frecuentemente (resistencias, líquidos).
+
+Elemento Clave: Botón "Añadir al carrito" (🛒) directo en la tarjeta.
+
+Sección "Tendencias / Lo más buscado":
+
+Grid o lista visual de productos top ventas del momento.
+
+Botón Flotante (Floating Action Button - FAB):
+
+Ubicación: Esquina inferior derecha (por encima del teclado si estuviera activo).
+
+Texto: "🤖 Ayuda IA" o "¿Dudas?".
+
+Estilo: Color de acento (Verde o Azul corporativo), sombra suave.
+
+3. Estado B: "Active-Query" (Mientras el usuario escribe)
+Objetivo: Resultados precisos, visuales y resolución de compatibilidad.
+
+Comportamiento Dinámico:
+
+Al empezar a escribir, OCULTAR inmediatamente los Chips, la sección de Habituales y el Botón Flotante de IA para liberar espacio.
+
+El teclado ocupa el 40-50% inferior. El espacio restante es sagrado.
+
+Componentes Visuales de Resultados:
+
+Módulo "Solver" de Compatibilidad (Prioridad Alta):
+
+Si la IA detecta una búsqueda de recambio (ej: "resis luxe").
+
+Mostrar una tarjeta destacada (borde verde o fondo sutil) en la parte superior.
+
+Header: "✅ Compatible con tu dispositivo Luxe".
+
+Contenido: Foto del producto + Precio + Stock + Botón Grande de Añadir.
+
+Lista de Resultados Rich Autocomplete:
+
+No mostrar solo texto.
+
+Formato "Mini-Ficha": [Foto Thumbnail] + [Título Producto] + [Precio] + [Icono Carrito].
+
+Altura de fila compacta para que quepan 3-4 resultados visibles antes del teclado.
+
+4. Guía de Estilo (UI Kit)
+Paleta de Colores: Mantener el azul corporativo de iVapeo y fondo blanco limpio. Usar Verde (#28a745) exclusivamente para mensajes de éxito (Stock, Compatibilidad, Botón Añadir).
+
+Tipografía: Legible, sans-serif (la actual de la web). Tamaños grandes en móvil (mínimo 16px para inputs).
+
+Iconografía:
+
+Fuego (🔥) para tendencias.
+
+Flecha circular (↺) para historial.
+
+Robot (🤖) para el asistente.
+
+Check (✅) para compatibilidad.
+
+5. Entregables Esperados
+Wireframe Móvil - Estado A: Pantalla completa con Chips, Historial y Botón IA.
+
+Wireframe Móvil - Estado B: Usuario escribiendo "Resistencia...", mostrando teclado abierto y tarjeta de "Producto Compatible" destacada.
+
+Wireframe Desktop: Desplegable tipo Mega-Menu con dos columnas (Texto a la izquierda, Productos visuales a la derecha).

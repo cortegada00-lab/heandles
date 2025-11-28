@@ -1,0 +1,108 @@
+. UBIACIÓN ESTRATÉGICA (Dónde ponerlo)
+El objetivo es que el usuario vea esta opción justo en el momento de decidir la compra, como una alternativa al envío online.
+
+La Regla de Oro: Debe estar cerca del botón "Añadir al Carrito", pero sin competir visualmente con él.
+
+En Desktop (PC): Justo debajo del bloque de precio y el botón principal de "Añadir al carrito".
+
+En Móvil: Igualmente, debajo del botón principal de compra (antes de la descripción y pestañas).
+
+2. DISEÑO DEL "GATILLO" (El botón que el usuario ve)
+No debe ser un botón sólido naranja (ese es para compra online). Debe ser un botón secundario (outline o enlace con icono) que denote información/servicio.
+
+Propuesta Visual (Mockup Conceptual)
+Imagínate esta estructura en tu ficha de producto actual, justo debajo del botón naranja grande:
+
+[ BOTÓN NARANJA GRANDE: AÑADIR AL CARRITO ]
+--------------------------------------------------
+[🚚 Envío gratis a partir de 30€] (Tu texto actual)
+
+[📍 ICONO TIENDA]  ¿Lo necesitas HOY? Ver stock en tiendas
+                  (Este es el nuevo botón secundario)
+Especificaciones de Diseño del "Gatillo":
+Estilo: Botón tipo "Outline" (borde azul corporativo, fondo blanco o transparente) o un enlace de texto grande y claro con un icono prominente.
+
+Color: Azul corporativo de iVapeo (transmite información y confianza).
+
+Icono: Un icono de tienda física (storefront) o un marcador de mapa (map-marker-alt). Imprescindible para el escaneo visual rápido.
+
+Copy (Texto): Debe transmitir inmediatez.
+
+Malo: "Stock en tiendas".
+
+Bueno: "Disponibilidad en tienda física".
+
+Ganador (CRO): "¿Lo necesitas HOY? Ver stock en tiendas." (Ataca directamente la necesidad de urgencia).
+
+3. INTERACCIÓN Y DISEÑO DEL RESULTADO (El Modal)
+Al hacer clic en el gatillo, NO llevamos al usuario a otra página (eso mata la conversión). Abrimos un Modal (Popup) sobre la misma ficha de producto.
+
+En Desktop: Un modal centrado clásico.
+
+En Móvil: Un "Bottom Sheet" o "Drawer" (un panel que se desliza desde abajo hacia arriba), que es mucho más fácil de usar con el pulgar.
+
+Estructura del Modal de Stock:
+El diseño del modal debe ser limpio y enfocado en el semáforo de stock.
+
+Cabecera del Modal:
+
+Título: "Disponibilidad en Tiendas iVapeo"
+
+Botón (Opcional pero recomendado): [🎯 Usar mi ubicación] (Para ordenar las tiendas por cercanía si el usuario da permiso al navegador).
+
+Cuerpo del Modal (Lista de las 8 tiendas): Cada tienda es una "tarjeta" o fila limpia con la siguiente información:
+
+Columna 1: La Tienda y Ubicación
+
+Nombre: iVapeo Sants (Negrita)
+
+Dirección/Distancia: C/ de Sants, 123 (a 1.5 km)
+
+Columna 2: El Semáforo de Stock (Lo más importante)
+
+Debe usar indicadores visuales universales (puntos de color + texto).
+
+🟢 Disponible (Stock alto, >5 uds).
+
+🟡 Últimas unidades (Stock bajo, <3 uds). Genera urgencia.
+
+🔴 Agotado (Stock 0).
+
+Ejemplo Visual del Modal (Simplificado):
+Plaintext
+
++-------------------------------------------------------+
+|  Disponibilidad en Tiendas iVapeo             [X]     |
++-------------------------------------------------------+
+| [🎯 Ordenar por mi ubicación actual]                  |
+|                                                       |
+| 📍 iVapeo Sants                         🟢 Disponible |
+|    C/ Sants, 123 (1.2km)                              |
+|-------------------------------------------------------|
+| 📍 iVapeo Gràcia                  🟡 Últimas unidades |
+|    Gran de Gràcia, 45 (3.5km)                         |
+|-------------------------------------------------------|
+| 📍 iVapeo Poblenou                       🔴 Agotado   |
+|    Rambla Poblenou, 10 (5.1km)                        |
+|-------------------------------------------------------|
+| ( ... resto de tiendas ... )                          |
++-------------------------------------------------------+
+4. INSTRUCCIONES TÉCNICAS PARA EL EQUIPO NEXT.JS
+Como CTO, esta es la especificación técnica para que funcione rápido en Headless:
+
+Lazy Loading (Carga perezosa): El componente del Modal y la llamada a la API de stock NO DEBEN ejecutarse al cargar la página de producto. Solo se ejecutan cuando el usuario hace clic en el botón "¿Lo necesitas HOY?". Esto mantiene la ficha de producto rápida para Google y el usuario inicial.
+
+API Endpoint: Necesitáis un endpoint en el backend (vuestro ERP o un módulo custom de PrestaShop) que acepte la referencia del producto (ej: SKU-123) y devuelva un JSON ligero con el stock de los 8 almacenes.
+
+JSON
+
+// Ejemplo de respuesta de API esperada
+{
+  "product_id": "123",
+  "stores": [
+    { "id": 1, "name": "Sants", "stock_level": "high", "qty": 15, "address": "..." },
+    { "id": 2, "name": "Gràcia", "stock_level": "low", "qty": 2, "address": "..." },
+    { "id": 3, "name": "Poblenou", "stock_level": "out", "qty": 0, "address": "..." }
+  ]
+}
+Gestión de Estados en el Frontend: El frontend debe traducir el campo qty (cantidad) al semáforo visual (🟢/🟡/🔴) basado en reglas de negocio (ej: menos de 3 es amarillo). No mostréis el número exacto de stock al cliente, solo el estado.

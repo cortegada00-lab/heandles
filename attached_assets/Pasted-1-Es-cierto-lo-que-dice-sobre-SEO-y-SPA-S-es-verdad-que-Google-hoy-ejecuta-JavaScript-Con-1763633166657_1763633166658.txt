@@ -1,0 +1,89 @@
+1. ¿Es cierto lo que dice sobre SEO y SPA?
+
+✅ Sí es verdad que:
+
+Google hoy ejecuta JavaScript.
+
+Con react-helmet-async Google puede ver los <title> y <meta> que se inyectan en el cliente.
+
+Muchas webs SPA indexan “aceptablemente” así.
+
+❌ Pero NO es cierto que eso sea lo mismo que:
+
+SSR/SSG bien hecho (como Next.js, Nuxt, etc.).
+
+Lo que se suele recomendar para un e-commerce con muchas URLs y SEO crítico.
+
+Lo que está haciendo tu agente ahora es:
+👉 “Hacer que funcione”
+No 👉 “Diseñar la arquitectura más sólida a largo plazo para SEO”.
+
+2. ¿Cuál es el problema real de Vite + SPA para tu caso?
+
+Con Vite + React + react-helmet-async pasa esto:
+
+El servidor manda HTML casi vacío (un <div id="root"></div> y poco más).
+
+El navegador (y Googlebot) descargan el JS → ejecutan React → entonces se pintan:
+
+el contenido,
+
+los títulos,
+
+las descripciones.
+
+Eso significa que:
+
+Google hace el trabajo en dos fases:
+
+ve un HTML muy pobre
+
+más tarde, cuando renderiza JS, ve el contenido real.
+
+Para pocas páginas puede ir bien;
+para muchísimas páginas de producto/categoría, puede:
+
+tardar más en indexar,
+
+saltarse algunas páginas,
+
+dar problemas con otros bots que no ejecutan JS (previews, herramientas SEO, etc.).
+
+Para un proyecto como el tuyo:
+
+Tienda que ya tiene SEO en PrestaShop.
+
+Quieres mejorar y no jugártela.
+
+Piensas incluso en hacer un SaaS en el futuro…
+
+👉 Lo realmente profesional sigue siendo SSR/SSG:
+
+Next.js, por ejemplo:
+
+devuelve HTML completo listo desde el servidor,
+
+con <title>, <meta>, contenido, etc.
+
+Es justo lo que Google y cualquier bot leen sin complicarse.
+
+3. “Amazon también usa client-side moderno”
+
+Ese argumento es un poco de marketing del agente 😏
+
+Amazon tiene:
+
+infraestructura brutal,
+
+SSR, caching, edge, mil capas de sistemas,
+
+equipos gigantes tuning performance y SEO.
+
+No es “Amazon = SPA sin SSR y listo”.
+No es comparable a un Vite + React sencillito.
+
+Así que cuando te dicen “Amazon también usa client-side moderno”, la traducción real es:
+
+“No pasa nada si por ahora tiramos con SPA, Google suele apañarse”.
+
+Que puede ser cierto para un prototipo, pero no es razón para copiar esa arquitectura.

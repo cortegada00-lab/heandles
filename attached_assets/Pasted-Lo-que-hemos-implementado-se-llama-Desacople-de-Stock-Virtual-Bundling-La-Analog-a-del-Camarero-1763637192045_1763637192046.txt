@@ -1,0 +1,28 @@
+Lo que hemos implementado se llama "Desacople de Stock" (Virtual Bundling).La Analogía del "Camarero Inteligente"Imagina que estás en un bar:El Cliente (Usuario) pide: "Quiero un Gin Tonic".El Camarero (Tu Web React) no apunta "Gin Tonic" en la comanda. Apunta:1x Botella de Ginebra (3cl).1x Tónica.El Almacén (PrestaShop) recibe la orden y descuenta el stock de la ginebra y de la tónica por separado.Si intentaras crear un producto "Gin Tonic" en el almacén, tendrías que gestionar el stock de ese "pack" manualmente. Con nuestro sistema, el pack solo existe en el momento de la compra.Paso a Paso: ¿Cómo funciona técnicamente?Aquí está el diagrama lógico de lo que ocurre en milisegundos cuando el usuario pulsa "Añadir al Carrito":Shutterstock1. El Precio (Matemática Simple)En la base de datos (PrestaShop), los productos tienen su precio real individual:Aroma Halo: 9,90€Nicokit: 1,50€En el Frontend (React), cuando el usuario selecciona la opción "3mg de Nicotina", el sistema hace esto:Sabe que 3mg requieren 2 Nicokits.Calcula visualmente: 9,90€ (Halo) + (1,50€ x 2 Nicokits) = 12,90€.Le muestra al usuario 12,90€.2. El Stock (La Magia del Array)Aquí es donde engañamos al sistema para bien. En lugar de enviar una orden de un solo producto, React envía una lista de productos.Mira este fragmento real de tu código (OneFile.tsx), concretamente la función addToCart:TypeScriptconst addToCart = (product, selections, qty) => {
+    let itemsToAdd = [];
+
+    // PASO A: Añade el producto principal (El bote de Halo)
+    // ID 8299 - Stock actual: 50
+    itemsToAdd.push({
+        id: product.id, 
+        name: product.name,
+        qty: 1
+    });
+
+    // PASO B: ¿Ha elegido nicotina? Añade los componentes extra
+    // La lógica dice: "Si quiere 3mg, necesito 2 nicokits"
+    if (selections.nicotineSelection.kitsNeeded > 0) {
+         const nicokitReal = AUX_PRODUCTS['nicokit_std']; // Busca el ID real del nicokit
+         
+         itemsToAdd.push({
+             id: nicokitReal.id, // ID 9001 - Stock actual: 500
+             name: nicokitReal.name,
+             qty: selections.nicotineSelection.kitsNeeded // Añade 2 unidades
+         });
+    }
+
+    // PASO C: Envía TODO al carrito
+    // El carrito recibe: [ {ID: 8299, Qty: 1}, {ID: 9001, Qty: 2} ]
+    setCartItems([...cartItems, ...itemsToAdd]);
+};
+3. El Resultado en PrestaShopCuando el pedido llega a tu backend (PrestaShop) a través de la API, PrestaShop ve esto:Línea 1: ID 8299 x 1 unidad. -> PrestaShop resta 1 al stock del Halo.Línea 2: ID 9001 x 2 unidades. -> PrestaShop resta 2 al stock del Nicokit.¿Por qué es mejor esto que un Módulo de Packs?Método¿Cómo gestiona el Stock?ProblemaMódulo de Packs (Clásico)Crea un producto nuevo "Pack Halo 3mg" con su propio stock virtual.Si vendes un Nicokit suelto, el stock del Pack se descuadra. Necesitas sincronización constante.Nuestro Método (React)Compra los productos reales por separado.Cero problemas. El stock siempre es real porque siempre vendes los componentes base.

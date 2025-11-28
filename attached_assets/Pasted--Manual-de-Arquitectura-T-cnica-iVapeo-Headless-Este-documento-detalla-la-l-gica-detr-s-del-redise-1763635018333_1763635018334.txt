@@ -1,0 +1,136 @@
+ Manual de Arquitectura Técnica: iVapeo Headless
+
+Este documento detalla la lógica detrás del rediseño de la tienda, explicando cómo transformamos una tienda estática en una plataforma inteligente usando React.
+
+1. El Cerebro: Detección de Productos (Polimorfismo)
+
+El mayor desafío en vapeo es que vender un Líquido es muy diferente a vender un Mod (Hardware).
+
+Líquido: Necesita selectores de nicotina y gráficos de sabor.
+
+Hardware: Necesita selectores de color y ficha de batería.
+
+¿Cómo lo hace el sistema automáticamente?
+
+En lugar de crear 10 plantillas diferentes, usamos un Componente Polimórfico. El sistema lee una propiedad clave del producto llamada type (tipo) y adapta la interfaz en tiempo real.
+
+La Lógica (Pseudocódigo):
+
+// En ProductPage.tsx
+const ProductPage = ({ product }) => {
+  
+  // 1. ¿Es un Líquido para mezclar?
+  if (product.type === 'longfill') {
+      return <CalculadoraNicotina />; // Muestra selectores de mg/ml
+  }
+
+  // 2. ¿Es un Dispositivo?
+  if (product.type === 'hardware') {
+      return <SelectorColores />; // Muestra bolitas de colores
+  }
+
+  // 3. ¿Es un Recambio?
+  if (product.type === 'accessory') {
+      return <SelectorOhmios />; // Muestra lista de resistencias (0.2Ω, 0.4Ω...)
+  }
+};
+
+
+Resultado: Solo mantienes un archivo de código, pero el cliente ve una experiencia personalizada para cada producto.
+
+2. El Sistema de "Perfil de Sabor" Automático
+
+Querías que las barras de "Frescor", "Golpe" y "Dulzura" se generasen solas. Así es como funciona:
+
+A. La Fuente de Datos (PrestaShop)
+
+En tu panel de PrestaShop, en la pestaña "Características" del producto, asignas valores numéricos (0-10 o 0-100):
+
+Frescor: 80
+
+Dulzura: 20
+
+Golpe: 90
+
+B. El Mapeo (API Bridge)
+
+Cuando el Frontend (React) pide el producto, recibe estos datos en el JSON:
+
+"flavorProfile": {
+    "freshness": 80,
+    "sweetness": 20,
+    "throatHit": 90
+}
+
+
+C. La Visualización (Componente FlavorBar)
+
+El código lee esos números y pinta la barra automáticamente. No tienes que diseñar nada.
+
+Si el valor es > 0: La barra aparece.
+
+Si el valor es 0 o nulo: La barra se oculta (ej: en un líquido de tabaco seco, la barra de "Frescor" desaparece sola).
+
+Código del renderizado:
+
+<FlavorBar label="Frescor" value={product.flavorProfile.freshness} color="text-cyan-500"/>
+// El ancho de la barra se calcula con CSS: width: `${value}%`
+
+
+3. SEO Híbrido: "Contenido para Robots, Diseño para Humanos"
+
+El problema clásico: Google quiere 2.000 palabras de texto, el cliente quiere comprar rápido.
+
+La Solución: SeoDescription
+
+Implementamos un componente de "Acordeón Inverso".
+
+Carga Inicial: El HTML contiene todo el texto (H2, H3, párrafos largos). Google lo lee entero al instante.
+
+Visibilidad: Mediante CSS (max-height + overflow: hidden), al usuario solo le mostramos los primeros 100px (unas 3 líneas) con un degradado elegante.
+
+Interacción: Un botón "Leer descripción completa" elimina la restricción de altura.
+
+Beneficio: Tu página carga rápido y se ve limpia, pero posicionas por todas las palabras clave "long-tail" que hay en el texto oculto.
+
+4. Bundling Virtual (Stock Desacoplado)
+
+Esta es la joya de la corona para la gestión de inventario.
+
+El Problema: Si creas un "Pack Líquido + Nicokit" en PrestaShop como un producto nuevo, tienes que gestionar el stock de ese pack manualmente. Un caos.
+
+Nuestra Solución: El "Pack" solo existe en el momento de la compra.
+
+El usuario está en la ficha de Halo Subzero.
+
+Selecciona "3mg de Nicotina".
+
+El sistema sabe (por nuestra lógica programada) que 3mg = 2 Nicokits.
+
+Al dar click a "Añadir al Carrito", el sistema envía DOS órdenes al carrito:
+
+1x Halo Subzero (ID 8299)
+
+2x Nicokit 20mg (ID 9001) -> Este es el producto real de tu almacén
+
+Resultado:
+
+El stock se descuenta de los productos individuales correctamente.
+
+No tienes que crear miles de combinaciones en el backend.
+
+El usuario ve claramente en el carrito que se le regalan o añaden los nicokits necesarios.
+
+5. Buscador con IA (Spotlight)
+
+El buscador no busca palabras exactas, busca intenciones mediante un mapa de palabras clave (tags):
+
+Usuario escribe: "algo fresco"
+
+Algoritmo: Detecta la palabra "fresco".
+
+Acción: Busca productos con el tag menta o hielo y con flavorProfile.freshness > 50.
+
+Respuesta: Muestra los mentolados y añade una etiqueta: "Intención detectada: Sabores Mentolados".
+
+Esto simula una IA sin necesitar servidores costosos de OpenAI, usando lógica condicional inteligente en el propio navegador del cliente.

@@ -1,0 +1,50 @@
+MÓDULO B: Ficha de Producto (PDP)
+B.1. Versión MÓVIL (Smartphone)
+Concepto: Conversión sin fricción y jerarquía vertical estricta.
+
+Header & Héroe: Carrusel de imágenes con puntos indicadores. Título y Precio grande.
+
+Descripción Corta (El Gancho): Máximo 2 líneas de texto clave (sabor, perfil). Enlace "Leer más ⬇" que lleva al acordeón inferior.
+
+Selectores de Variantes (CRÍTICO):
+
+NO usar dropdowns.
+
+Usar filas de Chips/Botones con Scroll Horizontal.
+
+Ejemplo: Fila 1: [10ml] [50ml] [100ml >]. Fila 2: [0mg] [3mg] [6mg >].
+
+Botón Principal: Botón verde grande "AÑADIR AL CARRITO" debajo de las variantes.
+
+Módulo Cross-Sell (Venta Cruzada): Inmediatamente debajo del botón principal. Título: "🔥 Completa tu vapeo:". Carrusel de productos complementarios necesarios (ej: Nicokits para un Longfill) con botón rápido de añadir.
+
+Contenido SEO y Secundario: Debajo del Cross-sell, usar Acordeones Desplegables (Cerrados por defecto) para: "Descripción Detallada (SEO)", "Ficha Técnica", "Opiniones".
+
+Sticky Bar Inferior (CRÍTICO): Barra fija en la parte inferior de la pantalla que aparece al hacer scroll. Contiene el Precio a la izquierda y el botón verde "AÑADIR 🛒" a la derecha. Siempre visible.
+
+B.2. Versión PC (Escritorio)
+Concepto: "Attribute Splitting" (Desglose de atributos) en la Buy Box.
+
+Layout: Estándar 2 columnas. Izquierda: Galería de imágenes grande. Derecha: "Buy Box" (Columna de compra).
+
+Diseño de la "Buy Box" (Derecha):
+
+Título, Estrellas, Precio grande.
+
+Visualización de Sabor (Opcional): Barras gráficas (Frescor: ❄️❄️❄️❄️, Dulzor: 🍬🍬).
+
+Selectores de Variantes (CRÍTICO):
+
+Técnica "Attribute Splitting": Filas separadas de botones para cada atributo. Todos visibles de un vistazo, sin scroll horizontal.
+
+Ejemplo:
+
+Tamaño: [ 10ml ] [ 50ml ] [ 100ml ]
+
+Nicotina: [ 0mg ] [ 3mg ] [ 6mg ] [ 12mg ] [ 18mg ]
+
+Botón Principal: Verde grande.
+
+Cross-Sell: Bloque "Comprados juntos habitualmente" justo debajo del botón principal.
+
+Contenido Inferior (SEO): Debajo de las dos columnas principales, usar un sistema de Pestañas Horizontales (Tabs) para organizar la información larga: [DESCRIPCIÓN DETALLADA (SEO)] | [FICHA TÉCNICA] | [OPINIONES].
