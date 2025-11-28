@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
-import { Truck, ShieldCheck, MapPin } from "lucide-react";
+import { Truck, ShieldCheck, MapPin, Flame } from "lucide-react";
 import { Link } from "wouter";
 
 const messages = [
   {
-    icon: <Truck className="w-3.5 h-3.5" />,
-    text: "Envío Gratis +28€",
+    icon: <Flame className="w-3.5 h-3.5 text-orange-500" />,
+    text: "nº1 en España",
   },
   {
-    icon: <ShieldCheck className="w-3.5 h-3.5" />,
-    text: "Garantía de Calidad",
+    icon: <MapPin className="w-3.5 h-3.5 text-primary" />,
+    text: "8 Tiendas BCN",
   },
   {
-    icon: <MapPin className="w-3.5 h-3.5" />,
-    text: "8 Tiendas Físicas en BCN",
+    icon: <Truck className="w-3.5 h-3.5 text-green-400" />,
+    text: "Envío Gratis >30€",
   },
 ];
 
@@ -28,30 +28,27 @@ export function AnnouncementBar() {
   }, []);
 
   return (
-    <div className="bg-primary text-white py-2 text-[11px] md:text-xs font-medium tracking-wide overflow-hidden relative h-[32px]">
+    <div className="bg-[#020617] text-gray-300 py-2 text-[11px] md:text-xs font-medium tracking-wide overflow-hidden relative h-[32px] border-b border-white/5">
       <div className="container-custom h-full flex items-center justify-center relative">
-        {/* Desktop: Show all or grid? Mobile: Rotate. Let's stick to rotation for mobile as requested, maybe static for desktop? 
-            Prompt says "FRANJA AZUL SUPERIOR ROTATORIA". Let's make it rotate on mobile, static grid on desktop if space permits?
-            Actually, let's just make it rotate for now to be safe with "Rotatoria".
-        */}
+        {/* Mobile: Rotating Messages */}
         <div className="flex md:hidden items-center gap-2 animate-in fade-in slide-in-from-bottom-2 duration-500 absolute w-full justify-center" key={currentIndex}>
           {messages[currentIndex].icon}
-          <span>{messages[currentIndex].text}</span>
+          <span className="text-white">{messages[currentIndex].text}</span>
         </div>
 
         {/* Desktop View - Static Grid */}
-        <div className="hidden md:flex justify-between w-full px-4">
+        <div className="hidden md:flex justify-between w-full px-4 max-w-4xl mx-auto">
              <div className="flex items-center gap-2">
-                <Truck className="w-3.5 h-3.5" /> <span>Envío Gratis +28€</span>
-             </div>
-             <div className="flex items-center gap-2">
-                <ShieldCheck className="w-3.5 h-3.5" /> <span>Garantía de Calidad</span>
+                <Flame className="w-3.5 h-3.5 text-orange-500" /> <span className="text-white">nº1 en España</span>
              </div>
              <Link href="/tiendas">
-                <div className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-                    <MapPin className="w-3.5 h-3.5" /> <span>8 Tiendas Físicas en Barcelona</span>
+                <div className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors">
+                    <MapPin className="w-3.5 h-3.5 text-primary" /> <span>8 Tiendas BCN</span>
                 </div>
              </Link>
+             <div className="flex items-center gap-2">
+                <Truck className="w-3.5 h-3.5 text-green-400" /> <span>Envío Gratis {'>'}30€</span>
+             </div>
         </div>
       </div>
     </div>

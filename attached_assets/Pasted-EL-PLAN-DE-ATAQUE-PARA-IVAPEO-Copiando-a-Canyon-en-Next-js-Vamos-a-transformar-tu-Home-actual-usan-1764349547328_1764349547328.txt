@@ -1,0 +1,64 @@
+EL PLAN DE ATAQUE PARA IVAPEO (Copiando a Canyon en Next.js)
+Vamos a transformar tu Home actual usando esta estructura. Pásale esto a tu equipo de diseño y desarrollo.
+
+PASO 1: La Barra Superior Funcional (Top Bar)
+Referencia Canyon: La barra negra de arriba del todo donde está el buscador y el menú.
+
+Implementación iVapeo: Usaremos la "Announcement Bar" rotatoria que definimos antes.
+
+Contenido: [🔥 nº1 España] [📍 8 Tiendas BCN] [🚚 Envío Gratis >30€]
+
+Diseño: Fondo azul corporativo oscuro, texto blanco pequeño. Muy limpia.
+
+PASO 2: El Hero Slider Premium (El cambio radical)
+Referencia Canyon: El banner gigante de la bici oscura.
+
+Implementación iVapeo:
+
+Adiós al fondo azul plano y el precio amarillo gigante.
+
+Nueva Imagen: Necesitamos fotos de tus mejores kits (Vaporesso, etc.) con iluminación dramática, sobre fondos oscuros o texturizados premium. Que el vaper parezca una joya tecnológica.
+
+Nuevos Botones: Cambia el botón amarillo por uno transparente con borde blanco o blanco sólido. Texto: "Descubrir Kits".
+
+Tecnología Next.js: Usar una librería ligera como Swiper.js optimizada para React.
+
+PASO 3: La Marquesina de Confianza (El "texto que se desplaza abajo")
+Referencia Canyon: La barra negra justo debajo del banner principal que se mueve sola con iconos pequeños.
+
+Implementación iVapeo (CRÍTICO PARA PARECER PRO):
+
+¿Qué ponemos ahí? ¡Movemos ahí los iconos que ahora tienes en el bloque de "Primera vez vapeando"!
+
+Contenido (Icono + Texto corto):
+
+[🚚 Envíos 24h]
+
+[🛡️ Garantía Oficial]
+
+[📍 8 Tiendas Físicas]
+
+[💬 Asesoramiento Experto]
+
+Diseño: Fondo oscuro (gris casi negro o azul muy oscuro), iconos blancos pequeños, texto blanco en una sola línea que hace scroll infinito horizontal suavemente.
+
+Tecnología Next.js: Un componente de "Marquee" (marquesina) CSS puro. Es muy ligero y da una sensación de dinamismo y modernidad brutal.
+
+Resumen Visual del Nuevo iVapeo "Estilo Canyon"
+[TOP BAR AZUL OSCURO: 🔥 nº1 España | 📍 8 Tiendas | 🚚 Envío Gratis... (Rotando)]
+----------------------------------------------------------------------------------
+[ HEADER: Logo iVapeo | Buscador | Carrito ]
+----------------------------------------------------------------------------------
+[                                                                                ]
+[  HERO SLIDER GIGANTE (Estilo Canyon)                                           ]
+[  Foto dramática oscura de un Vaper Premium.                                    ]
+[  Texto blanco grande: "Tecnología para dejar de fumar."                        ]
+[  [ Botón Elegante Blanco/Transparente: "Empezar ahora" ]                       ]
+[                                                                                ]
+----------------------------------------------------------------------------------
+[ MARQUESINA SCROLL INFINITO (Fondo oscuro)                                      ]
+[ 🚚 Envíos 24h   🛡️ Garantía   📍 8 Tiendas Físicas   💬 Asesoramiento Experto  ]
+[ <--- (Se mueve suavemente hacia la izquierda de forma continua) <---           ]
+----------------------------------------------------------------------------------
+[ Resto de la web... ]
+Conclusión: Si implementas esta estructura, especialmente la marquesina de confianza en movimiento justo debajo de un banner oscuro y elegante sin precios gigantes, darás ese salto visual a "marca top" que estás buscando. Es la combinación perfecta de aspiración (el banner) y seguridad (la marquesina).

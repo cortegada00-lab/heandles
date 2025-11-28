@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/footer";
 import { HeroGrid } from "@/components/home/hero-grid";
 import { HeroGridGuest } from "@/components/home/hero-grid-guest";
 import { TrustBanner } from "@/components/home/trust-banner";
+import { TrustMarquee } from "@/components/home/trust-marquee";
 import { ProductSection } from "@/components/home/product-section";
 import { NewArrivals } from "@/components/home/new-arrivals";
 import { SeoContent } from "@/components/home/seo-content";
@@ -49,9 +50,18 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         
-        {isLoggedIn ? <HeroGrid /> : <HeroGridGuest />}
+        {/* Unified Hero for Canyon Style - Using same component for now as per request to redesign Home */}
+        <HeroGrid />
         
-        <TrustBanner />
+        {/* Marquee below Hero - Critical for "Pro" feel */}
+        <TrustMarquee />
+        
+        {/* Keep TrustBanner for Guest as fallback or remove? 
+            The user said: "Movemos ahí los iconos que ahora tienes en el bloque de Primera vez vapeando". 
+            TrustBanner might be redundant if TrustMarquee exists. 
+            Let's keep TrustBanner hidden or remove it if it conflicts visually. 
+            Actually, TrustBanner was the icons block. Marquee replaces it.
+        */}
         
         <Brands />
 
