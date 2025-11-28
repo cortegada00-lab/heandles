@@ -8,7 +8,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col">
       <SeoHead 
         title="Sobre Nosotros | IVAPEO - Tu tienda de confianza"
-        description="Somos iVapeo.com, especialistas en vapeo desde 2012 con 6 tiendas físicas en Barcelona. Descubre nuestra historia."
+        description="Somos iVapeo.com, especialistas en vapeo desde 2012 con 8 tiendas físicas en Barcelona. Descubre nuestra historia."
       />
       <Navbar />
 
@@ -37,7 +37,7 @@ export default function AboutPage() {
                    Somos <strong>iVapeo.com</strong>, una empresa especializada en la venta de cigarrillos electrónicos, MODs, e-liquids, aromas y accesorios de vapeo desde 2012, enfocada en ofrecer tanto productos como servicio de calidad y profesionalidad.
                  </p>
                  <p className="text-gray-600 leading-relaxed">
-                   Actualmente disponemos de <strong>seis tiendas físicas en Barcelona</strong> y sitio web, dando así diversas posibilidades de compra a nuestros clientes. Nuestro objetivo principal es ofrecer la excelencia en nuestro servicio al cliente, logrando así dar la mejor experiencia posible tanto a nuevos usuarios como a los más avanzados.
+                   Actualmente disponemos de <strong>8 tiendas físicas en Barcelona</strong> y sitio web, dando así diversas posibilidades de compra a nuestros clientes. Nuestro objetivo principal es ofrecer la excelencia en nuestro servicio al cliente, logrando así dar la mejor experiencia posible tanto a nuevos usuarios como a los más avanzados.
                  </p>
               </div>
               <div className="relative">
@@ -63,7 +63,7 @@ export default function AboutPage() {
                     <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm text-primary mb-2">
                        <MapPin className="w-8 h-8" />
                     </div>
-                    <span className="text-4xl font-black text-gray-900">6</span>
+                    <span className="text-4xl font-black text-gray-900">8</span>
                     <span className="text-sm text-gray-500 uppercase font-bold tracking-wider">Tiendas Físicas</span>
                  </div>
                  <div className="flex flex-col items-center gap-3">
