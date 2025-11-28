@@ -13,7 +13,7 @@ const messages = [
   },
   {
     icon: <Truck className="w-3.5 h-3.5 text-green-400" />,
-    text: "Envío Gratis >30€",
+    text: "Envío gratuito en pedidos superiores a 28.00€",
   },
 ];
 
@@ -47,7 +47,7 @@ export function AnnouncementBar() {
                 </div>
              </Link>
              <div className="flex items-center gap-2">
-                <Truck className="w-3.5 h-3.5 text-green-400" /> <span>Envío Gratis {'>'}30€</span>
+                <Truck className="w-3.5 h-3.5 text-green-400" /> <span>Envío gratuito en pedidos superiores a 28.00€</span>
              </div>
         </div>
       </div>
