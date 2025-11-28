@@ -41,11 +41,11 @@ export function CategoryGrid() {
         <div className="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-6">
           {CATEGORIES.map((cat) => (
             <Link key={cat.name} href={cat.href}>
-              <div className="group flex flex-col items-center gap-3 cursor-pointer p-4 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:border-gray-300 hover:shadow-lg transition-all duration-300 ease-out h-full justify-center">
-                <div className="transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1">
+              <div className="group flex flex-col items-center gap-4 cursor-pointer p-6 border border-gray-200 hover:border-black hover:bg-gray-50 transition-all duration-200 ease-out h-full justify-center min-h-[140px]">
+                <div className="transition-transform duration-300 group-hover:scale-110 text-gray-900">
                   {cat.icon}
                 </div>
-                <span className="text-[10px] md:text-xs font-bold text-gray-900 text-center uppercase tracking-wide leading-tight">
+                <span className="text-[11px] md:text-xs font-black text-gray-900 text-center uppercase tracking-widest leading-tight">
                   {cat.name}
                 </span>
               </div>
