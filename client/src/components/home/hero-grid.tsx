@@ -7,8 +7,6 @@ import { cn } from "@/lib/utils";
 
 // Images
 import heroImage1 from "@assets/generated_images/hand_holding_premium_pod_vape_dark_background.png";
-import heroImage2Background from "@assets/generated_images/empty_beach_bar_table_at_sunset_background_for_product_placement.png";
-import heroImage2Bottle from "@assets/image_1764350777336.png";
 
 const SLIDES = [
   {
@@ -30,27 +28,6 @@ const SLIDES = [
     primaryButtonLink: "/kits",
     secondaryButtonText: "Descubrir Kits",
     secondaryButtonLink: "/novedades"
-  },
-  {
-    id: 2,
-    image: heroImage2Background,
-    bottleImage: heroImage2Bottle,
-    tagline: "Sabor Premium",
-    taglineColor: "text-pink-400",
-    taglineBorder: "border-pink-400/30 bg-pink-400/10",
-    title: (
-      <>
-        Momentos de <br/>
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-200 to-purple-400">
-          puro placer.
-        </span>
-      </>
-    ),
-    description: "E-liquids seleccionados para los paladares más exigentes. La mejor calidad en cada gota.",
-    primaryButtonText: "Ver E-liquids",
-    primaryButtonLink: "/eliquids",
-    secondaryButtonText: "Más Vendidos",
-    secondaryButtonLink: "/ofertas"
   }
 ];
 
