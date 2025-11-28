@@ -1,198 +1,64 @@
-# Manual de Lógica de Negocio (Frontend a Backend)
 
-Este documento detalla las reglas de negocio implementadas en el prototipo Frontend que deben ser replicadas o soportadas por el Backend en la versión final.
+## 11. Mapeo de Endpoints REST PrestaShop (API Real)
 
-## 0. Guía de Mapeo PrestaShop (PrestaShop Integration Guide)
-**Para el Agente de Programación / Backend Developer:**
+Este proyecto está diseñado para conectarse a una API REST de PrestaShop. A continuación, se detalla el mapeo exacto entre las funcionalidades del Frontend y los Endpoints proporcionados en la documentación de la API.
 
-Si el backend se basa en **PrestaShop**, utiliza esta guía de mapeo para conectar los conceptos del frontend con la base de datos de PrestaShop.
+**Base URL:** `[website_url]/restapi`
 
-| Concepto Frontend (Mock Data) | Entidad PrestaShop Recomendada | Notas de Implementación |
-| :--- | :--- | :--- |
-| **Variantes (Ohmios, Nicotina)** | `Combinations` (Atributos) | Usar combinaciones estándar. El stock se gestiona por combinación. |
-| **Colores (Hardware)** | `Attributes` (Tipo Color) | Crear atributo "Color". Asignar textura/imagen al valor del atributo para mostrar la "bolita" visual. |
-| **Specs / Ficha Técnica** | `Features` (Características) | Crear características "Batería", "Dimensiones", etc. Valores predefinidos o personalizados. |
-| **Flavor Profile (Sabor)** | `Features` (Características) | Crear características numéricas: "Frescor (0-100)", "Dulzor (0-100)", "Golpe (0-100)". |
-| **Etiquetas de Sabor (Iconos)** | `Features` o `Tags` | Se recomienda usar `Features` (ej: "Sabor Principal") para filtrado facetado, o `Tags` para visualización simple. |
-| **Longfill / Alquimia** | `Pack` (Nativo) o Módulo Custom | La lógica de "añadir nicokits gratis/cobrados" requiere un módulo que intercepte el `Add to Cart` o use Packs nativos si el precio es fijo. |
-| **Tier Pricing (Descuentos)** | `Specific Prices` (Precios Específicos) | Usar la tabla `ps_specific_price` para definir reglas de descuento por cantidad (ej: "A partir de 5 uds"). |
-| **Accesorios Compatibles** | `Accessories` (Nativo) | Usar la pestaña "Accesorios" nativa de la ficha de producto en el Backoffice. |
-| **Brand Stores** | `Manufacturers` (Marcas) | Mapear `id_manufacturer`. Usar campos de descripción de la marca para el contenido rico (HTML). |
+### Autenticación y Usuario
+| Funcionalidad Frontend | Endpoint PrestaShop | Método | Notas |
+| :--- | :--- | :--- | :--- |
+| **Login** | `/login` | POST | Devuelve token/cookie de sesión. |
+| **Registro** | `/registration` | POST | Campos estándar de registro. |
+| **Recuperar Contraseña** | `/passwordrecovery` | POST | |
+| **Mi Cuenta (Datos)** | `/accountinfo` | GET | |
+| **Mis Direcciones** | `/addresses` | GET/POST/PUT/DELETE | CRUD completo de direcciones. |
+| **Mis Pedidos** | `/orderhistory` | GET | Historial de compras. |
+| **Detalle Pedido** | `/orderdetail?id_order=X` | GET | |
+
+### Catálogo y Productos
+| Funcionalidad Frontend | Endpoint PrestaShop | Método | Notas |
+| :--- | :--- | :--- | :--- |
+| **Listado Productos** | `/products` | GET | Soporta filtros: `?id_category=2`, `order_by=price`, etc. |
+| **Ficha Producto (Full)** | `/products?id_product=X` | GET | Debe devolver: imágenes, atributos, combinaciones, precios específicos. |
+| **Categorías (Menú)** | `/categories` | GET | Árbol de categorías para el Navbar. |
+| **Buscador** | `/search?s=QUERY` | GET | Usado en la barra de búsqueda global. |
+| **Marcas (Brand Stores)** | `/manufacturer` | GET | Listado de marcas y productos por marca. |
+| **Novedades** | `/newproducts` | GET | Para la página `/novedades`. |
+| **Ofertas** | `/pricesdrop` | GET | Para la página `/ofertas`. |
+
+### Carrito y Checkout
+| Funcionalidad Frontend | Endpoint PrestaShop | Método | Notas |
+| :--- | :--- | :--- | :--- |
+| **Obtener Carrito** | `/cart` | GET | Devuelve el estado actual del carrito. |
+| **Añadir Item** | `/cart` | POST | Body: `{id_product, id_product_attribute, quantity}`. |
+| **Eliminar Item** | `/cart` | DELETE | |
+| **Aplicar Cupón** | `/cart` (Voucher) | POST | Acción `addDiscount`. |
+| **Seleccionar Dirección** | `/setaddress` | POST | Paso 1 del Checkout. |
+| **Listar Transportistas** | `/carriers` | GET | Paso 2 del Checkout. |
+| **Seleccionar Transporte** | `/setcarrier` | POST | |
+| **Métodos de Pago** | `/paymentoptions` | GET | Paso 3 del Checkout. |
+
+### Contenido Estático (CMS)
+| Funcionalidad Frontend | Endpoint PrestaShop | Método | Notas |
+| :--- | :--- | :--- | :--- |
+| **Páginas Legales** | `/cms?id_cms=X` | GET | Para Aviso Legal, Privacidad, Envíos, etc. |
+| **Sobre Nosotros** | `/cms?id_cms=X` | GET | ID específico para la página About Us. |
+| **Tiendas Físicas** | `/stores` | GET | Para la página `/tiendas` (Mapa y listado). |
 
 ---
 
-## 1. Sistema de Packs Virtuales (Nicokits)
-**Ubicación:** `client/src/components/product/product-details.tsx` -> `handleAddToCart`
+## 12. Guía de Migración a Next.js
 
-El frontend actualmente simula la creación de "packs" añadiendo múltiples ítems al carrito cuando se selecciona un nivel de nicotina en líquidos Longfill.
+Este proyecto React (Vite) ha sido estructurado para facilitar una migración directa a Next.js (App Router o Pages Router).
 
-**Lógica Actual:**
-- Si `nicotine == "1.5mg"`: Añade 1x Nicokit 10mg.
-- Si `nicotine == "3mg"`: Añade 2x Nicokits 20mg.
-- **Cálculo de Precio:** Suma el precio de los nicokits al precio base visualmente, pero al carrito se envían como productos separados con sus propios precios.
-
-**Requerimiento Backend:**
-- Necesitará un endpoint que acepte "bundles" o lógica en el carrito para agrupar estos ítems, o simplemente mantener la lógica de añadir múltiples SKUs al pedido.
-
-## 2. Perfil de Sabor (Flavor Profile)
-**Ubicación:** `client/src/lib/mock-data.ts` (Modelo de datos)
-
-Cada producto líquido tiene un objeto `flavorProfile`:
-```typescript
-flavorProfile: {
-  freshness: 90, // 0-100
-  sweetness: 10, // 0-100
-  throatHit: 85  // 0-100
-}
-```
-
-**Requerimiento Backend:**
-- La base de datos de productos debe incluir estas columnas o un campo JSON para almacenar estos valores numéricos.
-
-## 3. Sistema "Completa tu Kit" (Accesorios)
-**Ubicación:** `client/src/components/product/product-details.tsx` -> `HardwareBundleConfigurator`
-
-Permite seleccionar accesorios compatibles (resistencias, pyrex) directamente desde la ficha del dispositivo.
-
-**Requerimiento Backend:**
-- Relación `Many-to-Many` entre Productos (Padre) y Accesorios (Hijos).
-- El endpoint de producto debe devolver la lista de `compatibleAccessories` con su stock y precio actual.
-
-## 4. Preguntas Frecuentes (FAQs) Dinámicas
-**Ubicación:** `client/src/pages/product.tsx`
-
-Actualmente las FAQs son estáticas en el componente.
-
-**Requerimiento Backend:**
-- Idealmente, las FAQs deberían ser un campo de texto enriquecido en la base de datos del producto, o generarse dinámicamente mediante IA en el backend basándose en la descripción del producto antes de servirse a la API.
-
-## 5. Variantes de Color (Hardware)
-**Ubicación:** `client/src/lib/mock-data.ts`
-
-Los productos de hardware tienen un array de colores con metadatos específicos (Hex code e imagen asociada).
-
-```typescript
-colors: [
-  { name: "Dark Black", hex: "#1a1a1a", image: "url..." },
-  ...
-]
-```
-
-**Requerimiento Backend:**
-- Tabla de variantes que soporte códigos de color HEX para mostrar la "bolita" de color correctamente en el frontend.
-
-## 6. Ficha Técnica (Specs)
-**Ubicación:** `client/src/lib/mock-data.ts`
-
-La ficha técnica se renderiza dinámicamente a partir de un array de objetos clave-valor.
-
-```typescript
-specs: [
-  { name: "Dimensiones", value: "138.5 x 44 x 29 mm" },
-  { name: "Potencia", value: "5-220W" },
-  ...
-]
-```
-
-**Requerimiento Backend:**
-- El producto debe tener un campo JSONB (en PostgreSQL) o una tabla relacionada `ProductSpecs` para almacenar estos pares `Nombre: Valor`. Esto permite flexibilidad total sin tener columnas fijas para cada especificación técnica posible.
-
-## 7. Estrategia de Datos (Producción)
-**Nota para el Desarrollador:**
-El usuario ha planteado la necesidad de poblar estos datos automáticamente.
-
-**Recomendación de Implementación:**
-- **Ingesta:** Al importar productos (desde CSV/ERP) o al crear nuevos productos, se recomienda implementar un **Servicio de Extracción IA** (usando OpenAI/Anthropic) en el backend.
-- **Flujo:** 
-  1. El sistema recibe la descripción en texto plano del proveedor.
-  2. La IA analiza el texto y extrae las especificaciones técnicas (Dimensiones, Batería, etc.).
-  3. Estas especificaciones se **guardan** en la base de datos como datos estructurados (JSON/Tabla).
-- **Frontend:** El frontend siempre lee los datos estructurados de la DB, nunca "parsea" la descripción en tiempo real por rendimiento.
-
-## 8. Iconos de Sabores en Tarjetas de Producto
-**Ubicación:** Tarjetas de producto en `ProductSection` o Vistas de Categoría.
-
-**Requerimiento Backend:**
-- El producto debe tener una lista de "Etiquetas de Sabor" (e.g., `["fresa", "hielo", "sandia"]`) almacenada en la base de datos.
-- **Lógica de Mapeo:** El frontend mantendrá un diccionario estático que mapea estas etiquetas a iconos SVG (ej: `fresa` -> Icono Fresa).
-- **Ingesta IA:** Al igual que las specs, la IA debe detectar los sabores principales de la descripción y asignar las etiquetas correspondientes automáticamente.
-
-## 9. Asistente de Mezcla (Longfills & Alquimia)
-**Ubicación:** `client/src/components/product/mix-wizard.tsx`
-
-Esta herramienta permite a los usuarios comprar líquidos "Longfill" sin hacer cálculos matemáticos, añadiendo automáticamente los productos necesarios (Nicokits y Base) al carrito.
-
-**Flujo de Datos & Requerimientos:**
-
-1.  **Flag de Producto:** El Backend debe identificar los productos que requieren este asistente.
-    *   Campo `type` = `'longfill'`
-    *   Campo `bottleCapacity` (int): Capacidad total del bote (ej. 30, 60, 120).
-    *   Campo `contentAmount` (int): Cantidad real de aroma (ej. 10, 12, 24).
-
-2.  **Lógica de Cálculo (Frontend):**
-
-    **A. Modo Estándar (Freebase) - Para botellas > 30ml**
-    *   Opciones de Nicotina: 0, 1.5, 3, 6 mg/ml.
-    *   `Espacio Libre` = `bottleCapacity` - `contentAmount` - `Volumen Nicokits`.
-    *   **Selección de Nicokits:**
-        *   Elige entre Nicokits de **20mg** (estándar) o **10mg** (ajuste fino) para aproximarse mejor al objetivo.
-    *   **Relleno de Base:**
-        *   Si `Espacio Libre` > 20ml: Busca la botella de base más pequeña disponible (70ml, 85ml, 90ml).
-        *   Si `Espacio Libre` <= 20ml: Rellena el espacio restante usando **Nicokits de 0mg** (10ml cada uno).
-
-    **B. Modo Sales (Salt Nicotine) - Para botellas <= 30ml**
-    *   Se activa automáticamente si `bottleCapacity <= 30` o mediante flag.
-    *   Opciones de Nicotina: 0, 6.6, 10, 15 mg/ml.
-    *   **Recetas Específicas (para 30ml):**
-        *   **0mg:** 2x Nicokit Salt 0mg (Relleno).
-        *   **6.6mg:** 2x Nicokit Salt 10mg (Opción económica).
-        *   **10mg:** 2x Nicokit Salt 15mg.
-        *   **15mg:** 2x Nicokit Salt 20mg (Máximo legal).
-
-3.  **Acción de Compra:**
-    *   Al pulsar "Añadir", el frontend envía al carrito los items por separado:
-        1.  Producto Principal (Longfill).
-        2.  X unidades de Nicokit con Nicotina (Normal o Salt).
-        3.  Y unidades de Nicokit 0mg (Relleno) **O** 1 unidad de Base grande.
-
-**Recomendación Backend:**
-*   Tener SKUs específicos para:
-    *   "Nicokit Freebase 20mg", "Nicokit Freebase 10mg".
-    *   "Nicokit Salt 10mg", "Nicokit Salt 15mg", "Nicokit Salt 20mg".
-    *   "Nicokit 0mg" (Relleno universal).
-*   Validar stock de los componentes auxiliares al añadir el pack.
-*   Soportar la lógica de bundles dinámicos.
-
-**Casos de Prueba (Demo en `/mix-demo`):**
-*   **Mini Longfill (30ml):** Prioriza Sales y relleno con Nicokits 0mg.
-*   **Estándar (60ml):** Usa Freebase y bases de 70ml/85ml.
-*   **Maxi (100ml/120ml):** Ajusta nicokits proporcionalmente.
-
-## 10. Lógica de Vista Rápida (Quick Add Logic)
-**Ubicación:** `client/src/components/product/quick-add-popover.tsx`
-
-El sistema de "Compra Rápida" utiliza un patrón de **Polimorfismo de Interfaz** para decidir qué opciones mostrar al usuario sin recargar la página.
-
-**Árbol de Decisión:**
-
-1.  **¿Es Hardware?** (`type === 'hardware'`)
-    *   **Muestra:** Selector de Colores (Visual) + Accesorios Compatibles.
-    *   **Lógica:** Permite añadir el kit base + múltiples accesorios al carrito en un solo clic.
-
-2.  **¿Es Longfill Avanzado?** (`type === 'longfill'` con `bottleCapacity` definido)
-    *   **Muestra:** El **Mix Wizard** completo (ver punto 9).
-    *   **Lógica:** Calculadora de alquimia embebida en el popup.
-
-3.  **¿Es Consumible con Descuentos?** (`tierPricing` existe)
-    *   **Muestra:** Selector de Variantes (ej. Ohmios) + Tabla de Descuento por Volumen.
-    *   **Lógica:**
-        *   Permite elegir variante (con control de stock).
-        *   Calcula el descuento en tiempo real según la cantidad seleccionada.
-        *   Aplica el precio unitario reducido al añadir al carrito.
-
-4.  **Fallback (Producto Simple):**
-    *   **Muestra:** Selector de Cantidad simple.
-    *   **Lógica:** Añade SKU estándar.
-
-**Requerimiento Backend:**
-*   El endpoint de producto debe devolver toda la metadata necesaria (`tierPricing`, `variants`, `colors`, `compatibleAccessories`) incluso en los listados de categoría (endpoint "light") para evitar latencia al abrir el popup.
+**Puntos Clave de Compatibilidad:**
+1.  **Componentes Puros:** Todos los componentes en `client/src/components` son "Client Components" (`use client`) compatibles.
+2.  **Routing:** Se utiliza `wouter` que es similar a `react-router`. Para migrar a Next.js:
+    *   Reemplazar `<Link href="...">` de `wouter` por `next/link`.
+    *   Mover las rutas de `App.tsx` a la estructura de carpetas `app/` o `pages/`.
+3.  **Data Fetching:**
+    *   Actualmente usamos `react-query` (TanStack Query) en el cliente.
+    *   **En Next.js:** Se puede mantener `react-query` para el cliente, o mover las llamadas iniciales a `getServerSideProps` / `Server Components` para SEO (SSR).
+4.  **Estilos:** Tailwind CSS funciona nativamente en Next.js sin cambios.
+5.  **Imágenes:** Reemplazar `<img>` por `<Image />` de `next/image` para optimización automática.
