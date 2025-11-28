@@ -9,17 +9,16 @@ export function HeroGridGuest() {
   return (
     <div className="bg-[#F8F9FA] py-4 md:py-6">
       <div className="container-custom">
-        {/* Greeting and Top Links - Compact & Modern */}
-        <div className="flex flex-row items-center justify-between py-3 mb-4 border-b border-gray-100">
-          <div className="flex items-center gap-3 md:gap-4">
-            <h2 className="text-lg font-black tracking-tighter uppercase text-[#0a1a2a]">Bienvenido</h2>
-            <div className="hidden md:block w-px h-4 bg-gray-300"></div>
-            <p className="text-xs md:text-sm font-medium text-gray-500 flex items-center gap-2">
-              Tienda nº1 <span className="text-gray-300 text-[10px]">•</span> Envíos 24h
+        {/* Greeting and Top Links - Minimalist & Bold (Zara Style) */}
+        <div className="flex items-center justify-between py-4 mb-6 border-b-2 border-black">
+          <div className="flex items-baseline gap-3 overflow-hidden">
+            <h2 className="text-2xl font-black tracking-tighter uppercase text-black shrink-0">iVapeo</h2>
+            <p className="text-base md:text-lg font-medium text-gray-900 truncate">
+              La tienda <span className="font-bold">nº1 en España</span>. Envíos 24h.
             </p>
           </div>
-          <div className="flex items-center gap-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider bg-white border border-gray-100 text-gray-600 px-2 py-1 rounded-md shadow-sm">
-            <ShieldCheck className="w-3.5 h-3.5 text-green-500" /> Compra Segura
+          <div className="hidden sm:flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+            <ShieldCheck className="w-3.5 h-3.5" /> Compra Segura
           </div>
         </div>
 
