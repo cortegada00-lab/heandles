@@ -22,6 +22,7 @@ import StaticPage from "@/pages/static";
 import ProductProPage from "@/pages/product-pro";
 import { CartProvider } from "@/lib/cart-context";
 import { FavoritesProvider } from "@/lib/favorites-context";
+import { AuthProvider } from "@/lib/auth-context";
 import { CookieConsent } from "@/components/shared/cookie-consent";
 
 import ContactPage from "@/pages/contact";
@@ -122,17 +123,19 @@ import { WhatsAppButton } from "@/components/shared/whatsapp-button";
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <FavoritesProvider>
-          <TooltipProvider>
-            <Toaster />
-            <CookieConsent />
-            <ScrollToTop />
-            <WhatsAppButton />
-            <Router />
-          </TooltipProvider>
-        </FavoritesProvider>
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <FavoritesProvider>
+            <TooltipProvider>
+              <Toaster />
+              <CookieConsent />
+              <ScrollToTop />
+              <WhatsAppButton />
+              <Router />
+            </TooltipProvider>
+          </FavoritesProvider>
+        </CartProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

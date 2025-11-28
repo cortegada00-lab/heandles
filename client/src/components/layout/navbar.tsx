@@ -1,11 +1,12 @@
-import { Link } from "wouter";
-import { Search, ShoppingCart, User, Menu, X, Phone, Truck, ShieldCheck, Zap, Sparkles, Gift, ChevronRight, MapPin, ChevronDown, MessageCircle } from "lucide-react";
+import { Link, useLocation } from "wouter";
+import { Search, ShoppingCart, User, Menu, X, Phone, Truck, ShieldCheck, Zap, Sparkles, Gift, ChevronRight, MapPin, ChevronDown, MessageCircle, LogOut, Heart, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { SearchOverlay } from "@/components/search/search-overlay";
 import ivapeoLogo from "@/assets/ivapeo-logo.webp";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { useCart } from "@/lib/cart-context";
+import { useAuth } from "@/lib/auth-context";
 import {
   Sheet,
   SheetContent,
@@ -13,11 +14,21 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { itemCount } = useCart();
+  const { user, status, logout } = useAuth();
+  const [, setLocation] = useLocation();
 
   return (
     <div className="w-full bg-white flex flex-col font-sans">
@@ -176,12 +187,55 @@ export function Navbar() {
                </Button>
             </div>
 
-            <Link href="/login">
-              <div className="hidden sm:flex flex-col items-center justify-center cursor-pointer group">
-                <User className="h-6 w-6 text-gray-700 group-hover:text-primary transition-colors mb-1" />
-                <span className="text-[10px] font-bold text-gray-500 group-hover:text-primary uppercase tracking-wider">Entrar</span>
-              </div>
-            </Link>
+            {status === "logged_in" && user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className="flex flex-col items-center justify-center cursor-pointer group outline-none">
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold mb-0.5">
+                      {user.name.charAt(0).toUpperCase()}
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-500 group-hover:text-primary max-w-[60px] truncate hidden sm:block">
+                      {user.name}
+                    </span>
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel>
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">{user.name}</p>
+                      <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => setLocation("/account")}>
+                    <User className="mr-2 h-4 w-4" />
+                    <span>Mi Cuenta</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLocation("/account")}>
+                    <Package className="mr-2 h-4 w-4" />
+                    <span>Mis Pedidos</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLocation("/favorites")}>
+                    <Heart className="mr-2 h-4 w-4" />
+                    <span>Favoritos</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={logout} className="text-red-600 focus:text-red-600">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Cerrar Sesión</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link href="/login">
+                <div className="hidden sm:flex flex-col items-center justify-center cursor-pointer group">
+                  <User className="h-6 w-6 text-gray-700 group-hover:text-primary transition-colors mb-1" />
+                  <span className="text-[10px] font-bold text-gray-500 group-hover:text-primary uppercase tracking-wider">
+                    {status === "dormant" ? "Acceder" : "Entrar"}
+                  </span>
+                </div>
+              </Link>
+            )}
             
             {/* Cart Drawer Trigger */}
             <CartDrawer>

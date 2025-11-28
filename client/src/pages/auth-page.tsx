@@ -11,9 +11,11 @@ import { ArrowLeft, Mail, Lock, User, Eye, EyeOff, CheckCircle2, ShieldCheck, Tr
 import heroImage from "@assets/generated_images/High_tech_vape_mod_kit_444d8fd5.png";
 import registerLogo from "@/assets/register-logo.png";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/lib/auth-context";
 
 export default function AuthPage() {
   const [location, setLocation] = useLocation();
+  const { login } = useAuth();
   const [view, setView] = useState<"login" | "register" | "forgot-password">("login");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,8 +31,11 @@ export default function AuthPage() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    const emailInput = (document.getElementById("email") as HTMLInputElement)?.value;
+    
     // Simulate API call
     setTimeout(() => {
+      login(emailInput || "usuario@ejemplo.com");
       setIsLoading(false);
       setLocation("/");
     }, 1500);
