@@ -1,6 +1,10 @@
 import { Link } from "wouter";
-import { Droplets, Zap, Leaf, Disc, Battery, Package, ArrowUpRight } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useCallback } from "react";
 
+// Import existing realistic images
 import imgLiquids from "@assets/generated_images/Premium_e-liquid_bottles_132f9a1b.png";
 import imgVapers from "@assets/generated_images/dark_vape_mod_device_product_shot.png";
 import imgZero from "@assets/generated_images/dark_e-liquid_bottle_product_shot.png";
@@ -9,96 +13,68 @@ import imgDisposable from "@assets/generated_images/High_tech_vape_mod_kit_444d8
 import imgKits from "@assets/generated_images/dark_advanced_vape_kit_parts.png";
 
 const CATEGORIES = [
-  {
-    id: "01",
-    name: "eLiquids",
-    icon: <Droplets className="w-6 h-6 md:w-8 md:h-8" strokeWidth={1.5} />,
-    href: "/eliquids",
-    image: imgLiquids
-  },
-  {
-    id: "02",
-    name: "Vapers",
-    icon: <Zap className="w-6 h-6 md:w-8 md:h-8" strokeWidth={1.5} />,
-    href: "/kits",
-    image: imgVapers
-  },
-  {
-    id: "03",
-    name: "Sin Nicotina",
-    icon: <Leaf className="w-6 h-6 md:w-8 md:h-8" strokeWidth={1.5} />,
-    href: "/sin-nicotina",
-    image: imgZero
-  },
-  {
-    id: "04",
-    name: "Pods",
-    icon: <Disc className="w-6 h-6 md:w-8 md:h-8" strokeWidth={1.5} />,
-    href: "/pods",
-    image: imgPods
-  },
-  {
-    id: "05",
-    name: "Desechables",
-    icon: <Battery className="w-6 h-6 md:w-8 md:h-8" strokeWidth={1.5} />,
-    href: "/disposables",
-    image: imgDisposable
-  },
-  {
-    id: "06",
-    name: "Kits Pro",
-    icon: <Package className="w-6 h-6 md:w-8 md:h-8" strokeWidth={1.5} />,
-    href: "/kits",
-    image: imgKits
-  }
+  { name: "eLiquids", href: "/eliquids", image: imgLiquids },
+  { name: "Vapers", href: "/kits", image: imgVapers },
+  { name: "Sin Nicotina", href: "/sin-nicotina", image: imgZero },
+  { name: "Pods", href: "/pods", image: imgPods },
+  { name: "Desechables", href: "/disposables", image: imgDisposable },
+  { name: "Kits Pro", href: "/kits", image: imgKits },
+  // Duplicate for scroll effect if needed or add more mock categories
+  { name: "Resistencias", href: "/accessories", image: imgKits },
+  { name: "Baterías", href: "/accessories", image: imgVapers },
 ];
 
 export function CategoryGrid() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    align: "start", 
+    loop: false,
+    containScroll: "trimSnaps",
+    dragFree: true
+  });
+
+  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+
   return (
-    <section className="bg-white border-b border-gray-100">
-      <div className="container-custom">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 border-l border-gray-100">
-          {CATEGORIES.map((cat) => (
-            <Link key={cat.name} href={cat.href}>
-              <div className="group relative flex flex-col items-center justify-between p-6 cursor-pointer border-r border-b border-gray-100 hover:border-gray-300 hover:shadow-xl hover:z-10 transition-all duration-300 h-[200px] bg-white overflow-hidden">
-                
-                {/* Background Image (Screen blend mode to remove black bg) */}
-                <div className="absolute bottom-0 right-0 w-32 h-32 md:w-40 md:h-40 translate-x-8 translate-y-8 group-hover:translate-x-4 group-hover:translate-y-4 transition-transform duration-500">
-                  <img 
-                    src={cat.image} 
-                    alt={cat.name} 
-                    className="w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-hard-light grayscale group-hover:grayscale-0"
-                  />
-                </div>
+    <section className="py-6 bg-white border-b border-gray-100">
+      <div className="container-custom relative group/section">
+        
+        {/* Navigation Buttons */}
+        <div className="absolute top-1/2 -translate-y-1/2 left-2 z-10 opacity-0 group-hover/section:opacity-100 transition-opacity duration-300 hidden md:block">
+          <Button variant="outline" size="icon" className="h-8 w-8 rounded-full bg-white/80 backdrop-blur shadow-md border-gray-200" onClick={scrollPrev}>
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+        </div>
+        <div className="absolute top-1/2 -translate-y-1/2 right-2 z-10 opacity-0 group-hover/section:opacity-100 transition-opacity duration-300 hidden md:block">
+          <Button variant="outline" size="icon" className="h-8 w-8 rounded-full bg-white/80 backdrop-blur shadow-md border-gray-200" onClick={scrollNext}>
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
 
-                {/* Top Bar: Index + Arrow */}
-                <div className="w-full flex justify-between items-start z-20">
-                   <span className="text-[10px] font-mono text-gray-400 group-hover:text-black transition-colors">
-                     {cat.id}
-                   </span>
-                   <ArrowUpRight className="w-4 h-4 text-gray-300 group-hover:text-black transition-colors" />
-                </div>
-                
-                {/* Icon Container */}
-                <div className="flex-1 flex items-center justify-center z-20 -mt-4">
-                  <div className="text-gray-900 group-hover:scale-110 transition-transform duration-300">
-                    {cat.icon}
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex touch-pan-y">
+            {CATEGORIES.map((cat, index) => (
+              <div key={`${cat.name}-${index}`} className="flex-[0_0_22%] md:flex-[0_0_14%] min-w-0 pl-4 first:pl-0">
+                <Link href={cat.href}>
+                  <div className="group flex flex-col items-center gap-3 cursor-pointer">
+                    {/* Realistic Icon / Image Circle */}
+                    <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full bg-gray-50 border border-gray-100 p-2 shadow-sm group-hover:shadow-md group-hover:border-gray-300 transition-all duration-300 overflow-hidden">
+                      <img 
+                        src={cat.image} 
+                        alt={cat.name}
+                        className="w-full h-full object-contain object-center group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                    
+                    {/* Label */}
+                    <span className="text-[10px] md:text-xs font-bold text-gray-700 text-center uppercase tracking-tight group-hover:text-black transition-colors leading-tight">
+                      {cat.name}
+                    </span>
                   </div>
-                </div>
-
-                {/* Label */}
-                <div className="w-full text-center z-20 mt-auto">
-                  <span className="text-xs font-black text-gray-900 uppercase tracking-widest border-b-2 border-transparent group-hover:border-black pb-1 transition-all duration-300">
-                    {cat.name}
-                  </span>
-                </div>
-                
-                {/* Hover Accent Line */}
-                <div className="absolute top-0 left-0 w-full h-[3px] bg-black scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-
+                </Link>
               </div>
-            </Link>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
