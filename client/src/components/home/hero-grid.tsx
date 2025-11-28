@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 // Images
 import heroImage1 from "@assets/generated_images/hand_holding_premium_pod_vape_dark_background.png";
-import heroImage2 from "@assets/generated_images/beach_sunset_vaping_scene_with_pink/blue_swirl_bottle_on_table.png";
+import heroImage2 from "@assets/image_1764350777336.png";
 
 const SLIDES = [
   {
