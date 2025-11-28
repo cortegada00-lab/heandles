@@ -1,0 +1,37 @@
+[INICIO DEL BLOQUE PARA EL EQUIPO DE DESARROLLO]
+
+🚀 Mejoras Críticas de UX/SEO en Home GUEST (Móvil) - Aprovechando Headless
+Para la versión móvil de no registrados (referencia image_6.png), la implementación actual en PrestaShop tiene deficiencias graves de usabilidad que debemos solucionar en el paso a Next.js.
+
+Estas son las 3 prioridades absolutas para esta vista:
+
+1. SOLUCIÓN AL TEXTO SEO BLOQUEANTE (Implementación Técnica Crítica)
+El Problema (Crítica UX): Actualmente, el usuario móvil se encuentra al final de la página con un bloque de texto SEO inmenso que le obliga a hacer scroll infinito. Esto destroza la experiencia de usuario y aumenta la tasa de rebote. Nadie lee eso en un móvil.
+
+La Solución Headless (El Acordeón "Leer más"): Debemos implementar un patrón de acordeón. Mostrar inicialmente solo las primeras 2-3 líneas del texto seguido de un botón/enlace que diga "Leer más sobre cigarrillos electrónicos" o un icono de flecha hacia abajo [v]. Al pulsar, se expande el resto del texto.
+
+⚠️ INSTRUCCIÓN TÉCNICA IMPRESCINDIBLE PARA SEO: Para que Google siga indexando y dando peso a ese texto oculto, NO PODÉIS usar renderizado condicional de React (ej: {isExpanded && <div className="text-seo">...}). Si el texto no está en el HTML inicial, Googlebot no lo leerá, ya que no hace clic en los botones. La implementación DEBE ser vía CSS: El texto completo debe estar siempre presente en el HTML renderizado por el servidor (SSR). Usad clases CSS para ocultarlo visualmente en el estado inicial (ej: max-height: 100px; overflow: hidden;) y quitar esa restricción al hacer clic. Así garantizamos UX limpia y SEO intacto.
+
+2. INYECCIÓN DE LA VENTAJA COMPETITIVA (Omnicanalidad Real)
+El Problema (Crítica de Negocio): Un usuario nuevo que aterriza en la web móvil percibe iVapeo como "otra tienda online más" (posiblemente dropshipping o china). No hay rastro de la mayor fortaleza de la empresa: la presencia física.
+
+La Solución Headless: Hay que inyectar un bloque visual potente de confianza.
+
+Ubicación: Justo debajo del Hero Banner principal y la Oferta Flash, y antes del carrusel de marcas.
+
+Contenido Visual: Un icono de tienda física o marcador de mapa + Texto gancho fuerte.
+
+Copy Sugerido: "Más que una web: 8 Tiendas Físicas en Barcelona. Ven a probar y asesorarte."
+
+Objetivo: Disparar la confianza inmediata frente a Amazon o competencia puramente online.
+
+3. VELOCIDAD PERCIBIDA (Performance Extrema)
+El Objetivo: La Home Guest es la primera impresión. Debe cargar instantáneamente. El LCP (Largest Contentful Paint) debe estar por debajo de 1.5 segundos en móvil 4G.
+
+La Solución Headless:
+
+El contenido de esta Home Guest (banners, textos, marcas) es estático en un 95%.
+
+Obligatorio: Utilizar SSG (Static Site Generation) o ISR (Incremental Static Regeneration) en Next.js para servir esta página como HTML estático puro desde CDN. No debe haber llamadas a la API de PrestaShop en tiempo de ejecución para renderizar esta página inicial.
+
+Imágenes: Uso obligatorio del componente next/image para los banners principales, con priority={true} para el Hero Banner y tamaños responsivos correctos para evitar Cumulative Layout Shift (CLS).

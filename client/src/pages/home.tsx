@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { HeroGrid } from "@/components/home/hero-grid";
 import { HeroGridGuest } from "@/components/home/hero-grid-guest";
+import { TrustBanner } from "@/components/home/trust-banner";
 import { ProductSection } from "@/components/home/product-section";
 import { NewArrivals } from "@/components/home/new-arrivals";
 import { SeoContent } from "@/components/home/seo-content";
@@ -49,6 +50,8 @@ export default function Home() {
       <main className="flex-1">
         
         {isLoggedIn ? <HeroGrid /> : <HeroGridGuest />}
+        
+        <TrustBanner />
         
         <Brands />
 
