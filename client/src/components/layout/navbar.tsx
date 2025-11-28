@@ -43,6 +43,7 @@ export function Navbar() {
                 alt="IVAPEO" 
                 className="h-8 w-auto object-contain"
               />
+              <span className="text-[8px] text-gray-500 font-medium -mt-0.5 block whitespace-nowrap">Tienda de cigarrillos electrónicos iVapeo</span>
             </Link>
           </div>
 
