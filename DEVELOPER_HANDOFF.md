@@ -2,6 +2,25 @@
 
 Este documento detalla las reglas de negocio implementadas en el prototipo Frontend que deben ser replicadas o soportadas por el Backend en la versión final.
 
+## 0. Guía de Mapeo PrestaShop (PrestaShop Integration Guide)
+**Para el Agente de Programación / Backend Developer:**
+
+Si el backend se basa en **PrestaShop**, utiliza esta guía de mapeo para conectar los conceptos del frontend con la base de datos de PrestaShop.
+
+| Concepto Frontend (Mock Data) | Entidad PrestaShop Recomendada | Notas de Implementación |
+| :--- | :--- | :--- |
+| **Variantes (Ohmios, Nicotina)** | `Combinations` (Atributos) | Usar combinaciones estándar. El stock se gestiona por combinación. |
+| **Colores (Hardware)** | `Attributes` (Tipo Color) | Crear atributo "Color". Asignar textura/imagen al valor del atributo para mostrar la "bolita" visual. |
+| **Specs / Ficha Técnica** | `Features` (Características) | Crear características "Batería", "Dimensiones", etc. Valores predefinidos o personalizados. |
+| **Flavor Profile (Sabor)** | `Features` (Características) | Crear características numéricas: "Frescor (0-100)", "Dulzor (0-100)", "Golpe (0-100)". |
+| **Etiquetas de Sabor (Iconos)** | `Features` o `Tags` | Se recomienda usar `Features` (ej: "Sabor Principal") para filtrado facetado, o `Tags` para visualización simple. |
+| **Longfill / Alquimia** | `Pack` (Nativo) o Módulo Custom | La lógica de "añadir nicokits gratis/cobrados" requiere un módulo que intercepte el `Add to Cart` o use Packs nativos si el precio es fijo. |
+| **Tier Pricing (Descuentos)** | `Specific Prices` (Precios Específicos) | Usar la tabla `ps_specific_price` para definir reglas de descuento por cantidad (ej: "A partir de 5 uds"). |
+| **Accesorios Compatibles** | `Accessories` (Nativo) | Usar la pestaña "Accesorios" nativa de la ficha de producto en el Backoffice. |
+| **Brand Stores** | `Manufacturers` (Marcas) | Mapear `id_manufacturer`. Usar campos de descripción de la marca para el contenido rico (HTML). |
+
+---
+
 ## 1. Sistema de Packs Virtuales (Nicokits)
 **Ubicación:** `client/src/components/product/product-details.tsx` -> `handleAddToCart`
 
