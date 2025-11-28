@@ -9,7 +9,7 @@ const messages = [
   },
   {
     icon: <MapPin className="w-3.5 h-3.5 text-primary" />,
-    text: "8 Tiendas BCN",
+    text: "Visita nuestras tiendas",
   },
   {
     icon: <Truck className="w-3.5 h-3.5 text-green-400" />,
@@ -43,7 +43,7 @@ export function AnnouncementBar() {
              </div>
              <Link href="/tiendas">
                 <div className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors">
-                    <MapPin className="w-3.5 h-3.5 text-primary" /> <span>8 Tiendas BCN</span>
+                    <MapPin className="w-3.5 h-3.5 text-primary" /> <span>Visita nuestras tiendas</span>
                 </div>
              </Link>
              <div className="flex items-center gap-2">
