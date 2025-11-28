@@ -9,18 +9,17 @@ export function HeroGridGuest() {
   return (
     <div className="bg-[#F8F9FA] py-4 md:py-6">
       <div className="container-custom">
-        {/* Greeting and Top Links */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 md:mb-6 gap-2">
-          <div className="space-y-1">
-            <h2 className="text-xl md:text-3xl text-[#0a1a2a] font-heading font-black tracking-tight">
-              Bienvenido a iVapeo.
-            </h2>
-            <p className="text-sm md:text-base text-gray-500 font-medium">
-              La tienda de vapeo nº1 en España. Envíos en 24h.
+        {/* Greeting and Top Links - Compact & Modern */}
+        <div className="flex flex-row items-center justify-between py-3 mb-4 border-b border-gray-100">
+          <div className="flex items-center gap-3 md:gap-4">
+            <h2 className="text-lg font-black tracking-tighter uppercase text-[#0a1a2a]">Bienvenido</h2>
+            <div className="hidden md:block w-px h-4 bg-gray-300"></div>
+            <p className="text-xs md:text-sm font-medium text-gray-500 flex items-center gap-2">
+              Tienda nº1 <span className="text-gray-300 text-[10px]">•</span> Envíos 24h
             </p>
           </div>
-          <div className="flex text-xs md:text-sm font-bold text-gray-400">
-            <span className="flex items-center gap-2 text-gray-400"><ShieldCheck className="w-4 h-4" /> Compra Segura</span>
+          <div className="flex items-center gap-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider bg-white border border-gray-100 text-gray-600 px-2 py-1 rounded-md shadow-sm">
+            <ShieldCheck className="w-3.5 h-3.5 text-green-500" /> Compra Segura
           </div>
         </div>
 
