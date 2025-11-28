@@ -95,18 +95,19 @@ export function HeroGrid() {
                         {slide.bottleImage && <div className="absolute inset-0 backdrop-blur-[2px]"></div>}
                     </div>
                     
-                    {/* Optional Bottle Overlay for Slide 2 - Floating Hero Style */}
+                    {/* Optional Bottle Overlay for Slide 2 - HUGE & CINEMATIC */}
                     {/* @ts-ignore */}
                     {slide.bottleImage && (
-                      <div className="absolute top-1/2 right-4 md:right-16 lg:right-32 -translate-y-1/2 z-20 w-[200px] md:w-[300px] lg:w-[380px] h-[300px] md:h-[450px] lg:h-[550px] flex items-center justify-center pointer-events-none">
-                          {/* Atmospheric Glow */}
-                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-tr from-pink-500/20 to-blue-500/20 blur-[60px] rounded-full"></div>
+                      <div className="absolute bottom-0 right-0 md:right-10 lg:right-20 z-20 w-[250px] md:w-[400px] lg:w-[500px] h-[80%] flex items-end justify-center pointer-events-none">
+                          
+                          {/* Strong Back Glow to separate from background */}
+                          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-[60%] bg-gradient-to-t from-pink-600/40 to-transparent blur-[50px] rounded-full"></div>
                           
                           <img 
                             /* @ts-ignore */
                             src={slide.bottleImage} 
                             alt="Premium E-Liquid Bottle" 
-                            className="relative z-10 w-full h-full object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.5)] animate-in zoom-in-95 fade-in slide-in-from-bottom-8 duration-1000 ease-out"
+                            className="relative z-10 w-full h-full object-contain object-bottom drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] animate-in slide-in-from-bottom-12 fade-in duration-1000 ease-out"
                           />
                       </div>
                     )}
