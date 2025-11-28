@@ -1,0 +1,38 @@
+. EL ICONO PARA "VER TODAS LAS CATEGORÍAS"
+Este es un punto crítico de UX en móvil. Ahora mismo tienes un menú hamburguesa (las tres rayitas ≡ a la izquierda del logo).
+
+La Tendencia Actual (y lo mejor para UX):
+
+El menú hamburguesa se está moviendo a la barra de navegación inferior (Bottom Navigation Bar) en móvil.
+
+¿Por qué? Las pantallas de móvil son muy altas. El pulgar llega fácil abajo, pero difícil arriba a la izquierda. Mover el menú abajo aumenta la interacción.
+
+Propuesta de Diseño Móvil (Estructura Completa):
+
+[ FRANJA AZUL SUPERIOR ROTATORIA (Autoridad, Tiendas, Envíos) ]
+------------------------------------------------------------------
+      [LOGO iVAPEO Centrado]                    [🔍] [🛒]
+------------------------------------------------------------------
+ (Scroll horizontal de Píldoras: Kits, Sales, Desechables...)
+------------------------------------------------------------------
+
+[ CONTENIDO DE LA PÁGINA (Hero Banners, etc.) ]
+
+...
+
+------------------------------------------------------------------
+[ BARRA DE NAVEGACIÓN INFERIOR FIJA (Sticky Bottom Nav) ]
+[🏠 Inicio]  [📂 Categorías]  [🔥 Ofertas]  [👤 Mi Cuenta]
+------------------------------------------------------------------
+El icono [📂 Categorías] (o un icono de hamburguesa ahí abajo) es el que abre el menú completo con todas las categorías y subcategorías.
+
+La barra superior se queda limpia, solo con Logo, Lupa y Carrito.
+
+Resumen para el Equipo de Desarrollo (Next.js)
+Componente AnnouncementBar: Crear un componente de carrusel de texto para la parte superior del layout. Debe aceptar un array de strings (los mensajes) y rotar automáticamente. Debe ser fácil de editar desde el CMS.
+
+Layout Móvil: Implementar una BottomNavigationBar fija. El menú principal debe abrirse desde el segundo icono de esta barra inferior, no desde la cabecera.
+
+Limpieza del Header: El header superior solo debe contener Logo, Lupa (Buscador) y Carrito.
+
+Píldoras de Navegación: Justo debajo del header, implementar una lista de enlaces con scroll horizontal (overflow-x: auto) para los accesos directos principales ("Kits", "Sales", etc.), con un diseño de "chip" o píldora limpia.

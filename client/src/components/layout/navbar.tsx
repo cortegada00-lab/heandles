@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Search, ShoppingCart, User, Menu, X, Phone, Truck, ShieldCheck, Zap, Sparkles, Gift, ChevronRight, MapPin, ChevronDown, MessageCircle, LogOut, Heart, Package } from "lucide-react";
+import { Search, ShoppingCart, User, Phone, Truck, ShieldCheck, Sparkles, ChevronRight, MapPin, ChevronDown, LogOut, Heart, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { SearchOverlay } from "@/components/search/search-overlay";
@@ -7,13 +7,8 @@ import ivapeoLogo from "@/assets/ivapeo-logo.webp";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { useCart } from "@/lib/cart-context";
 import { useAuth } from "@/lib/auth-context";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { AnnouncementBar } from "./announcement-bar";
+import { CategoryPills } from "./category-pills";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,7 +19,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { itemCount } = useCart();
   const { user, status, logout } = useAuth();
@@ -34,127 +28,33 @@ export function Navbar() {
     <div className="w-full bg-white flex flex-col font-sans">
       <SearchOverlay open={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
       
-      {/* USP Top Bar - Professional Dark */}
-      <div className="bg-[#1a1a1a] text-gray-300 py-2 text-[11px] md:text-xs font-medium tracking-wide border-b border-white/10">
-        <div className="container-custom flex flex-wrap justify-between items-center gap-2">
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5 text-white"><Truck className="w-3.5 h-3.5 text-primary" /> Envío Gratis +28€</span>
-            <span className="flex items-center gap-1.5 hidden sm:flex"><ShieldCheck className="w-3.5 h-3.5 text-green-400" /> Garantía de Calidad</span>
-          </div>
-          <div className="flex items-center gap-6">
-            <Link href="/tiendas">
-              <div className="flex items-center gap-2 cursor-pointer group">
-                <div className="bg-primary/20 p-1 rounded-full group-hover:bg-primary/30 transition-colors animate-pulse shadow-[0_0_8px_rgba(56,189,248,0.6)]">
-                   <MapPin className="w-3.5 h-3.5 text-primary" />
-                </div>
-                <span className="text-white group-hover:text-primary transition-colors flex items-center gap-1 font-medium">
-                   Ven a nuestras tiendas <span className="text-primary font-bold hidden sm:inline"> y te asesoramos</span>
-                </span>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </div>
+      {/* USP Top Bar - Rotating Component */}
+      <AnnouncementBar />
 
       {/* Main Header */}
-      <header className="py-4 md:py-6 bg-white relative z-50 sticky top-0 shadow-sm md:shadow-none">
+      <header className="py-3 md:py-6 bg-white relative z-50 sticky top-0 shadow-sm md:shadow-none">
         <div className="container-custom flex items-center justify-between gap-0 md:gap-8">
           
-          <div className="flex items-center lg:hidden shrink-0 mr-auto">
-            {/* Mobile Menu - Nike Style */}
-            <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-              <SheetTrigger asChild className="lg:hidden">
-                <Button variant="ghost" size="icon" className="shrink-0 -ml-2">
-                  <Menu className="h-6 w-6" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:w-[400px] p-0 border-l border-gray-100 bg-white overflow-y-auto">
-                <SheetHeader className="p-6 flex flex-row justify-between items-center border-b border-transparent">
-                   {/* Empty title for accessibility or hidden */}
-                   <SheetTitle className="hidden">Menú</SheetTitle>
-                   <div className="w-8"></div> {/* Spacer for balance if needed, or just rely on Close button */}
-                </SheetHeader>
-                
-                <div className="px-8 pb-8 flex flex-col h-full">
-                  {/* Main Categories - Big & Bold */}
-                  <div className="space-y-6 mb-12">
-                    <Link href="/ofertas" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-red-600">
-                      Black Friday Ofertas
-                      <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-red-600 transition-colors" />
-                    </Link>
-                    <Link href="/novedades" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
-                      Novedades
-                      <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
-                    </Link>
-                    <Link href="/eliquids" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
-                      E-Liquids
-                      <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
-                    </Link>
-                    <Link href="/disposables" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
-                      Desechables
-                      <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
-                    </Link>
-                    <Link href="/kits" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
-                      Vape Kits
-                      <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
-                    </Link>
-                    <Link href="/coils" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-2xl font-medium text-gray-900">
-                      Resistencias
-                      <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-black transition-colors" />
-                    </Link>
-                  </div>
-
-                  {/* Secondary / Brands Section */}
-                  <div className="space-y-4 mb-12 pl-1">
-                     <div className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                        <Sparkles className="w-5 h-5" /> Marcas Top
-                     </div>
-                     <Link href="/vaporesso" onClick={() => setIsMenuOpen(false)} className="block text-lg font-medium text-gray-500 hover:text-black transition-colors">Vaporesso</Link>
-                     <Link href="/voopoo" onClick={() => setIsMenuOpen(false)} className="block text-lg font-medium text-gray-500 hover:text-black transition-colors">Voopoo</Link>
-                     <Link href="/elfbar" onClick={() => setIsMenuOpen(false)} className="block text-lg font-medium text-gray-500 hover:text-black transition-colors">ElfBar</Link>
-                     <Link href="/tiendas" onClick={() => setIsMenuOpen(false)} className="block text-lg font-medium text-gray-500 hover:text-black transition-colors mt-6 flex items-center gap-2">
-                        <MapPin className="w-5 h-5" /> Tiendas Físicas
-                     </Link>
-                  </div>
-
-                  {/* Contact & Auth Section - No Club/Points */}
-                  <div className="mt-auto pt-8 border-t border-gray-100">
-                     <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="group flex items-center justify-between text-lg font-medium text-gray-600 hover:text-black mb-8">
-                        <span className="flex items-center gap-2"><Phone className="w-5 h-5" /> Contacto y Ayuda</span>
-                        <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-black transition-colors" />
-                     </Link>
-
-                     <p className="text-gray-500 text-base leading-relaxed mb-6">
-                        Regístrate para gestionar tus pedidos y direcciones de envío fácilmente.
-                     </p>
-                     <div className="flex gap-3">
-                        <Link href="/register" onClick={() => setIsMenuOpen(false)} className="flex-1">
-                          <Button className="w-full rounded-full h-12 bg-black hover:bg-gray-800 text-white font-bold text-base">
-                             Registrarse
-                          </Button>
-                        </Link>
-                        <Link href="/login" onClick={() => setIsMenuOpen(false)} className="flex-1">
-                           <Button variant="outline" className="w-full rounded-full h-12 border-gray-300 text-black font-bold text-base hover:bg-gray-50">
-                             Iniciar sesión
-                           </Button>
-                        </Link>
-                     </div>
-                  </div>
-
-                </div>
-              </SheetContent>
-            </Sheet>
-
-            {/* Logo - Centered on mobile if needed, but usually left aligned is fine */}
-            <Link href="/" className="shrink-0 flex flex-col">
+          {/* Mobile Logo - Centered */}
+          <div className="flex items-center lg:hidden shrink-0 mx-auto absolute left-1/2 -translate-x-1/2">
+            <Link href="/" className="flex flex-col items-center">
               <img 
                 src={ivapeoLogo} 
                 alt="IVAPEO" 
-                className="h-8 md:h-12 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity block"
+                className="h-8 w-auto object-contain"
               />
-              <span className="text-[8px] md:text-[10px] text-gray-500 font-medium -mt-1 block leading-tight">Tienda de cigarrillos electrónicos iVapeo</span>
             </Link>
           </div>
+
+          {/* Desktop Logo */}
+          <Link href="/" className="hidden lg:flex shrink-0 mr-auto lg:mr-0 flex-col">
+            <img 
+              src={ivapeoLogo} 
+              alt="IVAPEO" 
+              className="h-12 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity block"
+            />
+            <span className="text-[10px] text-gray-500 font-medium -mt-1 block">Tienda de cigarrillos electrónicos iVapeo</span>
+          </Link>
 
           {/* Smart Search - Desktop: Centered & Wide. Mobile: Icon Trigger */}
           <div className="hidden lg:block flex-1 max-w-3xl mx-4">
@@ -189,7 +89,7 @@ export function Navbar() {
           </div>
 
           {/* User Actions */}
-          <div className="flex items-center gap-2 md:gap-4 shrink-0">
+          <div className="flex items-center gap-3 md:gap-4 shrink-0 ml-auto lg:ml-0">
             {/* Mobile Search Trigger */}
             <div className="lg:hidden">
                <Button variant="ghost" size="icon" className="text-gray-700" onClick={() => setIsSearchOpen(true)}>
@@ -264,6 +164,9 @@ export function Navbar() {
           </div>
         </div>
       </header>
+      
+      {/* Mobile Category Pills */}
+      <CategoryPills />
 
       {/* Navigation Bar - Professional Corporate Navy (Slate 900) */}
       <nav className="hidden lg:block bg-[#0f172a] sticky top-0 z-40 shadow-md border-t border-white/5 font-sans">
@@ -379,99 +282,16 @@ export function Navbar() {
                 <Link href="/atomizadores" className="h-full flex items-center px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[13px] font-bold border-b-2 border-transparent hover:border-white">Atomizadores</Link>
             </li>
             <li className="h-full flex items-center">
-                <Link href="/resistencias" className="h-full flex items-center px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[13px] font-bold border-b-2 border-transparent hover:border-white">Resistencias</Link>
+                <Link href="/coils" className="h-full flex items-center px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[13px] font-bold border-b-2 border-transparent hover:border-white">Resistencias</Link>
             </li>
             <li className="h-full flex items-center">
-                <Link href="/alquimia" className="h-full flex items-center px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[13px] font-bold border-b-2 border-transparent hover:border-white">Alquimia DIY</Link>
+                <Link href="/disposables" className="h-full flex items-center px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[13px] font-bold border-b-2 border-transparent hover:border-white">Desechables</Link>
             </li>
             <li className="h-full flex items-center">
-                <Link href="/ofertas" className="h-full flex items-center px-4 hover:bg-white/10 transition-colors uppercase tracking-wide text-[13px] font-bold text-red-500 hover:text-red-400 border-b-2 border-transparent hover:border-red-500 gap-1.5">
-                   <Zap className="w-3.5 h-3.5" /> Ofertas
-                </Link>
+                <Link href="/ofertas" className="h-full flex items-center px-4 hover:bg-white/10 text-red-500 hover:text-red-400 transition-colors uppercase tracking-wide text-[13px] font-bold border-b-2 border-transparent hover:border-red-500">Ofertas</Link>
             </li>
-             <li className="h-full flex items-center">
-                <Link href="/blogs" className="h-full flex items-center px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[13px] font-bold border-b-2 border-transparent hover:border-white">Blogs</Link>
-            </li>
-            <li className="group h-full flex items-center relative">
-                <Link href="/ayuda" className="h-full flex items-center px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[13px] gap-1 font-bold border-b-2 border-transparent hover:border-white">
-                    Ayuda <ChevronDown className="w-3 h-3 opacity-70 group-hover:rotate-180 transition-transform duration-300" />
-                </Link>
-                <div className="absolute top-full right-0 w-[550px] bg-white text-gray-800 shadow-2xl border-t-4 border-[#0f172a] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top z-50 rounded-b-sm overflow-hidden">
-                    <div className="grid grid-cols-2">
-                        {/* Left Column: Contact Info */}
-                        <div className="bg-gray-50 p-6 border-r border-gray-100">
-                            <h4 className="font-bold text-[#0f172a] text-xs uppercase tracking-wide mb-6 flex items-center gap-2">
-                                <Phone className="w-4 h-4 text-gray-500" /> Centro de Soporte
-                            </h4>
-                            
-                            <div className="space-y-6">
-                                <div>
-                                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-1">Llámanos</p>
-                                    <a href="tel:+34935167167" className="text-xl font-bold text-[#0f172a] hover:text-[#ea580c] transition-colors block mb-1">+34 935 167 167</a>
-                                    <p className="text-xs text-gray-500">Lunes a Viernes</p>
-                                </div>
-
-                                <div>
-                                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-1">Horario Atención</p>
-                                    <p className="text-sm font-medium text-gray-700">10:00 - 15:00</p>
-                                    <p className="text-sm font-medium text-gray-700">16:30 - 19:00</p>
-                                </div>
-
-                                <div className="pt-4 border-t border-gray-200 space-y-2">
-                                    <Link href="/contacto" className="inline-flex items-center justify-center w-full h-9 bg-white border border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 text-xs font-bold uppercase tracking-wide rounded transition-all shadow-sm">
-                                        Abrir un Ticket
-                                    </Link>
-                                    <a href="https://wa.me/34600000000" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-full h-9 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold uppercase tracking-wide rounded transition-all shadow-sm gap-2">
-                                        <MessageCircle className="w-4 h-4" /> WhatsApp
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Right Column: Resources */}
-                        <div className="p-6 bg-white">
-                            <h4 className="font-bold text-[#0f172a] text-xs uppercase tracking-wide mb-6 flex items-center gap-2">
-                                <Sparkles className="w-4 h-4 text-gray-500" /> Recursos
-                            </h4>
-
-                            <ul className="space-y-4">
-                                <li>
-                                    <Link href="/faq" className="group/item flex items-start gap-3 hover:bg-gray-50 p-2 rounded-lg transition-all -mx-2">
-                                        <div className="mt-0.5 w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 group-hover/item:bg-blue-100 transition-colors">
-                                            <ChevronRight className="w-4 h-4" />
-                                        </div>
-                                        <div>
-                                            <h5 className="font-bold text-sm text-gray-900 group-hover/item:text-blue-600 transition-colors">Preguntas Frecuentes</h5>
-                                            <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">Resolvemos tus dudas sobre envíos y pagos</p>
-                                        </div>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/guia-inicio" className="group/item flex items-start gap-3 hover:bg-gray-50 p-2 rounded-lg transition-all -mx-2">
-                                        <div className="mt-0.5 w-8 h-8 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center flex-shrink-0 group-hover/item:bg-orange-100 transition-colors">
-                                            <Zap className="w-4 h-4" />
-                                        </div>
-                                        <div>
-                                            <h5 className="font-bold text-sm text-gray-900 group-hover/item:text-orange-600 transition-colors">¿Nuevo en el vapeo?</h5>
-                                            <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">Guía completa para iniciarte en el vapeo</p>
-                                        </div>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/garantia" className="group/item flex items-start gap-3 hover:bg-gray-50 p-2 rounded-lg transition-all -mx-2">
-                                        <div className="mt-0.5 w-8 h-8 rounded-full bg-green-50 text-green-600 flex items-center justify-center flex-shrink-0 group-hover/item:bg-green-100 transition-colors">
-                                            <ShieldCheck className="w-4 h-4" />
-                                        </div>
-                                        <div>
-                                            <h5 className="font-bold text-sm text-gray-900 group-hover/item:text-green-600 transition-colors">Garantía y Devoluciones</h5>
-                                            <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">Condiciones de garantía y devoluciones</p>
-                                        </div>
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <li className="h-full flex items-center">
+                <Link href="/tiendas" className="h-full flex items-center px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[13px] font-bold border-b-2 border-transparent hover:border-white">Tiendas</Link>
             </li>
           </ul>
         </div>

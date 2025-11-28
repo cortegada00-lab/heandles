@@ -116,6 +116,7 @@ function Router() {
 }
 
 import { Navbar } from "@/components/layout/navbar";
+import { BottomNav } from "@/components/layout/bottom-nav";
 
 import { ScrollToTop } from "@/components/shared/scroll-to-top";
 import { WhatsAppButton } from "@/components/shared/whatsapp-button";
@@ -132,6 +133,7 @@ function App() {
               <ScrollToTop />
               <WhatsAppButton />
               <Router />
+              <BottomNav />
             </TooltipProvider>
           </FavoritesProvider>
         </CartProvider>
