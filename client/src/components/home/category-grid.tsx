@@ -1,56 +1,76 @@
 import { Link } from "wouter";
-import { Droplets, Zap, Leaf, Disc, Battery, Package } from "lucide-react";
+import { Droplets, Zap, Leaf, Disc, Battery, Package, ArrowUpRight } from "lucide-react";
 
 const CATEGORIES = [
   {
+    id: "01",
     name: "eLiquids",
-    icon: <Droplets className="w-6 h-6 md:w-8 md:h-8 text-white" strokeWidth={1.5} />,
+    icon: <Droplets className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1} />,
     href: "/eliquids",
   },
   {
+    id: "02",
     name: "Vapers",
-    icon: <Zap className="w-6 h-6 md:w-8 md:h-8 text-white" strokeWidth={1.5} />,
+    icon: <Zap className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1} />,
     href: "/kits",
   },
   {
-    name: "Desechables sin nicotina",
-    icon: <Leaf className="w-6 h-6 md:w-8 md:h-8 text-white" strokeWidth={1.5} />,
+    id: "03",
+    name: "Sin Nicotina",
+    icon: <Leaf className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1} />,
     href: "/sin-nicotina",
   },
   {
+    id: "04",
     name: "Pods",
-    icon: <Disc className="w-6 h-6 md:w-8 md:h-8 text-white" strokeWidth={1.5} />,
+    icon: <Disc className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1} />,
     href: "/pods",
   },
   {
-    name: "Vapers desechables",
-    icon: <Battery className="w-6 h-6 md:w-8 md:h-8 text-white" strokeWidth={1.5} />,
+    id: "05",
+    name: "Desechables",
+    icon: <Battery className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1} />,
     href: "/disposables",
   },
   {
-    name: "Kits Vapeo",
-    icon: <Package className="w-6 h-6 md:w-8 md:h-8 text-white" strokeWidth={1.5} />,
+    id: "06",
+    name: "Kits Pro",
+    icon: <Package className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1} />,
     href: "/kits",
   }
 ];
 
 export function CategoryGrid() {
   return (
-    <section className="py-10 bg-[#0a0a0a] border-b border-white/5">
+    <section className="bg-[#0a0a0a] border-b border-white/5">
       <div className="container-custom">
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 border-l border-white/10">
           {CATEGORIES.map((cat) => (
             <Link key={cat.name} href={cat.href}>
-              <div className="group flex flex-col items-center gap-4 cursor-pointer p-4 md:p-6 rounded-sm border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all duration-300 ease-out h-full justify-center min-h-[140px] backdrop-blur-sm relative overflow-hidden">
-                {/* Hover Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="group relative flex flex-col items-center justify-between p-6 md:p-8 cursor-pointer border-r border-b border-white/10 hover:bg-white/[0.02] transition-all duration-300 h-[180px] md:h-[220px]">
                 
-                <div className="relative z-10 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1 opacity-80 group-hover:opacity-100 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">
-                  {cat.icon}
+                {/* Technical Index Number */}
+                <div className="absolute top-4 right-4 text-[10px] font-mono text-white/30 group-hover:text-white/50 transition-colors">
+                  {cat.id}
                 </div>
-                <span className="relative z-10 text-[10px] md:text-xs font-black text-white/80 text-center uppercase tracking-widest leading-tight group-hover:text-white transition-colors">
-                  {cat.name}
-                </span>
+
+                {/* Hover Corner Accent */}
+                <div className="absolute top-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></div>
+                
+                {/* Icon Container */}
+                <div className="flex-1 flex items-center justify-center">
+                  <div className="text-white/70 group-hover:text-white group-hover:scale-110 transition-all duration-500 ease-out">
+                    {cat.icon}
+                  </div>
+                </div>
+
+                {/* Label & Action */}
+                <div className="w-full flex items-end justify-between mt-4">
+                  <span className="text-xs font-bold text-white uppercase tracking-widest">
+                    {cat.name}
+                  </span>
+                  <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-white group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-300" />
+                </div>
               </div>
             </Link>
           ))}
