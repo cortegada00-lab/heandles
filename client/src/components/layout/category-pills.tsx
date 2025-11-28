@@ -12,7 +12,7 @@ const categories = [
 
 export function CategoryPills() {
   return (
-    <div className="w-full bg-white border-b border-gray-100 py-3 lg:hidden sticky top-[120px] z-30 overflow-x-auto no-scrollbar">
+    <div className="w-full bg-white border-b border-gray-100 py-3 md:hidden sticky top-[120px] z-30 overflow-x-auto no-scrollbar">
       <div className="container-custom flex gap-2 px-4 min-w-max">
         {categories.map((cat) => (
           <Link key={cat.name} href={cat.href}>

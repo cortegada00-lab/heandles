@@ -20,7 +20,7 @@ export function BottomNav() {
   const isActive = (path: string) => location === path;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-50 lg:hidden">
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-50 md:hidden">
       <div className="grid grid-cols-4 h-[60px] pb-[env(safe-area-inset-bottom)]">
         
         {/* Home */}

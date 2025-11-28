@@ -36,7 +36,7 @@ export function Navbar() {
         <div className="container-custom flex items-center justify-between gap-0 md:gap-8">
           
           {/* Mobile Logo - Centered */}
-          <div className="flex items-center lg:hidden shrink-0 mx-auto absolute left-1/2 -translate-x-1/2">
+          <div className="flex items-center md:hidden shrink-0 mx-auto absolute left-1/2 -translate-x-1/2">
             <Link href="/" className="flex flex-col items-center">
               <img 
                 src={ivapeoLogo} 
@@ -47,7 +47,7 @@ export function Navbar() {
           </div>
 
           {/* Desktop Logo */}
-          <Link href="/" className="hidden lg:flex shrink-0 mr-auto lg:mr-0 flex-col">
+          <Link href="/" className="hidden md:flex shrink-0 mr-auto lg:mr-0 flex-col">
             <img 
               src={ivapeoLogo} 
               alt="IVAPEO" 
@@ -57,7 +57,7 @@ export function Navbar() {
           </Link>
 
           {/* Smart Search - Desktop: Centered & Wide. Mobile: Icon Trigger */}
-          <div className="hidden lg:block flex-1 max-w-3xl mx-4">
+          <div className="hidden md:block flex-1 max-w-3xl mx-4">
              <div 
                 onClick={() => setIsSearchOpen(true)}
                 className="relative flex items-center w-full h-12 rounded-full border-2 border-primary/10 bg-gray-50 hover:bg-white hover:border-primary transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md group"
@@ -72,7 +72,7 @@ export function Navbar() {
                     <span className="opacity-70">¿Qué estás buscando hoy?</span>
                     
                     {/* Desktop Shortcut Hint */}
-                    <div className="hidden md:flex items-center gap-2 pr-2">
+                    <div className="hidden lg:flex items-center gap-2 pr-2">
                        <kbd className="pointer-events-none inline-flex h-6 select-none items-center gap-1 rounded border bg-gray-100 px-2 font-mono text-[10px] font-medium text-gray-500">
                         <span className="text-xs">⌘</span>K
                       </kbd>
@@ -89,9 +89,9 @@ export function Navbar() {
           </div>
 
           {/* User Actions */}
-          <div className="flex items-center gap-3 md:gap-4 shrink-0 ml-auto lg:ml-0">
+          <div className="flex items-center gap-3 md:gap-4 shrink-0 ml-auto md:ml-0">
             {/* Mobile Search Trigger */}
-            <div className="lg:hidden">
+            <div className="md:hidden">
                <Button variant="ghost" size="icon" className="text-gray-700" onClick={() => setIsSearchOpen(true)}>
                  <Search className="h-6 w-6" />
                </Button>
@@ -169,17 +169,17 @@ export function Navbar() {
       <CategoryPills />
 
       {/* Navigation Bar - Professional Corporate Navy (Slate 900) */}
-      <nav className="hidden lg:block bg-[#0f172a] sticky top-0 z-40 shadow-md border-t border-white/5 font-sans">
+      <nav className="hidden md:block bg-[#0f172a] sticky top-0 z-40 shadow-md border-t border-white/5 font-sans">
         <div className="container-custom relative">
-          <ul className="flex items-center justify-center gap-0 text-sm font-medium text-slate-200 h-12">
+          <ul className="flex items-center justify-center gap-0 text-xs lg:text-sm font-medium text-slate-200 h-12">
             
             <li className="h-full flex items-center">
-                <Link href="/novedades" className="h-full flex items-center px-4 hover:bg-white/10 transition-colors uppercase tracking-wide text-[13px] font-bold text-sky-400 hover:text-sky-300 border-b-2 border-transparent hover:border-sky-400">Novedades</Link>
+                <Link href="/novedades" className="h-full flex items-center px-2 lg:px-4 hover:bg-white/10 transition-colors uppercase tracking-wide text-[11px] lg:text-[13px] font-bold text-sky-400 hover:text-sky-300 border-b-2 border-transparent hover:border-sky-400">Novedades</Link>
             </li>
 
             {/* VAPER */}
             <li className="group h-full flex items-center">
-                <Link href="/kits" className="h-full flex items-center px-4 gap-1 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[13px] cursor-pointer font-bold border-b-2 border-transparent hover:border-white">
+                <Link href="/kits" className="h-full flex items-center px-2 lg:px-4 gap-1 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[11px] lg:text-[13px] cursor-pointer font-bold border-b-2 border-transparent hover:border-white">
                   Vaper <ChevronDown className="w-3 h-3 opacity-70 group-hover:rotate-180 transition-transform duration-300" />
                 </Link>
                 <div className="absolute top-full left-0 w-full bg-white text-gray-800 shadow-2xl border-t-4 border-[#0f172a] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top z-50">
@@ -223,7 +223,7 @@ export function Navbar() {
 
             {/* ELIQUIDS */}
             <li className="group h-full flex items-center">
-                <Link href="/eliquids" className="h-full flex items-center px-4 gap-1 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[13px] cursor-pointer font-bold border-b-2 border-transparent hover:border-white">
+                <Link href="/eliquids" className="h-full flex items-center px-2 lg:px-4 gap-1 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[11px] lg:text-[13px] cursor-pointer font-bold border-b-2 border-transparent hover:border-white">
                   eLiquids <ChevronDown className="w-3 h-3 opacity-70 group-hover:rotate-180 transition-transform duration-300" />
                 </Link>
                 <div className="absolute top-full left-0 w-full bg-white text-gray-800 shadow-2xl border-t-4 border-[#0f172a] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top z-50">
@@ -279,19 +279,19 @@ export function Navbar() {
             </li>
 
             <li className="h-full flex items-center">
-                <Link href="/atomizadores" className="h-full flex items-center px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[13px] font-bold border-b-2 border-transparent hover:border-white">Atomizadores</Link>
+                <Link href="/atomizadores" className="h-full flex items-center px-2 lg:px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[11px] lg:text-[13px] font-bold border-b-2 border-transparent hover:border-white">Atomizadores</Link>
             </li>
             <li className="h-full flex items-center">
-                <Link href="/coils" className="h-full flex items-center px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[13px] font-bold border-b-2 border-transparent hover:border-white">Resistencias</Link>
+                <Link href="/coils" className="h-full flex items-center px-2 lg:px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[11px] lg:text-[13px] font-bold border-b-2 border-transparent hover:border-white">Resistencias</Link>
             </li>
             <li className="h-full flex items-center">
-                <Link href="/disposables" className="h-full flex items-center px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[13px] font-bold border-b-2 border-transparent hover:border-white">Desechables</Link>
+                <Link href="/disposables" className="h-full flex items-center px-2 lg:px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[11px] lg:text-[13px] font-bold border-b-2 border-transparent hover:border-white">Desechables</Link>
             </li>
             <li className="h-full flex items-center">
-                <Link href="/ofertas" className="h-full flex items-center px-4 hover:bg-white/10 text-red-500 hover:text-red-400 transition-colors uppercase tracking-wide text-[13px] font-bold border-b-2 border-transparent hover:border-red-500">Ofertas</Link>
+                <Link href="/ofertas" className="h-full flex items-center px-2 lg:px-4 hover:bg-white/10 text-red-500 hover:text-red-400 transition-colors uppercase tracking-wide text-[11px] lg:text-[13px] font-bold border-b-2 border-transparent hover:border-red-500">Ofertas</Link>
             </li>
             <li className="h-full flex items-center">
-                <Link href="/tiendas" className="h-full flex items-center px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[13px] font-bold border-b-2 border-transparent hover:border-white">Tiendas</Link>
+                <Link href="/tiendas" className="h-full flex items-center px-2 lg:px-4 hover:bg-white/10 hover:text-white transition-colors uppercase tracking-wide text-[11px] lg:text-[13px] font-bold border-b-2 border-transparent hover:border-white">Tiendas</Link>
             </li>
           </ul>
         </div>
