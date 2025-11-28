@@ -44,10 +44,10 @@ export function Navbar() {
           <div className="flex items-center gap-6">
             <Link href="/tiendas">
               <div className="flex items-center gap-2 cursor-pointer group">
-                <div className="bg-primary/20 p-1 rounded-full group-hover:bg-primary/30 transition-colors">
+                <div className="bg-primary/20 p-1 rounded-full group-hover:bg-primary/30 transition-colors animate-pulse shadow-[0_0_8px_rgba(56,189,248,0.6)]">
                    <MapPin className="w-3.5 h-3.5 text-primary" />
                 </div>
-                <span className="text-white group-hover:text-primary transition-colors flex items-center gap-1">
+                <span className="text-white group-hover:text-primary transition-colors flex items-center gap-1 font-medium">
                    Ven a nuestras tiendas <span className="text-primary font-bold hidden sm:inline"> y te asesoramos</span>
                 </span>
               </div>
