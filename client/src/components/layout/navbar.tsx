@@ -151,7 +151,7 @@ export function Navbar() {
               alt="IVAPEO" 
               className="h-8 md:h-12 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity block"
             />
-            <span className="text-[10px] text-gray-500 font-medium -mt-1 hidden md:block">Tienda de cigarrillos electrónicos iVapeo</span>
+            <span className="text-[10px] text-gray-500 font-medium -mt-1 block">Tienda de cigarrillos electrónicos iVapeo</span>
           </Link>
 
           {/* Smart Search - Desktop: Centered & Wide. Mobile: Icon Trigger */}
