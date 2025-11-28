@@ -7,7 +7,8 @@ import { cn } from "@/lib/utils";
 
 // Images
 import heroImage1 from "@assets/generated_images/hand_holding_premium_pod_vape_dark_background.png";
-import heroImage2 from "@assets/image_1764350777336.png";
+import heroImage2Background from "@assets/generated_images/empty_beach_bar_table_at_sunset_background_for_product_placement.png";
+import heroImage2Bottle from "@assets/image_1764350777336.png";
 
 const SLIDES = [
   {
@@ -32,7 +33,8 @@ const SLIDES = [
   },
   {
     id: 2,
-    image: heroImage2,
+    image: heroImage2Background,
+    bottleImage: heroImage2Bottle,
     tagline: "Sabor Premium",
     taglineColor: "text-pink-400",
     taglineBorder: "border-pink-400/30 bg-pink-400/10",
@@ -89,6 +91,19 @@ export function HeroGrid() {
                         {/* Overlay Gradient */}
                         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent"></div>
                     </div>
+                    
+                    {/* Optional Bottle Overlay for Slide 2 */}
+                    {/* @ts-ignore */}
+                    {slide.bottleImage && (
+                      <div className="absolute bottom-0 right-[10%] md:right-[15%] lg:right-[20%] z-10 w-[180px] md:w-[240px] lg:w-[300px] transform translate-y-[10%] rotate-3 drop-shadow-2xl filter brightness-90">
+                          <img 
+                            /* @ts-ignore */
+                            src={slide.bottleImage} 
+                            alt="Premium E-Liquid Bottle" 
+                            className="w-full h-auto object-contain animate-in slide-in-from-bottom-10 fade-in duration-1000 delay-300"
+                          />
+                      </div>
+                    )}
 
                     {/* Content */}
                     <div className="container-custom relative z-10 h-full flex flex-col justify-center px-6 md:px-12 lg:px-20">
