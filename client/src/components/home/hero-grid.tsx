@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 // Images
 import heroImage1 from "@assets/generated_images/hand_holding_premium_pod_vape_dark_background.png";
-import heroImage2 from "@assets/generated_images/lifestyle_vaping_shot_at_beach_sunset_with_e-liquid_bottle.png";
+import heroImage2 from "@assets/generated_images/lifestyle_beach_sunset_vaping_shot_with_specific_pink/blue_swirl_bottle.png";
 
 const SLIDES = [
   {
