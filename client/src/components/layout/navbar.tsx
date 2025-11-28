@@ -32,7 +32,7 @@ export function Navbar() {
       <AnnouncementBar />
 
       {/* Main Header */}
-      <header className="py-3 md:py-6 bg-white relative z-50 sticky top-0 shadow-sm md:shadow-none">
+      <header className="py-3 md:py-6 bg-white relative z-50">
         <div className="container-custom flex items-center justify-between gap-0 md:gap-8">
           
           {/* Mobile Logo - Centered */}
