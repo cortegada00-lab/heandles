@@ -48,7 +48,7 @@ export function Navbar() {
                    <MapPin className="w-3.5 h-3.5 text-primary" />
                 </div>
                 <span className="text-white group-hover:text-primary transition-colors flex items-center gap-1">
-                   8 Tiendas Físicas <span className="hidden sm:inline text-gray-400">-</span> <span className="text-primary font-bold hidden sm:inline">Ven y te asesoramos</span>
+                   Ven a nuestras tiendas <span className="text-primary font-bold hidden sm:inline"> y te asesoramos</span>
                 </span>
               </div>
             </Link>
