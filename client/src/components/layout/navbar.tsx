@@ -42,8 +42,16 @@ export function Navbar() {
             <span className="flex items-center gap-1.5 hidden sm:flex"><ShieldCheck className="w-3.5 h-3.5 text-green-400" /> Garantía de Calidad</span>
           </div>
           <div className="flex items-center gap-6">
-            <a href="tel:+34935167167" className="hover:text-white transition-colors flex items-center gap-1"><Phone className="w-3 h-3" /> +34 935 167 167</a>
-            <Link href="/tiendas" className="hover:text-white transition-colors hidden sm:block">Tiendas Físicas</Link>
+            <Link href="/tiendas">
+              <div className="flex items-center gap-2 cursor-pointer group">
+                <div className="bg-primary/20 p-1 rounded-full group-hover:bg-primary/30 transition-colors">
+                   <MapPin className="w-3.5 h-3.5 text-primary" />
+                </div>
+                <span className="text-white group-hover:text-primary transition-colors flex items-center gap-1">
+                   8 Tiendas en BCN <span className="hidden sm:inline text-gray-400">-</span> <span className="text-primary font-bold hidden sm:inline">Te asesoramos en persona</span>
+                </span>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
