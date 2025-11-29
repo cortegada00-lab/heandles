@@ -71,31 +71,43 @@ export function CategoryGrid() {
             </div>
           </Link>
 
-          {/* 4. Kits Vapeo - Square (Bottom Middle Left) */}
-          <Link href="/kits" className="group relative md:col-span-1 md:row-span-1 rounded-2xl overflow-hidden bg-gray-100 block border border-gray-100">
+          {/* 4. Kits Vapeo - PRO Style (Dark & Colorful) */}
+          <Link href="/kits" className="group relative md:col-span-1 md:row-span-1 rounded-2xl overflow-hidden block shadow-sm hover:shadow-xl transition-all duration-500">
             <img 
               src={imgKits} 
               alt="Kits" 
-              className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700 mix-blend-multiply"
+              className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-white/60 group-hover:bg-white/40 transition-colors"></div>
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-              <h3 className="text-gray-900 text-xl font-black uppercase mb-1">Kits Pro</h3>
-              <span className="text-[10px] font-bold bg-black/5 backdrop-blur-sm px-2 py-1 rounded text-gray-700">AVANZADO</span>
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 mix-blend-hard-light opacity-90"></div>
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center z-10">
+              <div className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-2 border border-white/20 group-hover:scale-110 transition-transform">
+                  <span className="text-lg">⚡</span>
+              </div>
+              <h3 className="text-white text-2xl font-black uppercase mb-2 tracking-wide drop-shadow-md">Kits Pro</h3>
+              <span className="text-[10px] font-bold bg-white text-purple-900 px-3 py-1 rounded-full uppercase tracking-wider shadow-lg transform group-hover:-translate-y-1 transition-transform">
+                  Avanzado
+              </span>
             </div>
           </Link>
 
-          {/* 5. Pods - Square (Bottom Middle Right) */}
-          <Link href="/pods" className="group relative md:col-span-1 md:row-span-1 rounded-2xl overflow-hidden bg-gray-100 block border border-gray-100">
+          {/* 5. Pods - Vibrant Style (Colorful) */}
+          <Link href="/pods" className="group relative md:col-span-1 md:row-span-1 rounded-2xl overflow-hidden block shadow-sm hover:shadow-xl transition-all duration-500">
             <img 
               src={imgPods} 
               alt="Pods" 
-              className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
+              className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-700"
             />
-             <div className="absolute inset-0 bg-gradient-to-t from-white/90 to-transparent"></div>
-             <div className="absolute bottom-4 left-4">
-               <h3 className="text-gray-900 text-xl font-black uppercase">Pods</h3>
-               <p className="text-gray-500 text-[10px] uppercase tracking-wider">Compactos & Potentes</p>
+             <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-pink-600 mix-blend-overlay opacity-90"></div>
+             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
+             
+             <div className="absolute bottom-0 left-0 w-full p-5 z-10">
+               <h3 className="text-white text-2xl font-black uppercase mb-1 drop-shadow-md">Pods</h3>
+               <div className="flex items-center justify-between w-full border-t border-white/30 pt-3 mt-1">
+                  <p className="text-white text-[11px] uppercase tracking-widest font-bold">Compactos</p>
+                  <div className="bg-white text-pink-500 rounded-full p-1.5 shadow-lg group-hover:rotate-45 transition-transform duration-300">
+                     <ArrowRight className="w-3.5 h-3.5" />
+                  </div>
+               </div>
              </div>
           </Link>
 
