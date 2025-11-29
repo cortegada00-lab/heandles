@@ -58,31 +58,24 @@ export function Navbar() {
           </Link>
 
           {/* Smart Search - Desktop: Centered & Wide. Mobile: Icon Trigger */}
-          <div className="hidden md:block flex-1 max-w-3xl mx-4">
+          <div className="hidden md:block flex-1 max-w-2xl mx-8">
              <div 
                 onClick={() => setIsSearchOpen(true)}
-                className="relative flex items-center w-full h-12 rounded-full border-2 border-primary/10 bg-gray-50 hover:bg-white hover:border-primary transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md group"
+                className="relative flex items-center w-full h-[52px] rounded-full border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-slate-300 hover:shadow-lg transition-all duration-300 cursor-pointer group px-1.5"
              >
                  {/* Search Icon */}
-                 <div className="pl-4 pr-3 text-gray-400 group-hover:text-primary transition-colors">
+                 <div className="pl-3 pr-3 text-slate-400 group-hover:text-slate-600 transition-colors">
                     <Search className="w-5 h-5" />
                  </div>
 
                  {/* Text Input Simulation */}
-                 <div className="flex-1 flex items-center justify-between text-sm text-gray-500">
+                 <div className="flex-1 flex items-center text-[15px] text-slate-500 font-medium">
                     <span className="opacity-70">¿Qué estás buscando hoy?</span>
-                    
-                    {/* Desktop Shortcut Hint */}
-                    <div className="hidden lg:flex items-center gap-2 pr-2">
-                       <kbd className="pointer-events-none inline-flex h-6 select-none items-center gap-1 rounded border bg-gray-100 px-2 font-mono text-[10px] font-medium text-gray-500">
-                        <span className="text-xs">⌘</span>K
-                      </kbd>
-                    </div>
                  </div>
 
-                 {/* Search Button - Clean & Professional */}
-                 <div className="p-1">
-                    <Button size="sm" className="rounded-full h-9 px-6 bg-[#1a1a1a] hover:bg-black text-white font-medium shadow-sm transition-all duration-300 hover:shadow-md">
+                 {/* Search Button - Professional Pill */}
+                 <div className="">
+                    <Button size="sm" className="rounded-full h-[42px] px-8 bg-black hover:bg-slate-800 text-white font-bold text-sm shadow-sm transition-all duration-300">
                        Buscar
                     </Button>
                  </div>
