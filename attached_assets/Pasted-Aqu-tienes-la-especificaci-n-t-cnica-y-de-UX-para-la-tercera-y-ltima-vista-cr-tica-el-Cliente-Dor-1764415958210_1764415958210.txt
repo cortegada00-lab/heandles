@@ -1,0 +1,91 @@
+Aquí tienes la especificación técnica y de UX para la tercera y última vista crítica: el Cliente Dormido (Win-Back).
+
+Como tu CTO y estratega, esta es la vista más "agresiva" comercialmente. No buscamos velocidad (como en el activo), ni educación (como en el guest). Buscamos reactivación pura mediante FOMO (Fear Of Missing Out - Miedo a perderse algo) e incentivos.
+
+Este usuario conoce la marca pero se ha ido a la competencia o ha dejado de comprar. Hay que darle una razón poderosa para volver HOY.
+
+Pásale este documento a tu equipo de desarrollo.
+
+ESPECIFICACIÓN TÉCNICA/UX: HOME PAGE - USUARIO DORMIDO (WIN-BACK)
+Estado del Usuario: isLoggedIn === true AND lastOrderDate > 90 days (Ajustar los días según vuestra métrica de recurrencia, 60 o 90 es estándar). Filosofía: Reactivación agresiva pero elegante. Uso de urgencia y novedad. Hay que tentarle con lo que se ha perdido mientras no estaba.
+
+Referencia Visual Base: Mantener la estética premium oscura definida en image_11.png, pero cambiando radicalmente el mensaje de los banners.
+
+ZONA 1 (HEADER SUP): Barra de Anuncios + Navegación
+Estado: IDÉNTICO al Guest/Activo.
+
+Misma barra de anuncios rotatoria y mismo header. No hay cambios aquí.
+
+ZONA 2 (HERO SECTION): El "Banner de Reactivación" (FOMO)
+Reemplaza al Slider aspiracional y al Dashboard personal.
+
+Objetivo: Impacto emocional y urgencia económica.
+
+Diseño Visual: Fondo oscuro dramático (estilo Canyon), quizás con humo elegante, pero sin un producto específico como protagonista. El protagonista es el mensaje.
+
+Contenido Dinámico:
+
+Título de Impacto (Emocional): "¡Te echamos de menos, [Nombre]!" (Tipografía grande, blanca).
+
+Subtítulo (El Gancho Económico):
+
+Crucial: Debes tener un sistema de cupones en PrestaShop para esto.
+
+Texto: "Hemos activado un 15% DTO. EXTRA en tu cuenta para que vuelvas."
+
+Elemento de Urgencia (Opcional pero recomendado): Un pequeño texto o contador: "Caduca en 48h".
+
+CTA Principal (Acción única): Botón prominente elegante.
+
+Texto: "Usar mi 15% ahora"
+
+Acción: Lleva a una categoría general de "Novedades" o "Top Ventas", y si es posible técnicamente, auto-aplica el cupón en la sesión.
+
+ZONA 3: Marquesina de Confianza (Trust Marquee)
+Estado: SE MANTIENE.
+
+Por qué: El usuario quizás olvidó por qué iVapeo era bueno. Recordarle "Envíos 24h" y "8 Tiendas Físicas" es vital para que vuelva a confiar frente a la competencia.
+
+ZONA 4 (Cuerpo Principal): El Escaparate de "LO QUE TE HAS PERDIDO"
+Reemplaza la posición del Grid de Categorías estándar.
+
+Objetivo: Tentación mediante novedad tecnológica. No le enseñes lo que compraba hace 3 meses (quizás ya está obsoleto). Enséñale lo nuevo.
+
+Título del Bloque: "Novedades desde tu última visita" o "La nueva tecnología que todos usan".
+
+Estructura: Un Grid (rejilla) de 4 a 6 productos destacados.
+
+Lógica de Datos (Backend):
+
+Query API que devuelva los productos marcados como "Novedad" o los lanzamientos de Hardware/Pods más exitosos de los últimos 90 días.
+
+Foco: Dispositivos nuevos, sabores de moda. Cosas que le hagan decir: "Uy, esto no lo conocía".
+
+Interacción: Tarjetas de producto estándar que llevan a la ficha de producto.
+
+ZONA 5 (Secundaria): El Grid de Categorías Estándar (Bento Box)
+Se mantiene como red de seguridad.
+
+Objetivo: Si las novedades no le convencen, facilitarle la navegación a las secciones habituales.
+
+Posición: Justo debajo del grid de Novedades.
+
+Diseño y Contenido: EXACTAMENTE el mismo componente Grid Bento que en la versión Guest (image_11.png).
+
+ZONA 6 (Footer): Limpieza Radical (Igual que Activo)
+Objetivo: No distraer de la oferta de reactivación.
+
+Renderizado Condicional (Instrucción Dev):
+
+if (user.isDormant):
+
+❌ NO RENDERIZAR textos SEO, guías de inicio, ni suscripción a newsletter.
+
+Resumen del Flujo para el Usuario Dormido
+Aterriza: Recibe un impacto emocional ("Te echamos de menos") y una oferta agresiva con caducidad (15% DTO).
+
+Scroll inmediato: Ve los dispositivos nuevos que han salido mientras no estaba (tentación tecnológica).
+
+Acción esperada: Clic en el botón del descuento o en uno de los nuevos productos para cotillear.
+
+Con estas tres definiciones (Guest, Activo, Dormido) y la nueva estética premium, tienes una estrategia Headless de primer nivel mundial.
