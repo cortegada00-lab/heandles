@@ -5,23 +5,20 @@ import { Button } from "@/components/ui/button";
 import { useCallback } from "react";
 
 // Import existing realistic images
-import imgLiquids from "@assets/generated_images/Premium_e-liquid_bottles_132f9a1b.png";
-import imgVapers from "@assets/generated_images/dark_vape_mod_device_product_shot.png";
-import imgZero from "@assets/generated_images/dark_e-liquid_bottle_product_shot.png";
-import imgPods from "@assets/generated_images/dark_vape_pod_system_product_shot.png";
-import imgDisposable from "@assets/generated_images/High_tech_vape_mod_kit_444d8fd5.png";
-import imgKits from "@assets/generated_images/dark_advanced_vape_kit_parts.png";
+import imgLiquids from "@assets/generated_images/eliquid_bottle_icon.png";
+import imgVapers from "@assets/generated_images/vape_mod_kit_icon.png";
+import imgZero from "@assets/generated_images/disposable_vape_icon.png"; // Fallback/Similar
+import imgPods from "@assets/generated_images/pod_system_icon.png";
+import imgDisposable from "@assets/generated_images/disposable_vape_icon.png";
+import imgKits from "@assets/generated_images/vape_mod_kit_icon.png";
 
 const CATEGORIES = [
   { name: "eLiquids", href: "/eliquids", image: imgLiquids },
   { name: "Vapers", href: "/kits", image: imgVapers },
-  { name: "Sin Nicotina", href: "/sin-nicotina", image: imgZero },
+  { name: "Desechables sin nicotina", href: "/sin-nicotina", image: imgZero },
   { name: "Pods", href: "/pods", image: imgPods },
-  { name: "Desechables", href: "/disposables", image: imgDisposable },
-  { name: "Kits Pro", href: "/kits", image: imgKits },
-  // Duplicate for scroll effect if needed or add more mock categories
-  { name: "Resistencias", href: "/accessories", image: imgKits },
-  { name: "Baterías", href: "/accessories", image: imgVapers },
+  { name: "Vapers desechables", href: "/disposables", image: imgDisposable },
+  { name: "Kits Vapeo", href: "/kits", image: imgKits },
 ];
 
 export function CategoryGrid() {
