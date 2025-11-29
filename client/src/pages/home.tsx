@@ -222,6 +222,7 @@ export default function Home() {
             <SeoContent />
           </>
         )}
+      </main>
 
       {/* Newsletter - Only show for Guests */}
       {userState === "guest" && (
