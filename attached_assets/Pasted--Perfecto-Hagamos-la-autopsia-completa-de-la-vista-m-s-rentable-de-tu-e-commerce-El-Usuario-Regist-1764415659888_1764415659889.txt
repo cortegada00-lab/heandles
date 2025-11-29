@@ -1,0 +1,115 @@
+¡Perfecto! Hagamos la autopsia completa de la vista más rentable de tu e-commerce: El Usuario Registrado Activo ("Power User").
+
+Como tu CTO, esta es mi especificación favorita. Aquí es donde el Headless deja de ser "una web bonita" y se convierte en una herramienta de retención brutal.
+
+Pásale este documento exacto a tu equipo de desarrollo (Frontend Next.js) y diseño UI.
+
+ESPECIFICACIÓN TÉCNICA/UX: HOME PAGE - USUARIO REGISTRADO ACTIVO
+Estado del Usuario: isLoggedIn === true AND lastOrderDate < 90 days. Filosofía: Velocidad sobre descubrimiento. Utilidad sobre inspiración. El usuario ya sabe vapear y confía en nosotros. Su visita tiene un propósito: reponer stock.
+
+Referencia Visual Base: Estética premium oscura ("estilo Canyon") definida en image_11.png, pero adaptando los componentes.
+
+ZONA 1 (HEADER SUP): Barra de Anuncios + Navegación
+Estado: IDÉNTICO al Guest.
+
+Barra Superior (Announcement Bar): Carrusel rotatorio (🔥 nº1 España, 📍 8 Tiendas, 🚚 Envío Gratis).
+
+Header Principal: Logo, Buscador, Carrito. El icono de "Mi Cuenta" debe mostrar claramente que está logueado (quizás su inicial o un pequeño punto verde).
+
+ZONA 2 (HERO SECTION): El "Dashboard Personal"
+Reemplaza al Slider aspiracional del Guest.
+
+Objetivo: Conexión inmediata y utilidad omnicanal.
+
+Diseño Visual: Fondo oscuro premium (consistente con la estética global). No es un slider, es un banner estático.
+
+Contenido Dinámico:
+
+Saludo Personalizado: "Hola de nuevo, [Nombre del Cliente]." (Tipografía grande, blanca).
+
+Estado Crítico (Condicional):
+
+Si tiene pedido activo: "Tu pedido #123 está en camino 🚚" (Enlace al tracking).
+
+Si NO tiene pedido activo: Mensaje de refuerzo de marca breve. "Listo para tu próxima sesión."
+
+CTA Principal (OMNICANALIDAD): Botón prominente (estilo transparente con borde blanco, elegante).
+
+Texto: "📍 ¿Lo necesitas HOY? Ver stock en mis tiendas cercanas"
+
+Acción: Abre el modal de geolocalización de tiendas.
+
+ZONA 3: Marquesina de Confianza (Trust Marquee)
+Estado: IDÉNTICO al Guest.
+
+Componente: Barra oscura justo debajo del Hero.
+
+Comportamiento: Scroll horizontal infinito automático en móvil y desktop.
+
+Contenido: 🚚 Envíos 24h | 🛡️ Garantía | 📍 8 Tiendas Físicas | 💬 Asesoramiento.
+
+ZONA 4 (Cuerpo Principal): Motor de "RECOMPRA EXPRESS"
+Reemplaza la posición del Grid de Categorías.
+
+Objetivo: Reducir el tiempo de compra de consumibles habituales a menos de 15 segundos. Esta es la zona que más factura.
+
+Título del Bloque: "Tus habituales" o "Vuelve a pedir en 1 clic".
+
+Estructura: Carrusel horizontal de tarjetas de producto (diseño limpio, fondo blanco para que el producto resalte, sin sombras pesadas).
+
+Lógica de Datos (Backend):
+
+Query API que devuelva los últimos 5-8 ítems consumibles únicos comprados por este userID.
+
+Priorizar: Líquidos, Resistencias, Pods de recambio. Excluir hardware (Kits) a menos que sea la única compra reciente.
+
+INTERACCIÓN CRÍTICA (Must-Have):
+
+La Tarjeta: Muestra Foto, Nombre corto, Precio y (si aplica) la variante exacta que compró (ej: "0.4ohm").
+
+EL BOTÓN DE ACCIÓN: NO es "Ver producto". Es un botón [AÑADIR +] o un icono de carrito con un "+".
+
+Comportamiento al Clic:
+
+Llamada AJAX a la API del carrito (add-to-cart).
+
+NO REDIRIGIR. El usuario se queda en la Home.
+
+Feedback visual inmediato: Un "Toast" (notificación flotante) que diga "¡Añadido al carrito!" y el icono del carrito en el header actualiza su número (ej: de 0 a 1).
+
+ZONA 5 (Secundaria): El Grid de Categorías (Bento Box)
+Se mantiene por requerimiento SEO y navegación secundaria.
+
+Objetivo: Permitir la navegación exploratoria si el usuario no viene solo a reponer.
+
+Posición: Justo debajo del carrusel de Recompra Express.
+
+Diseño y Contenido: EXACTAMENTE el mismo componente que en la versión Guest (image_11.png). Eliquids Premium, Desechables, Kits Pro, Pods, Top Ventas.
+
+Nota al SEO: Al mantener este bloque, garantizamos la estructura de enlaces internos que Google necesita rastrear (aunque Googlebot no vea esta vista logueada, mantenemos la coherencia).
+
+ZONA 6 (Footer): Limpieza Radical
+Objetivo: Aligerar la carga y mejorar la UX móvil.
+
+Renderizado Condicional (Instrucción Dev):
+
+if (user.isLoggedIn):
+
+❌ NO RENDERIZAR el bloque de texto SEO gigante.
+
+❌ NO RENDERIZAR la guía "¿Qué es un cigarrillo electrónico?".
+
+❌ NO RENDERIZAR el bloque de suscripción a Newsletter (ya tenemos su email).
+
+Mostrar solo los enlaces de navegación del footer (Contacto, Envíos, Legal) y el copyright.
+
+Resumen del Flujo para el Usuario Activo
+Aterriza: Ve un saludo personal y un acceso directo a las tiendas físicas si tiene urgencia.
+
+Scroll inmediato: Se encuentra con sus líquidos y resistencias de siempre.
+
+Acción: Pulsa [+] en dos productos. Se añaden al instante.
+
+Checkout: Va al carrito y paga. Tiempo total estimado: < 30 segundos.
+
+Esta estructura convierte tu Headless en una máquina de fidelización optimizada.

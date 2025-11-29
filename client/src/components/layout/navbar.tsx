@@ -101,9 +101,11 @@ export function Navbar() {
             {status === "logged_in" && user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <div className="flex flex-col items-center justify-center cursor-pointer group outline-none">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold mb-0.5">
+                  <div className="flex flex-col items-center justify-center cursor-pointer group outline-none relative">
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold mb-0.5 relative">
                       {user.name.charAt(0).toUpperCase()}
+                      {/* Online Status Dot */}
+                      <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
                     </div>
                     <span className="text-[10px] font-bold text-gray-500 group-hover:text-primary max-w-[60px] truncate hidden sm:block">
                       {user.name}
