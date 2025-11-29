@@ -15,12 +15,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Star, ShoppingCart, Plus, RefreshCw } from "lucide-react";
+import { Star, Plus } from "lucide-react";
 
 export default function ProductPage() {
-  // Demo State
-  const [inStock, setInStock] = useState(true);
+  // Demo State for Product Type (Liquid vs Hardware)
+  // We keep this local as it's specific to the product demo, not the user session
   const [productType, setProductType] = useState<'liquid' | 'hardware'>('liquid');
+  const [inStock, setInStock] = useState(true);
 
   const activeProduct = productType === 'liquid' ? mockProduct : mockHardwareProduct;
 
@@ -31,52 +32,41 @@ export default function ProductPage() {
         description={`Compra ${activeProduct.name} en IVAPEO. Envío Gratis 24h. El mejor precio garantizado.`}
       />
       
-      {/* Demo Toggle - Floating for prototype visibility */}
-      <div className="fixed bottom-20 right-4 z-40 bg-white shadow-2xl border border-gray-200 p-2 rounded-lg flex flex-col gap-2 opacity-50 hover:opacity-100 transition-opacity md:bottom-4 md:left-4 md:right-auto md:flex-row">
-        <div className="flex flex-col gap-1 md:flex-row">
-           <span className="text-xs font-bold text-gray-500 uppercase px-1">Stock:</span>
-           <Button 
-             size="sm" 
-             variant={inStock ? "default" : "outline"}
-             onClick={() => setInStock(true)}
-             className="text-xs h-7 bg-green-600 hover:bg-green-700"
-           >
-             Con Stock
-           </Button>
-           <Button 
-             size="sm" 
-             variant={!inStock ? "default" : "outline"}
-             onClick={() => setInStock(false)}
-             className="text-xs h-7 bg-orange-500 hover:bg-orange-600"
-           >
-             Sin Stock
-           </Button>
-        </div>
-        <div className="w-full h-px bg-gray-200 md:w-px md:h-auto md:mx-1"></div>
-        <div className="flex flex-col gap-1 md:flex-row">
-           <span className="text-xs font-bold text-gray-500 uppercase px-1">Tipo:</span>
+      {/* Product Type Toggle (Demo Only) - Kept separate from User Toggle */}
+      <div className="fixed bottom-24 right-4 z-40 bg-white shadow-xl border border-gray-200 p-2 rounded-lg flex flex-col gap-2 opacity-80 hover:opacity-100 transition-opacity md:bottom-20 md:left-4 md:right-auto">
+        <span className="text-[10px] font-bold text-gray-400 uppercase text-center">Demo Producto</span>
+        <div className="flex flex-col gap-1">
            <Button 
              size="sm" 
              variant={productType === 'liquid' ? "default" : "outline"}
              onClick={() => setProductType('liquid')}
-             className="text-xs h-7"
+             className="text-xs h-6 w-full justify-start"
            >
-             Líquido (Longfill)
+             Líquido
            </Button>
            <Button 
              size="sm" 
              variant={productType === 'hardware' ? "default" : "outline"}
              onClick={() => setProductType('hardware')}
-             className="text-xs h-7"
+             className="text-xs h-6 w-full justify-start"
            >
-             Hardware (Kit)
+             Hardware
+           </Button>
+           <div className="h-px bg-gray-100 my-1"></div>
+           <Button 
+             size="sm" 
+             variant={inStock ? "secondary" : "outline"}
+             onClick={() => setInStock(!inStock)}
+             className={`text-xs h-6 w-full justify-start ${!inStock ? 'text-red-500 border-red-200' : 'text-green-600'}`}
+           >
+             {inStock ? 'En Stock' : 'Sin Stock'}
            </Button>
         </div>
       </div>
 
       <Navbar />
       
-      <main className="flex-1 py-6 md:py-8 pb-32 md:pb-8">
+      <main className="flex-1 py-6 md:py-8 pb-32 md:pb-8 relative">
         <div className="container-custom">
           {/* Mobile Back Button */}
           <div className="md:hidden mb-2">

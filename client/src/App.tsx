@@ -23,7 +23,10 @@ import ProductProPage from "@/pages/product-pro";
 import { CartProvider } from "@/lib/cart-context";
 import { FavoritesProvider } from "@/lib/favorites-context";
 import { AuthProvider } from "@/lib/auth-context";
+import { UserProvider } from "@/lib/user-context"; // Import UserProvider
 import { CookieConsent } from "@/components/shared/cookie-consent";
+import { DemoUserToggle } from "@/components/shared/demo-user-toggle"; // Import Toggle
+import { StickyWinbackBar } from "@/components/shared/sticky-winback-bar"; // Import StickyWinbackBar
 
 import ContactPage from "@/pages/contact";
 import DisposablesPage from "@/pages/disposables";
@@ -125,18 +128,22 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <CartProvider>
-          <FavoritesProvider>
-            <TooltipProvider>
-              <Toaster />
-              <CookieConsent />
-              <ScrollToTop />
-              <WhatsAppButton />
-              <Router />
-              <BottomNav />
-            </TooltipProvider>
-          </FavoritesProvider>
-        </CartProvider>
+        <UserProvider> {/* Wrap with UserProvider */}
+          <CartProvider>
+            <FavoritesProvider>
+              <TooltipProvider>
+                <Toaster />
+                <CookieConsent />
+                <DemoUserToggle /> {/* Global Toggle */}
+                <StickyWinbackBar /> {/* Global Dormant User Winback Bar */}
+                <ScrollToTop />
+                <WhatsAppButton />
+                <Router />
+                <BottomNav />
+              </TooltipProvider>
+            </FavoritesProvider>
+          </CartProvider>
+        </UserProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

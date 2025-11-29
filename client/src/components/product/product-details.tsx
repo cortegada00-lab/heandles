@@ -1,4 +1,4 @@
-import { Star, Minus, Plus, Check, Bell, FlaskConical, Info, ShoppingCart, Truck, ChevronDown, ChevronRight, Plug, Box } from "lucide-react";
+import { Star, Minus, Plus, Check, Bell, FlaskConical, Info, ShoppingCart, Truck, ChevronDown, ChevronRight, Plug, Box, ShieldCheck, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
@@ -14,8 +14,10 @@ import { useCart } from "@/lib/cart-context";
 import { cn } from "@/lib/utils";
 import { MixWizard, MixResult } from "./mix-wizard";
 import { VolumeDiscountSelector } from "./volume-discount-selector";
-
 import { StoreStockModal } from "./store-stock-modal";
+import { useUser } from "@/lib/user-context";
+import { TrustBooster } from "./trust-booster";
+import { BeginnerHelp } from "./beginner-help";
 
 interface ProductGalleryProps {
   images: string[];
@@ -312,6 +314,7 @@ interface ProductInfoProps {
 }
 
 export function ProductInfo({ product, inStock = true }: ProductInfoProps) {
+  const { userType } = useUser(); // Use Global User Context
   const [quantity, setQuantity] = useState(1);
   const [nicotine, setNicotine] = useState("0"); // Lifted state for bundling (Legacy)
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]); // Hardware bundle state
@@ -378,21 +381,19 @@ export function ProductInfo({ product, inStock = true }: ProductInfoProps) {
   const extraCost = getExtraCost();
   const discountPercentage = getVolumeDiscount();
   
+  // DORMANT USER LOGIC: Apply Welcome Back Discount in Price Display
+  const dormantDiscount = userType === 'dormant' ? 0.15 : 0;
+  
   // Base price + extras
   let baseTotal = product.price + extraCost;
   
-  // Apply discount if any (usually applies to the base product price, but let's apply to total unit price for simplicity unless specified)
-  // Standard ecommerce usually discounts the unit price.
-  // Let's assume discount applies to product.price ONLY, not extras? Or total?
-  // Usually "Buy 5 items save 5%" applies to the item price.
-  
   // Adjusted Unit Price based on volume
   const discountedUnitPrice = baseTotal * (1 - discountPercentage / 100);
+
+  // Apply Dormant Discount on top if applicable
+  const finalDisplayPrice = discountedUnitPrice * (1 - dormantDiscount);
   
-  // Total for Display (Unit Price) or Total Line Item?
-  // Usually display the UNIT PRICE.
-  
-  const totalPrice = discountedUnitPrice; // Per unit
+  const totalPrice = finalDisplayPrice; // Per unit
 
   const decreaseQty = () => setQuantity(q => Math.max(1, q - 1));
   const increaseQty = () => setQuantity(q => q + 1);
@@ -606,10 +607,23 @@ export function ProductInfo({ product, inStock = true }: ProductInfoProps) {
           {product.name}
         </h1>
 
+        {/* PRICE BLOCK DESKTOP - ADAPTIVE */}
         <div className="flex items-end gap-3 border-b border-gray-100 pb-4">
-             <span className="text-4xl font-black text-gray-900 tracking-tighter">{totalPrice.toFixed(2).replace('.', ',')}€</span>
-             {(product.originalPrice || 0) > totalPrice && (
-                <span className="text-lg text-gray-400 line-through font-medium mb-1.5">{product.originalPrice!.toFixed(2).replace('.', ',')}€</span>
+             {userType === 'dormant' ? (
+               <div className="animate-in zoom-in duration-300 flex items-end gap-3">
+                 <span className="text-4xl font-black text-purple-600 tracking-tighter">{finalDisplayPrice.toFixed(2).replace('.', ',')}€</span>
+                 <span className="text-lg text-gray-400 line-through font-medium mb-1.5">{discountedUnitPrice.toFixed(2).replace('.', ',')}€</span>
+                 <Badge className="bg-purple-100 text-purple-700 border-purple-200 mb-2 text-[10px] font-bold uppercase px-1.5 h-5">
+                   Vuelves y Ahorras
+                 </Badge>
+               </div>
+             ) : (
+               <>
+                 <span className="text-4xl font-black text-gray-900 tracking-tighter">{totalPrice.toFixed(2).replace('.', ',')}€</span>
+                 {(product.originalPrice || 0) > totalPrice && (
+                    <span className="text-lg text-gray-400 line-through font-medium mb-1.5">{product.originalPrice!.toFixed(2).replace('.', ',')}€</span>
+                 )}
+               </>
              )}
         </div>
 
@@ -635,8 +649,21 @@ export function ProductInfo({ product, inStock = true }: ProductInfoProps) {
             <span className="text-sm text-gray-500 font-medium ml-1">(142 Opiniones)</span>
         </div>
 
+        {/* PRICE BLOCK MOBILE - ADAPTIVE */}
         <div className="mb-4">
-             <span className="text-3xl font-black text-gray-900 tracking-tighter">{totalPrice.toFixed(2).replace('.', ',')}€</span>
+             {userType === 'dormant' ? (
+               <div className="animate-in zoom-in duration-300 flex flex-col">
+                 <div className="flex items-center gap-2">
+                    <span className="text-3xl font-black text-purple-600 tracking-tighter">{finalDisplayPrice.toFixed(2).replace('.', ',')}€</span>
+                    <Badge className="bg-purple-100 text-purple-700 border-purple-200 text-[10px] font-bold uppercase px-1.5 h-5">
+                      -15% Extra
+                    </Badge>
+                 </div>
+                 <span className="text-sm text-gray-400 line-through font-medium">{discountedUnitPrice.toFixed(2).replace('.', ',')}€</span>
+               </div>
+             ) : (
+               <span className="text-3xl font-black text-gray-900 tracking-tighter">{totalPrice.toFixed(2).replace('.', ',')}€</span>
+             )}
         </div>
 
         {/* Mobile Short Description */}
@@ -686,7 +713,7 @@ export function ProductInfo({ product, inStock = true }: ProductInfoProps) {
                       "hidden md:flex flex-1 h-14 text-lg font-bold uppercase tracking-wide transition-all duration-300 shadow-lg rounded-xl",
                       isAdded 
                         ? "bg-green-600 hover:bg-green-700 text-white scale-100 shadow-green-500/20" 
-                        : "bg-[#84CC16] hover:bg-[#65a30d] hover:-translate-y-1 shadow-lime-500/30 text-white"
+                        : (userType === 'dormant' ? "bg-purple-600 hover:bg-purple-700 shadow-purple-500/30" : "bg-[#84CC16] hover:bg-[#65a30d] hover:-translate-y-1 shadow-lime-500/30 text-white")
                     )}
                   >
                       {isAdded ? (
@@ -695,20 +722,39 @@ export function ProductInfo({ product, inStock = true }: ProductInfoProps) {
                         </span>
                       ) : (
                         <span className="flex items-center gap-2 whitespace-nowrap">
-                          <ShoppingCart className="w-5 h-5 mr-2" /> AÑADIR
+                          <ShoppingCart className="w-5 h-5 mr-2" /> {userType === 'dormant' ? 'AÑADIR CON DESCUENTO' : 'AÑADIR'}
                         </span>
                       )}
                   </Button>
               </div>
               
-              {/* Urgency & Delivery Info */}
-              <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 bg-white p-3 rounded-lg border border-gray-100 justify-center shadow-sm text-center">
-                  <Truck className="w-4 h-4 text-green-600 shrink-0" />
-                  <span>Recíbelo <span className="font-bold text-green-700">Mañana</span> si pides antes de las <span className="font-bold text-gray-900">17:00</span></span>
-              </div>
+              {/* GUEST INJECTION: Trust Booster */}
+              {userType === 'guest' && (
+                <div className="mt-2">
+                  <TrustBooster />
+                </div>
+              )}
 
-              {/* Store Stock Modal */}
-              <StoreStockModal />
+              {/* GUEST INJECTION: Beginner Help (Only for Hardware) */}
+              {userType === 'guest' && product.type === 'hardware' && (
+                <BeginnerHelp />
+              )}
+
+              {/* ACTIVE USER: Prominent Store Stock Check */}
+              {userType === 'active' && (
+                <div className="mt-2">
+                  <StoreStockModal productName={product.name} />
+                </div>
+              )}
+              
+              {/* Urgency & Delivery Info - Only for Guest/Dormant */}
+              {userType !== 'active' && (
+                <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 bg-white p-3 rounded-lg border border-gray-100 justify-center shadow-sm text-center mt-2">
+                    <Truck className="w-4 h-4 text-green-600 shrink-0" />
+                    <span>Recíbelo <span className="font-bold text-green-700">Mañana</span> si pides antes de las <span className="font-bold text-gray-900">17:00</span></span>
+                </div>
+              )}
+
           </div>
         ) : (
           /* OUT OF STOCK UI */
@@ -756,7 +802,7 @@ export function ProductInfo({ product, inStock = true }: ProductInfoProps) {
       
       {/* Mobile Sticky Bar (Hidden on Desktop) */}
       <MobileStickyBar 
-        price={totalPrice} 
+        price={finalDisplayPrice} 
         onAdd={handleAddToCart} 
         isAdded={isAdded} 
         inStock={inStock}
