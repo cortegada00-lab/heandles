@@ -1,0 +1,81 @@
+FILOSOFÍA: "Inyección de Componentes Inteligentes"
+No vamos a rediseñar las fichas de producto enteras para cada usuario (sería inmanejable). Lo que haremos será inyectar pequeños componentes estratégicos en el layout estándar de la Ficha de Producto (PDP) y la Página de Categoría (PLP) según quién sea el visitante.
+
+ESCENARIO A: El usuario GUEST (No registrado) aterriza en una Ficha de Producto
+Mentalidad: "He buscado 'comprar Vaporesso Xros' en Google y he caído aquí. Quiero este producto, pero no sé quién eres tú. ¿Me fío? ¿Llegará rápido? ¿Si se rompe qué hago?"
+
+Objetivo: Inyectar confianza y reducir ansiedad en el punto de compra.
+
+INSTRUCCIONES PARA EL EQUIPO DEV (Next.js):
+Si !isLoggedIn y estamos en ProductPageTemplate:
+
+Inyectar el "Trust Booster" (Refuerzo de Confianza):
+
+Qué es: ¿Recuerdas la Marquesina de Confianza de la Home (Envíos 24h, Garantía Oficial, 8 Tiendas)? Debes convertir eso en un componente pequeño y estático.
+
+Dónde: Justo debajo del botón principal de "Añadir al carrito".
+
+Por qué: Es el momento de máxima ansiedad antes del clic. Ver ahí que tienes 8 tiendas físicas valida la compra online instantáneamente.
+
+Inyectar "Ayuda al Principiante" (Contextual):
+
+Lógica: Si el producto es un Kit de Inicio Y el usuario es Guest.
+
+Dónde: Debajo de la descripción del producto o cerca del precio.
+
+Qué: Un pequeño banner o enlace: "¿Es tu primer vapeador? Mira nuestra guía rápida o compra el PACK TODO INCLUIDO aquí." (Enlace al Wizard o a un bundle).
+
+ESCENARIO B: El usuario REGISTRADO ACTIVO aterriza en una Ficha de Producto
+Mentalidad: "Vengo a comprar estas resistencias. Ya os conozco. No me agobies con mensajes de confianza, quiero velocidad y utilidad."
+
+Objetivo: Limpieza y Omnicanalidad útil.
+
+INSTRUCCIONES PARA EL EQUIPO DEV (Next.js):
+Si isLoggedIn && !isDormant en ProductPageTemplate:
+
+Limpieza Radical:
+
+❌ OCULTAR el "Trust Booster" debajo del botón de compra. Ya confía en ti.
+
+❌ OCULTAR cualquier banner de "Guía para principiantes".
+
+Potenciar la Omnicanalidad (Utilidad):
+
+El botón de Stock en Tienda: Asegúrate de que el gatillo "📍 ¿Lo necesitas HOY? Ver stock en tiendas" (que diseñamos anteriormente) esté MUY visible y funcione rápido cerca del botón de compra. Esto es lo que más valora este usuario.
+
+ESCENARIO C (EL MÁS CRÍTICO): El usuario DORMIDO aterriza en una Ficha de Producto
+Mentalidad: "Hace meses que no compro aquí. He visto un anuncio de un líquido nuevo y he entrado a curiosear. No sé si compraré."
+
+El Peligro: Si aterriza en el producto, lo mira y se va, nunca verá el banner de "¡Te echamos de menos! 15% DTO" de la Home. Perdemos la oportunidad de reactivarlo.
+
+Objetivo: La oferta debe perseguirle. FOMO (Miedo a perderse algo).
+
+INSTRUCCIONES PARA EL EQUIPO DEV (Next.js):
+Si isLoggedIn && isDormant en CUALQUIER página que no sea la Home:
+
+La "Sticky Bar" de Reactivación (El Perseguidor):
+
+Qué es: Una barra horizontal fija en la parte inferior (o superior, debajo del header) de la pantalla, con un color llamativo (ej: un azul más intenso o con un borde naranja).
+
+Comportamiento: "Sticky" (pegajosa). Le sigue aunque haga scroll leyendo la ficha del producto. Debe tener una "X" pequeña para cerrarla si molesta mucho.
+
+Contenido:
+
+Texto: "¡Hola de nuevo, [Nombre]! Recuerda que tienes un 15% DTO EXTRA esperándote."
+
+Botón pequeño: "Aplicar cupón ahora".
+
+Inyección en el Precio (Opcional pero potente):
+
+Si es técnicamente posible, en la ficha de producto, muestra el precio tachado y el precio con su 15% de descuento aplicado, con una etiqueta pequeña: "Tu precio de bienvenida de nuevo".
+
+Resumen de la Estrategia Transversal
+No importa dónde aterricen:
+
+El Guest siempre recibe inyecciones de Confianza.
+
+El Activo siempre recibe una interfaz Limpia y Útil (Stock físico).
+
+El Dormido siempre es Perseguido por su Incentivo.
+
+Con Headless, la web se adapta al usuario, no el usuario a la web. Esto es lo que diferencia a los e-commerce "top" del resto.
