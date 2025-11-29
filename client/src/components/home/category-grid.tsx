@@ -1,80 +1,106 @@
 import { Link } from "wouter";
-import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useCallback } from "react";
+import { ArrowRight } from "lucide-react";
 
-// Import Urban/Industrial images
-import imgLiquids from "@assets/generated_images/urban_eliquid_bottle.png"; // Placeholder until generated
-import imgVapers from "@assets/generated_images/urban_vaper_mod.png";
-import imgZero from "@assets/generated_images/urban_zero_nicotine_disposable.png";
-import imgPods from "@assets/generated_images/urban_pod_system.png";
-import imgDisposable from "@assets/generated_images/urban_disposable_vape.png";
-import imgKits from "@assets/generated_images/urban_vape_kit.png";
-
-const CATEGORIES = [
-  { name: "eLiquids", href: "/eliquids", image: imgLiquids },
-  { name: "Vapers", href: "/kits", image: imgVapers },
-  { name: "Desechables sin nicotina", href: "/sin-nicotina", image: imgZero },
-  { name: "Pods", href: "/pods", image: imgPods },
-  { name: "Vapers desechables", href: "/disposables", image: imgDisposable },
-  { name: "Kits Vapeo", href: "/kits", image: imgKits },
-];
+// Import New Banner Images
+import imgLiquids from "@assets/generated_images/premium_eliquid_advertisement_background.png";
+import imgDisposables from "@assets/generated_images/disposable_vapes_advertisement_background.png";
+import imgKits from "@assets/generated_images/vape_kits_advertisement_background.png";
+import imgPods from "@assets/generated_images/vape_pods_advertisement_background.png";
 
 export function CategoryGrid() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ 
-    align: "start", 
-    loop: false,
-    containScroll: "trimSnaps",
-    dragFree: true
-  });
-
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
-
   return (
-    <section className="py-8 bg-white border-b border-gray-100">
-      <div className="container-custom relative group/section">
-        
-        {/* Navigation Buttons */}
-        <div className="absolute top-1/2 -translate-y-1/2 -left-4 z-10 opacity-0 group-hover/section:opacity-100 transition-opacity duration-300 hidden md:block">
-          <Button variant="outline" size="icon" className="h-10 w-10 rounded-full bg-white/90 backdrop-blur shadow-xl border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all" onClick={scrollPrev}>
-            <ChevronLeft className="h-5 w-5" />
-          </Button>
-        </div>
-        <div className="absolute top-1/2 -translate-y-1/2 -right-4 z-10 opacity-0 group-hover/section:opacity-100 transition-opacity duration-300 hidden md:block">
-          <Button variant="outline" size="icon" className="h-10 w-10 rounded-full bg-white/90 backdrop-blur shadow-xl border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all" onClick={scrollNext}>
-            <ChevronRight className="h-5 w-5" />
+    <section className="py-8 md:py-12 bg-white border-b border-gray-100">
+      <div className="container-custom">
+        {/* Section Header */}
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl md:text-2xl font-black uppercase tracking-tight text-gray-900">
+            Categorías <span className="text-primary">Destacadas</span>
+          </h2>
+          <Button variant="link" className="text-xs md:text-sm font-bold text-gray-500 hover:text-primary uppercase tracking-wider">
+            Ver todo <ArrowRight className="ml-1 w-4 h-4" />
           </Button>
         </div>
 
-        <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex touch-pan-y -ml-4">
-            {CATEGORIES.map((cat, index) => (
-              <div key={`${cat.name}-${index}`} className="flex-[0_0_26%] sm:flex-[0_0_20%] md:flex-[0_0_15%] min-w-0 pl-4">
-                <Link href={cat.href}>
-                  <div className="group flex flex-col items-center gap-4 cursor-pointer">
-                    {/* Urban Square Image Container */}
-                    <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-gray-100 shadow-sm group-hover:shadow-lg transition-all duration-300 border border-gray-100 group-hover:border-gray-300">
-                      <img 
-                        src={cat.image} 
-                        alt={cat.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out filter brightness-[0.95] contrast-[1.1] group-hover:brightness-100"
-                      />
-                      
-                      {/* Overlay Shine Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    
-                    {/* Label - Urban Style */}
-                    <span className="text-[10px] md:text-xs font-black text-gray-800 text-center uppercase tracking-wider group-hover:text-black transition-colors leading-tight px-1">
-                      {cat.name}
-                    </span>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
+        {/* Bento Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-4 auto-rows-[180px] md:auto-rows-[240px]">
+          
+          {/* 1. eLiquids - Tall Vertical (Left) */}
+          <Link href="/eliquids" className="group relative md:col-span-1 md:row-span-2 rounded-2xl overflow-hidden bg-black block">
+            <img 
+              src={imgLiquids} 
+              alt="eLiquids" 
+              className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+            <div className="absolute bottom-0 left-0 p-6 w-full">
+              <p className="text-white/70 text-xs font-bold tracking-widest mb-1 uppercase">Sabor Intenso</p>
+              <h3 className="text-white text-2xl md:text-3xl font-black uppercase leading-none mb-3">eLiquids<br/>Premium</h3>
+              <Button size="sm" className="rounded-full bg-white text-black hover:bg-gray-200 font-bold text-xs px-6">
+                Ver Colección
+              </Button>
+            </div>
+          </Link>
+
+          {/* 2. Vapers Desechables - Wide (Top Middle) */}
+          <Link href="/disposables" className="group relative md:col-span-2 md:row-span-1 rounded-2xl overflow-hidden bg-black block">
+             <img 
+              src={imgDisposables} 
+              alt="Desechables" 
+              className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent"></div>
+            <div className="absolute top-0 left-0 h-full flex flex-col justify-center p-8 items-start">
+              <h3 className="text-white text-2xl md:text-4xl font-black uppercase leading-none mb-2">Vapers<br/><span className="text-blue-400">Desechables</span></h3>
+              <p className="text-white/80 text-sm font-medium max-w-[200px] mb-4">Simplicidad y sabor en cada calada.</p>
+              <span className="text-xs font-bold text-white border-b border-white pb-0.5 group-hover:border-blue-400 group-hover:text-blue-400 transition-colors">EXPLORAR AHORA</span>
+            </div>
+          </Link>
+
+          {/* 3. Top Ventas / Promos - Vertical (Right) */}
+          <Link href="/top-sales" className="group relative md:col-span-1 md:row-span-2 rounded-2xl overflow-hidden bg-[#111] block border border-gray-800">
+            {/* Abstract / Graphic Background */}
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-black"></div>
+            
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10">
+               <div className="w-16 h-1 bg-purple-500 mb-6"></div>
+               <h3 className="text-3xl md:text-4xl font-black text-white uppercase leading-none mb-2">Top<br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Ventas</span></h3>
+               <p className="text-gray-400 text-xs font-medium uppercase tracking-widest mb-6">Los favoritos de la semana</p>
+               <Button variant="outline" className="rounded-full border-purple-500/50 text-purple-300 hover:bg-purple-500 hover:text-white hover:border-purple-500 transition-all">
+                 Ver Ranking
+               </Button>
+            </div>
+          </Link>
+
+          {/* 4. Kits Vapeo - Square (Bottom Middle Left) */}
+          <Link href="/kits" className="group relative md:col-span-1 md:row-span-1 rounded-2xl overflow-hidden bg-black block">
+            <img 
+              src={imgKits} 
+              alt="Kits" 
+              className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+              <h3 className="text-white text-xl font-black uppercase mb-1">Kits Pro</h3>
+              <span className="text-[10px] font-bold bg-white/20 backdrop-blur-sm px-2 py-1 rounded text-white">AVANZADO</span>
+            </div>
+          </Link>
+
+          {/* 5. Pods - Square (Bottom Middle Right) */}
+          <Link href="/pods" className="group relative md:col-span-1 md:row-span-1 rounded-2xl overflow-hidden bg-black block">
+            <img 
+              src={imgPods} 
+              alt="Pods" 
+              className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-700"
+            />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+             <div className="absolute bottom-4 left-4">
+               <h3 className="text-white text-xl font-black uppercase">Pods</h3>
+               <p className="text-white/60 text-[10px] uppercase tracking-wider">Compactos & Potentes</p>
+             </div>
+          </Link>
+
         </div>
       </div>
     </section>
