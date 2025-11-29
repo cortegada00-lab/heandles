@@ -2,7 +2,9 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { HeroGrid } from "@/components/home/hero-grid";
 import { HeroDashboard } from "@/components/home/hero-dashboard";
+import { HeroWinback } from "@/components/home/hero-winback";
 import { ReorderCarousel } from "@/components/home/reorder-carousel";
+import { MissedProductsGrid } from "@/components/home/missed-products-grid";
 import { TrustMarquee } from "@/components/home/trust-marquee";
 import { CategoryGrid } from "@/components/home/category-grid";
 import { ProductSection } from "@/components/home/product-section";
@@ -14,43 +16,56 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
+type UserState = "guest" | "active" | "dormant";
+
 export default function Home() {
   // Simulating user state for demo purposes
-  // In a real app, this would come from an auth hook
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userState, setUserState] = useState<UserState>("guest");
+
+  const getPageTitle = () => {
+    switch(userState) {
+      case "active": return "iVapeo - Tu Panel";
+      case "dormant": return "iVapeo - ¡Te echamos de menos!";
+      default: return "IVAPEO - Tu Tienda de Vapeo Online nº1 en España";
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white text-foreground font-sans flex flex-col relative">
       <SeoHead 
-        title={isLoggedIn ? "iVapeo - Tu Panel" : "IVAPEO - Tu Tienda de Vapeo Online nº1 en España"}
+        title={getPageTitle()}
         description="Encuentra los mejores vapers, e-liquids y accesorios. Envíos gratis en 24h. Expertos en vapeo desde 2014."
       />
       
       {/* Demo Toggle - Floating for prototype visibility */}
       <div className="fixed bottom-4 left-4 z-50 bg-white shadow-2xl border border-gray-200 p-2 rounded-lg flex items-center gap-2 hidden md:flex">
         <span className="text-xs font-bold text-gray-500 uppercase">Vista:</span>
-        <Button 
-          size="sm" 
-          variant={isLoggedIn ? "default" : "outline"}
-          onClick={() => setIsLoggedIn(true)}
-          className="text-xs h-7"
-        >
-          Cliente (Logado)
-        </Button>
-        <Button 
-          size="sm" 
-          variant={!isLoggedIn ? "default" : "outline"}
-          onClick={() => setIsLoggedIn(false)}
-          className="text-xs h-7"
-        >
-          Invitado (Nuevo)
-        </Button>
+        <div className="flex bg-gray-100 p-1 rounded-md">
+          <button 
+            onClick={() => setUserState("guest")}
+            className={`px-3 py-1 text-[10px] font-bold rounded uppercase transition-all ${userState === "guest" ? "bg-white text-black shadow-sm" : "text-gray-500 hover:text-gray-900"}`}
+          >
+            Invitado
+          </button>
+          <button 
+            onClick={() => setUserState("active")}
+            className={`px-3 py-1 text-[10px] font-bold rounded uppercase transition-all ${userState === "active" ? "bg-white text-green-600 shadow-sm" : "text-gray-500 hover:text-gray-900"}`}
+          >
+            Activo
+          </button>
+          <button 
+            onClick={() => setUserState("dormant")}
+            className={`px-3 py-1 text-[10px] font-bold rounded uppercase transition-all ${userState === "dormant" ? "bg-white text-purple-600 shadow-sm" : "text-gray-500 hover:text-gray-900"}`}
+          >
+            Dormido
+          </button>
+        </div>
       </div>
 
       <Navbar />
       <main className="flex-1">
         
-        {isLoggedIn ? (
+        {userState === "active" && (
           /* LOGGED IN USER VIEW ("Power User") */
           <>
              {/* Zone 2: Dashboard Hero */}
@@ -67,7 +82,28 @@ export default function Home() {
                <CategoryGrid />
              </div>
           </>
-        ) : (
+        )}
+
+        {userState === "dormant" && (
+          /* DORMANT USER VIEW ("Win-Back") */
+          <>
+             {/* Zone 2: Winback Hero (FOMO + Coupon) */}
+             <HeroWinback />
+
+             {/* Zone 3: Trust Marquee (Re-build trust) */}
+             <TrustMarquee />
+
+             {/* Zone 4: Missed Products (New Tech Temptation) */}
+             <MissedProductsGrid />
+
+             {/* Zone 5: Category Bento (Safety Net) */}
+             <div className="opacity-80 hover:opacity-100 transition-opacity">
+               <CategoryGrid />
+             </div>
+          </>
+        )}
+
+        {userState === "guest" && (
           /* GUEST USER VIEW */
           <>
             {/* Unified Hero for Canyon Style */}
@@ -186,10 +222,9 @@ export default function Home() {
             <SeoContent />
           </>
         )}
-      </main>
 
-      {/* Newsletter - Only show for Guests (or if explicitly wanted, but specs said hide) */}
-      {!isLoggedIn && (
+      {/* Newsletter - Only show for Guests */}
+      {userState === "guest" && (
         <section className="bg-gray-50 border-t border-gray-100 py-16 relative overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full opacity-40 pointer-events-none">
              <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
