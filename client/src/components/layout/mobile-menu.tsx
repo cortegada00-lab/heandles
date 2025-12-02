@@ -4,13 +4,21 @@ import { Button } from "@/components/ui/button";
 import { Menu, ChevronRight, Package, Zap, Droplet, Flame, MapPin, Percent, Phone, ShieldCheck } from "lucide-react";
 import ivapeoLogo from "@/assets/ivapeo-logo.webp";
 
-export function MobileMenu() {
+interface MobileMenuProps {
+  trigger?: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+export function MobileMenu({ trigger, open, onOpenChange }: MobileMenuProps) {
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="mr-2 -ml-2 text-gray-800">
-          <Menu className="h-6 w-6" />
-        </Button>
+        {trigger || (
+          <Button variant="ghost" size="icon" className="mr-2 -ml-2 text-gray-800">
+            <Menu className="h-6 w-6" />
+          </Button>
+        )}
       </SheetTrigger>
       <SheetContent side="left" className="w-[300px] p-0 bg-white border-r border-gray-100">
         <div className="flex flex-col h-full">
