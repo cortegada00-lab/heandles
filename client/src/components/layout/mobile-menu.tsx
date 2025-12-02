@@ -20,7 +20,7 @@ export function MobileMenu() {
           </div>
 
           {/* Links Scroll Area */}
-          <div className="flex-1 overflow-y-auto py-4">
+          <div className="flex-1 overflow-y-auto py-4 pb-24">
             <nav className="flex flex-col space-y-1 px-3">
               
               <div className="px-3 py-2 text-xs font-black text-gray-400 uppercase tracking-widest">Catálogo</div>
@@ -85,6 +85,15 @@ export function MobileMenu() {
                 </div>
               </Link>
 
+              <div className="px-3 py-2 mt-2 text-xs font-black text-gray-400 uppercase tracking-widest">Marcas Top</div>
+              
+              <div className="grid grid-cols-2 gap-2 px-3 mb-2">
+                 <div className="bg-gray-50 rounded border border-gray-100 p-2 text-center text-xs font-bold text-gray-600 hover:border-gray-300 cursor-pointer">VAPORESSO</div>
+                 <div className="bg-gray-50 rounded border border-gray-100 p-2 text-center text-xs font-bold text-gray-600 hover:border-gray-300 cursor-pointer">OXVA</div>
+                 <div className="bg-gray-50 rounded border border-gray-100 p-2 text-center text-xs font-bold text-gray-600 hover:border-gray-300 cursor-pointer">VOOPOO</div>
+                 <div className="bg-gray-50 rounded border border-gray-100 p-2 text-center text-xs font-bold text-gray-600 hover:border-gray-300 cursor-pointer">ELFBAR</div>
+              </div>
+
               <div className="my-2 border-t border-gray-100"></div>
               
               <Link href="/ofertas">
@@ -98,17 +107,6 @@ export function MobileMenu() {
                     <ChevronRight className="w-4 h-4 text-red-300" />
                 </div>
               </Link>
-
-              <div className="px-3 py-2 mt-4 text-xs font-black text-gray-400 uppercase tracking-widest">Marcas Top</div>
-              
-              <div className="grid grid-cols-2 gap-2 px-3 mb-4">
-                 <div className="bg-gray-50 rounded border border-gray-100 p-2 text-center text-xs font-bold text-gray-600 hover:border-gray-300 cursor-pointer">VAPORESSO</div>
-                 <div className="bg-gray-50 rounded border border-gray-100 p-2 text-center text-xs font-bold text-gray-600 hover:border-gray-300 cursor-pointer">OXVA</div>
-                 <div className="bg-gray-50 rounded border border-gray-100 p-2 text-center text-xs font-bold text-gray-600 hover:border-gray-300 cursor-pointer">VOOPOO</div>
-                 <div className="bg-gray-50 rounded border border-gray-100 p-2 text-center text-xs font-bold text-gray-600 hover:border-gray-300 cursor-pointer">ELFBAR</div>
-              </div>
-
-               <div className="my-2 border-t border-gray-100"></div>
 
                <Link href="/tiendas">
                 <div className="flex items-center justify-between px-3 py-3 rounded-lg text-sm font-bold text-gray-800 hover:bg-gray-50 active:bg-gray-100 transition-colors group cursor-pointer">
