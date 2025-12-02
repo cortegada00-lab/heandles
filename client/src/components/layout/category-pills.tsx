@@ -1,11 +1,11 @@
 import { Link } from "wouter";
 
 const categories = [
-  { name: "Novedades", href: "/novedades", highlight: true },
+  { name: "NEW 🔥", href: "/novedades", highlight: true, style: "fomo" },
   { name: "Vapers", href: "/kits" },
   { name: "E-Liquids", href: "/eliquids" },
   { name: "Desechables", href: "/disposables" },
-  { name: "Sales Nicotina", href: "/eliquids?type=salts" },
+  { name: "Sales", href: "/eliquids?type=salts" },
   { name: "Pods", href: "/pods" },
   { name: "Resistencias", href: "/coils" },
   { name: "Ofertas", href: "/ofertas" },
@@ -20,9 +20,9 @@ export function CategoryPills() {
         {categories.map((cat) => (
           <Link key={cat.name} href={cat.href}>
             <div 
-              className={`px-4 py-1.5 rounded-full border text-xs font-bold whitespace-nowrap transition-colors cursor-pointer
-                ${cat.highlight 
-                  ? 'bg-black border-black text-white hover:bg-gray-800' 
+              className={`px-4 py-1.5 rounded-full border text-xs font-black whitespace-nowrap transition-all cursor-pointer flex items-center gap-1
+                ${(cat as any).style === 'fomo'
+                  ? 'bg-red-600 border-red-600 text-white hover:bg-red-700 animate-pulse shadow-md' 
                   : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-primary hover:text-white hover:border-primary'
                 }`}
             >
