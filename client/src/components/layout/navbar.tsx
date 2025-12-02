@@ -42,12 +42,13 @@ export function Navbar() {
              <div className="flex items-center justify-between h-[50px]">
                 <div className="flex items-center">
                    <MobileMenu />
-                   <Link href="/" className="flex items-center ml-1">
+                   <Link href="/" className="flex flex-col items-start ml-2">
                       <img 
                         src={ivapeoLogo} 
                         alt="IVAPEO" 
-                        className="h-6 w-auto object-contain"
+                        className="h-5 w-auto object-contain"
                       />
+                      <span className="text-[8px] text-gray-500 font-medium mt-0.5 block leading-none whitespace-nowrap">Tienda de cigarrillos electrónicos iVapeo</span>
                    </Link>
                 </div>
 
