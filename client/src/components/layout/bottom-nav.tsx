@@ -1,7 +1,8 @@
 import { Link, useLocation } from "wouter";
-import { Home, LayoutGrid, Tag, User, Menu, X, ChevronRight, Sparkles, MapPin, Phone, LogOut } from "lucide-react";
+import { Home, LayoutGrid, Tag, User } from "lucide-react";
 import { useState } from "react";
 import { MobileMenu } from "./mobile-menu";
+import { useAuth } from "@/lib/auth-context";
 
 export function BottomNav() {
   const [location, setLocation] = useLocation();
