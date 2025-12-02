@@ -9,6 +9,7 @@ import { useCart } from "@/lib/cart-context";
 import { useAuth } from "@/lib/auth-context";
 import { AnnouncementBar } from "./announcement-bar";
 import { CategoryPills } from "./category-pills";
+import { MobileMenu } from "./mobile-menu";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,131 +33,171 @@ export function Navbar() {
       <AnnouncementBar />
 
       {/* Main Header */}
-      <header className="py-3 md:py-6 bg-white relative z-50">
-        <div className="container-custom flex items-center justify-between gap-0 md:gap-8">
+      <header className="bg-white relative z-50 md:py-6 border-b border-gray-100 md:border-none">
+        <div className="container-custom">
           
-          {/* Mobile Logo - Centered */}
-          <div className="flex items-center md:hidden shrink-0 mx-auto absolute left-1/2 -translate-x-1/2">
-            <Link href="/" className="flex flex-col items-center">
+          {/* Mobile Layout (2 Rows) */}
+          <div className="md:hidden flex flex-col pb-3">
+             {/* Row 1: Menu, Logo, Icons */}
+             <div className="flex items-center justify-between h-[60px]">
+                <div className="flex items-center">
+                   <MobileMenu />
+                   <Link href="/" className="flex items-center ml-1">
+                      <img 
+                        src={ivapeoLogo} 
+                        alt="IVAPEO" 
+                        className="h-7 w-auto object-contain"
+                      />
+                   </Link>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  {status === "logged_in" && user ? (
+                    <Link href="/account">
+                      <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700">
+                         <User className="w-5 h-5" />
+                      </div>
+                    </Link>
+                  ) : (
+                    <Link href="/login">
+                      <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700">
+                         <User className="w-5 h-5" />
+                      </div>
+                    </Link>
+                  )}
+
+                  <CartDrawer>
+                    <div className="relative w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700">
+                      <ShoppingCart className="h-5 w-5" />
+                      {itemCount > 0 && (
+                        <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-white text-[10px] flex items-center justify-center font-bold ring-2 ring-white">
+                          {itemCount}
+                        </span>
+                      )}
+                    </div>
+                  </CartDrawer>
+                </div>
+             </div>
+
+             {/* Row 2: Full Width Search Bar */}
+             <div className="mt-1">
+                <div 
+                  onClick={() => setIsSearchOpen(true)}
+                  className="flex items-center w-full h-11 rounded-lg bg-gray-100 border border-transparent px-4 active:scale-[0.99] transition-transform"
+                >
+                   <Search className="w-4 h-4 text-gray-500 mr-3" />
+                   <span className="text-sm text-gray-500 font-medium">¿Qué estás buscando?</span>
+                </div>
+             </div>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden md:flex items-center justify-between gap-8">
+          
+            {/* Desktop Logo */}
+            <Link href="/" className="flex shrink-0 mr-auto lg:mr-0 flex-col">
               <img 
                 src={ivapeoLogo} 
                 alt="IVAPEO" 
-                className="h-8 w-auto object-contain"
+                className="h-12 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity block"
               />
-              <span className="text-[8px] text-gray-500 font-medium -mt-0.5 block whitespace-nowrap">Tienda de cigarrillos electrónicos iVapeo</span>
+              <span className="text-[10px] text-gray-500 font-medium -mt-1 block">Tienda de cigarrillos electrónicos iVapeo</span>
             </Link>
-          </div>
 
-          {/* Desktop Logo */}
-          <Link href="/" className="hidden md:flex shrink-0 mr-auto lg:mr-0 flex-col">
-            <img 
-              src={ivapeoLogo} 
-              alt="IVAPEO" 
-              className="h-12 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity block"
-            />
-            <span className="text-[10px] text-gray-500 font-medium -mt-1 block">Tienda de cigarrillos electrónicos iVapeo</span>
-          </Link>
+            {/* Smart Search - Desktop: Centered & Wide */}
+            <div className="flex-1 max-w-2xl mx-8">
+               <div 
+                  onClick={() => setIsSearchOpen(true)}
+                  className="relative flex items-center w-full h-[52px] rounded-full border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-slate-300 hover:shadow-lg transition-all duration-300 cursor-pointer group px-1.5"
+               >
+                   {/* Search Icon */}
+                   <div className="pl-3 pr-3 text-slate-400 group-hover:text-slate-600 transition-colors">
+                      <Search className="w-5 h-5" />
+                   </div>
 
-          {/* Smart Search - Desktop: Centered & Wide. Mobile: Icon Trigger */}
-          <div className="hidden md:block flex-1 max-w-2xl mx-8">
-             <div 
-                onClick={() => setIsSearchOpen(true)}
-                className="relative flex items-center w-full h-[52px] rounded-full border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-slate-300 hover:shadow-lg transition-all duration-300 cursor-pointer group px-1.5"
-             >
-                 {/* Search Icon */}
-                 <div className="pl-3 pr-3 text-slate-400 group-hover:text-slate-600 transition-colors">
-                    <Search className="w-5 h-5" />
-                 </div>
+                   {/* Text Input Simulation */}
+                   <div className="flex-1 flex items-center text-[15px] text-slate-500 font-medium">
+                      <span className="opacity-70">¿Qué estás buscando hoy?</span>
+                   </div>
 
-                 {/* Text Input Simulation */}
-                 <div className="flex-1 flex items-center text-[15px] text-slate-500 font-medium">
-                    <span className="opacity-70">¿Qué estás buscando hoy?</span>
-                 </div>
-
-                 {/* Search Button - Professional Pill */}
-                 <div className="">
-                    <Button size="sm" className="rounded-full h-[42px] px-8 bg-black hover:bg-slate-800 text-white font-bold text-sm shadow-sm transition-all duration-300">
-                       Buscar
-                    </Button>
-                 </div>
-              </div>
-          </div>
-
-          {/* User Actions */}
-          <div className="flex items-center gap-3 md:gap-4 shrink-0 ml-auto md:ml-0">
-            {/* Mobile Search Trigger */}
-            <div className="md:hidden">
-               <Button variant="ghost" size="icon" className="text-gray-700" onClick={() => setIsSearchOpen(true)}>
-                 <Search className="h-6 w-6" />
-               </Button>
+                   {/* Search Button - Professional Pill */}
+                   <div className="">
+                      <Button size="sm" className="rounded-full h-[42px] px-8 bg-black hover:bg-slate-800 text-white font-bold text-sm shadow-sm transition-all duration-300">
+                         Buscar
+                      </Button>
+                   </div>
+                </div>
             </div>
 
-            {status === "logged_in" && user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <div className="flex flex-col items-center justify-center cursor-pointer group outline-none relative">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold mb-0.5 relative">
-                      {user.name.charAt(0).toUpperCase()}
-                      {/* Online Status Dot */}
-                      <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
+            {/* User Actions - Desktop */}
+            <div className="flex items-center gap-4 shrink-0">
+              {status === "logged_in" && user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <div className="flex flex-col items-center justify-center cursor-pointer group outline-none relative">
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold mb-0.5 relative">
+                        {user.name.charAt(0).toUpperCase()}
+                        {/* Online Status Dot */}
+                        <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
+                      </div>
+                      <span className="text-[10px] font-bold text-gray-500 group-hover:text-primary max-w-[60px] truncate hidden sm:block">
+                        {user.name}
+                      </span>
                     </div>
-                    <span className="text-[10px] font-bold text-gray-500 group-hover:text-primary max-w-[60px] truncate hidden sm:block">
-                      {user.name}
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuLabel>
+                      <div className="flex flex-col space-y-1">
+                        <p className="text-sm font-medium leading-none">{user.name}</p>
+                        <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                      </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => setLocation("/account")}>
+                      <User className="mr-2 h-4 w-4" />
+                      <span>Mi Cuenta</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setLocation("/account")}>
+                      <Package className="mr-2 h-4 w-4" />
+                      <span>Mis Pedidos</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setLocation("/favorites")}>
+                      <Heart className="mr-2 h-4 w-4" />
+                      <span>Favoritos</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={logout} className="text-red-600 focus:text-red-600">
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>Cerrar Sesión</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Link href="/login">
+                  <div className="hidden sm:flex flex-col items-center justify-center cursor-pointer group">
+                    <User className="h-6 w-6 text-gray-700 group-hover:text-primary transition-colors mb-1" />
+                    <span className="text-[10px] font-bold text-gray-500 group-hover:text-primary uppercase tracking-wider">
+                      {status === "dormant" ? "Acceder" : "Entrar"}
                     </span>
                   </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
-                  <DropdownMenuLabel>
-                    <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-medium leading-none">{user.name}</p>
-                      <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
-                    </div>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => setLocation("/account")}>
-                    <User className="mr-2 h-4 w-4" />
-                    <span>Mi Cuenta</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setLocation("/account")}>
-                    <Package className="mr-2 h-4 w-4" />
-                    <span>Mis Pedidos</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setLocation("/favorites")}>
-                    <Heart className="mr-2 h-4 w-4" />
-                    <span>Favoritos</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={logout} className="text-red-600 focus:text-red-600">
-                    <LogOut className="mr-2 h-4 w-4" />
-                    <span>Cerrar Sesión</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <Link href="/login">
-                <div className="hidden sm:flex flex-col items-center justify-center cursor-pointer group">
-                  <User className="h-6 w-6 text-gray-700 group-hover:text-primary transition-colors mb-1" />
-                  <span className="text-[10px] font-bold text-gray-500 group-hover:text-primary uppercase tracking-wider">
-                    {status === "dormant" ? "Acceder" : "Entrar"}
-                  </span>
+                </Link>
+              )}
+              
+              {/* Cart Drawer Trigger */}
+              <CartDrawer>
+                <div className="flex flex-col items-center justify-center cursor-pointer group relative">
+                  <div className="relative">
+                    <ShoppingCart className="h-6 w-6 text-gray-700 group-hover:text-primary transition-colors mb-1" />
+                    {itemCount > 0 && (
+                      <span className="absolute -top-1.5 -right-1.5 h-4 w-4 rounded-full bg-primary text-white text-[10px] flex items-center justify-center font-bold ring-2 ring-white">
+                        {itemCount}
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-[10px] font-bold text-gray-500 group-hover:text-primary uppercase tracking-wider hidden sm:block">Cesta</span>
                 </div>
-              </Link>
-            )}
-            
-            {/* Cart Drawer Trigger */}
-            <CartDrawer>
-              <div className="flex flex-col items-center justify-center cursor-pointer group relative">
-                <div className="relative">
-                  <ShoppingCart className="h-6 w-6 text-gray-700 group-hover:text-primary transition-colors mb-1" />
-                  {itemCount > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 h-4 w-4 rounded-full bg-primary text-white text-[10px] flex items-center justify-center font-bold ring-2 ring-white">
-                      {itemCount}
-                    </span>
-                  )}
-                </div>
-                <span className="text-[10px] font-bold text-gray-500 group-hover:text-primary uppercase tracking-wider hidden sm:block">Cesta</span>
-              </div>
-            </CartDrawer>
+              </CartDrawer>
+            </div>
           </div>
         </div>
       </header>
