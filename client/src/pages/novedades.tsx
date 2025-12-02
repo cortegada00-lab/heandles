@@ -280,7 +280,7 @@ export default function NovedadesPage() {
         </div>
 
         {/* Toolbar */}
-        <div className="sticky top-[72px] z-20 bg-white/95 backdrop-blur-sm border-b border-gray-100 py-3 mb-8">
+        <div className="sticky top-[72px] z-20 bg-white/95 backdrop-blur-sm border-b border-gray-100 py-3 mb-4 md:mb-8">
           <div className="container-custom flex items-center justify-between">
             <div className="flex items-center gap-2">
                <Sheet open={mobileFiltersOpen} onOpenChange={setMobileFiltersOpen}>
@@ -394,7 +394,7 @@ export default function NovedadesPage() {
           {/* Products Grid - Updated to 4 columns max */}
           <div className="flex-1">
             {/* Top Pagination */}
-            <div className="mb-6 flex justify-end">
+            <div className="mb-6 hidden md:flex justify-end">
               <Pagination 
                 currentPage={currentPage} 
                 totalPages={totalPages} 

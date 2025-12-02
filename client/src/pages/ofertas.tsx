@@ -282,7 +282,7 @@ export default function OfertasPage() {
         </div>
 
         {/* Toolbar */}
-        <div className="sticky top-[72px] z-20 bg-white/95 backdrop-blur-sm border-b border-gray-100 py-3 mb-8">
+        <div className="sticky top-[72px] z-20 bg-white/95 backdrop-blur-sm border-b border-gray-100 py-3 mb-4 md:mb-8">
           <div className="container-custom flex items-center justify-between">
             <div className="flex items-center gap-2">
                <Sheet open={mobileFiltersOpen} onOpenChange={setMobileFiltersOpen}>
@@ -438,7 +438,7 @@ export default function OfertasPage() {
                     currentPage={currentPage} 
                     totalPages={totalPages} 
                     onPageChange={setCurrentPage}
-                    className="mt-0" 
+                    className="mt-0 hidden md:flex" 
                   />
                 </div>
 
