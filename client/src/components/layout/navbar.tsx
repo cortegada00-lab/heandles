@@ -37,46 +37,46 @@ export function Navbar() {
         <div className="container-custom">
           
           {/* Mobile Layout (2 Rows) */}
-          <div className="md:hidden flex flex-col pb-3">
+          <div className="md:hidden flex flex-col pb-2">
              {/* Row 1: Menu, Logo, Icons */}
-             <div className="flex items-center justify-between h-[60px]">
+             <div className="flex items-center justify-between h-[50px]">
                 <div className="flex items-center">
                    <MobileMenu />
                    <Link href="/" className="flex items-center ml-1">
                       <img 
                         src={ivapeoLogo} 
                         alt="IVAPEO" 
-                        className="h-7 w-auto object-contain"
+                        className="h-6 w-auto object-contain"
                       />
                    </Link>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
                   <Link href="/tiendas">
-                     <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700">
-                        <MapPin className="w-5 h-5" />
+                     <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-700">
+                        <MapPin className="w-4 h-4" />
                      </div>
                   </Link>
 
                   {status === "logged_in" && user ? (
                     <Link href="/account">
-                      <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700">
-                         <User className="w-5 h-5" />
+                      <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-700">
+                         <User className="w-4 h-4" />
                       </div>
                     </Link>
                   ) : (
                     <Link href="/login">
-                      <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700">
-                         <User className="w-5 h-5" />
+                      <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-700">
+                         <User className="w-4 h-4" />
                       </div>
                     </Link>
                   )}
 
                   <CartDrawer>
-                    <div className="relative w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700">
-                      <ShoppingCart className="h-5 w-5" />
+                    <div className="relative w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-700">
+                      <ShoppingCart className="h-4 w-4" />
                       {itemCount > 0 && (
-                        <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-white text-[10px] flex items-center justify-center font-bold ring-2 ring-white">
+                        <span className="absolute -top-1 -right-1 h-3.5 w-3.5 rounded-full bg-primary text-white text-[9px] flex items-center justify-center font-bold ring-2 ring-white">
                           {itemCount}
                         </span>
                       )}
@@ -86,13 +86,13 @@ export function Navbar() {
              </div>
 
              {/* Row 2: Full Width Search Bar */}
-             <div className="mt-1">
+             <div className="mt-0.5">
                 <div 
                   onClick={() => setIsSearchOpen(true)}
-                  className="flex items-center w-full h-11 rounded-lg bg-gray-100 border border-transparent px-4 active:scale-[0.99] transition-transform"
+                  className="flex items-center w-full h-9 rounded-lg bg-gray-100 border border-transparent px-3 active:scale-[0.99] transition-transform"
                 >
-                   <Search className="w-4 h-4 text-gray-500 mr-3" />
-                   <span className="text-sm text-gray-500 font-medium">¿Qué estás buscando?</span>
+                   <Search className="w-3.5 h-3.5 text-gray-500 mr-2" />
+                   <span className="text-xs text-gray-500 font-medium">¿Qué estás buscando?</span>
                 </div>
              </div>
           </div>
