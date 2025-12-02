@@ -418,7 +418,7 @@ export default function OfertasPage() {
                   <span className="w-1 h-4 bg-purple-600 block"></span>
                   Packs Ahorro
                 </h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                   {filteredPacks.map((pack) => (
                     <BundleCard key={pack.id} {...pack} />
                   ))}
@@ -442,7 +442,7 @@ export default function OfertasPage() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   {currentOffers.map((product) => (
                     <ProductCard 
                       key={product.id}

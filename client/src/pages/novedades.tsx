@@ -403,7 +403,7 @@ export default function NovedadesPage() {
               />
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {currentProducts.map((product) => {
                 const status = getProductStatus(product);
                 return (
