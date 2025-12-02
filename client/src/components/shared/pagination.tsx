@@ -10,15 +10,15 @@ interface PaginationProps {
 
 export function Pagination({ currentPage, totalPages, onPageChange, className }: PaginationProps) {
   return (
-    <div className={`flex items-center justify-center gap-2 ${className || 'mt-12'}`}>
+    <div className={`flex items-center justify-center gap-1 md:gap-2 ${className || 'mt-8 md:mt-12'}`}>
       <Button
         variant="outline"
         size="icon"
         onClick={() => onPageChange(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        className="h-10 w-10 rounded-full border-gray-200"
+        className="h-8 w-8 md:h-10 md:w-10 rounded-full border-gray-200"
       >
-        <ChevronLeft className="h-4 w-4" />
+        <ChevronLeft className="h-3 w-3 md:h-4 md:w-4" />
       </Button>
       
       {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
@@ -26,7 +26,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, className }:
           key={page}
           variant={currentPage === page ? "default" : "outline"}
           onClick={() => onPageChange(page)}
-          className={`h-10 w-10 rounded-full font-bold ${
+          className={`h-8 w-8 md:h-10 md:w-10 rounded-full font-bold text-xs md:text-sm ${
             currentPage === page 
               ? "bg-black text-white hover:bg-gray-800 border-none" 
               : "border-gray-200 text-gray-600 hover:bg-gray-50"
@@ -41,9 +41,9 @@ export function Pagination({ currentPage, totalPages, onPageChange, className }:
         size="icon"
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className="h-10 w-10 rounded-full border-gray-200"
+        className="h-8 w-8 md:h-10 md:w-10 rounded-full border-gray-200"
       >
-        <ChevronRight className="h-4 w-4" />
+        <ChevronRight className="h-3 w-3 md:h-4 md:w-4" />
       </Button>
     </div>
   );
