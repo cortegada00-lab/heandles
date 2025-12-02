@@ -108,7 +108,7 @@ export default function ProductPage() {
                    <div className="space-y-3">
                       {mockCategoryProducts.slice(0, 2).map(p => (
                         <div key={p.id} className="flex gap-3 items-center bg-white p-2 rounded border border-gray-200">
-                           <img src={p.image} className="w-10 h-10 object-contain mix-blend-multiply" />
+                           <img src={p.images[0]} className="w-10 h-10 object-contain mix-blend-multiply" />
                            <div className="flex-1 min-w-0">
                               <p className="text-xs font-bold text-gray-900 truncate">{p.name}</p>
                               <p className="text-xs text-gray-500">{p.price.toFixed(2)}€</p>
@@ -130,7 +130,7 @@ export default function ProductPage() {
                       {mockCategoryProducts.slice(0, 4).map(p => (
                         <div key={p.id} className="min-w-[140px] bg-white rounded-xl border border-gray-200 p-3 flex flex-col relative shadow-sm">
                            <div className="aspect-square mb-2 bg-gray-50 rounded-lg p-2">
-                              <img src={p.image} className="w-full h-full object-contain mix-blend-multiply" />
+                              <img src={p.images[0]} className="w-full h-full object-contain mix-blend-multiply" />
                            </div>
                            <p className="text-xs font-bold text-gray-900 line-clamp-2 mb-1 h-8">{p.name}</p>
                            <div className="mt-auto pt-2 flex items-center justify-between">

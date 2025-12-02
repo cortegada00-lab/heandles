@@ -42,7 +42,11 @@ const newProducts = [
     type: "hardware",
     productCategory: "kit",
     specialBadge: null,
-    attributes: { userLevel: "Principiante", tankCapacity: "2ml", batteryCapacity: "1000mAh", drawType: "MTL" }
+    attributes: { userLevel: "Principiante", tankCapacity: "2ml", batteryCapacity: "1000mAh", drawType: "MTL" },
+    description: "Kit de inicio compacto y potente.",
+    images: [imgKit],
+    sku: "VAP-XROS4M",
+    colors: ["Black", "Silver", "Blue"]
   },
   {
     id: 2,
@@ -57,7 +61,11 @@ const newProducts = [
     type: "eliquid",
     productCategory: "eliquid",
     specialBadge: "Nuevo Sabor",
-    attributes: { nicotine: "3mg", type: "Freebase", flavorType: "Postre", ratio: "50/50" }
+    attributes: { nicotine: "3mg", type: "Freebase", flavorType: "Postre", ratio: "50/50" },
+    description: "Delicioso sabor a crema pastelera con chocolate blanco.",
+    images: [imgProduct],
+    sku: "BOM-CS100",
+    colors: []
   },
   {
     id: 3,
@@ -72,7 +80,11 @@ const newProducts = [
     type: "hardware",
     productCategory: "kit",
     specialBadge: "Nuevo Modelo",
-    attributes: { userLevel: "Intermedio", tankCapacity: "2.5ml", batteryCapacity: "1200mAh", drawType: "MTL" }
+    attributes: { userLevel: "Intermedio", tankCapacity: "2.5ml", batteryCapacity: "1200mAh", drawType: "MTL" },
+    description: "La evolución del pod system más vendido.",
+    images: [imgKit],
+    sku: "OXV-XLP2",
+    colors: ["Black", "Red", "Blue"]
   },
   {
     id: 4,
@@ -88,7 +100,11 @@ const newProducts = [
     type: "eliquid",
     productCategory: "eliquid",
     specialBadge: null,
-    attributes: { nicotine: "0mg", type: "Freebase", flavorType: "Tabaco", ratio: "70/30" }
+    attributes: { nicotine: "0mg", type: "Freebase", flavorType: "Tabaco", ratio: "70/30" },
+    description: "Fusión de Don Juan Reserve y Aldonza.",
+    images: [imgProduct],
+    sku: "KCR-DJA100",
+    colors: []
   },
   {
     id: 5,
@@ -103,7 +119,11 @@ const newProducts = [
     type: "hardware",
     productCategory: "kit",
     specialBadge: null,
-    attributes: { userLevel: "Intermedio", tankCapacity: "3ml", batteryCapacity: "1500mAh", drawType: "DL" }
+    attributes: { userLevel: "Intermedio", tankCapacity: "3ml", batteryCapacity: "1500mAh", drawType: "DL" },
+    description: "Potencia y sabor en formato pod.",
+    images: [imgKit],
+    sku: "UWE-CG3P",
+    colors: ["Black", "Grey"]
   },
   {
     id: 6,
@@ -118,7 +138,11 @@ const newProducts = [
     type: "eliquid",
     productCategory: "eliquid",
     specialBadge: "Nueva Gama",
-    attributes: { nicotine: "10mg", type: "Sales", flavorType: "Frutal", ratio: "50/50" }
+    attributes: { nicotine: "10mg", type: "Sales", flavorType: "Frutal", ratio: "50/50" },
+    description: "Sabor intenso a mango helado.",
+    images: [imgProduct],
+    sku: "DRI-BMI",
+    colors: []
   },
   {
     id: 7,
@@ -133,7 +157,11 @@ const newProducts = [
     type: "hardware",
     productCategory: "kit",
     specialBadge: "Exclusivo",
-    attributes: { userLevel: "Avanzado", tankCapacity: "5ml", batteryCapacity: "2500mAh", drawType: "DL" }
+    attributes: { userLevel: "Avanzado", tankCapacity: "5ml", batteryCapacity: "2500mAh", drawType: "DL" },
+    description: "Mod de alta potencia para vapeadores exigentes.",
+    images: [imgKit],
+    sku: "VOO-DG5",
+    colors: ["Carbon", "Retro"]
   },
   {
     id: 8,
@@ -148,7 +176,11 @@ const newProducts = [
     type: "eliquid",
     productCategory: "eliquid",
     specialBadge: "Edición Limitada",
-    attributes: { nicotine: "6mg", type: "Freebase", flavorType: "Mentolado", ratio: "70/30" }
+    attributes: { nicotine: "6mg", type: "Freebase", flavorType: "Mentolado", ratio: "70/30" },
+    description: "El clásico Ragnarok con un toque legendario.",
+    images: [imgProduct],
+    sku: "AL-RAGL",
+    colors: []
   },
   {
     id: 9,
@@ -162,7 +194,11 @@ const newProducts = [
     stock: 0,
     type: "coming-soon",
     productCategory: "kit",
-    specialBadge: null
+    specialBadge: null,
+    description: "Próximamente disponible.",
+    images: [imgKit],
+    sku: "VAP-LQ2SE",
+    colors: []
   },
   {
     id: 10,
@@ -176,7 +212,11 @@ const newProducts = [
     stock: 0,
     type: "coming-soon",
     productCategory: "eliquid",
-    specialBadge: null
+    specialBadge: null,
+    description: "Próximamente disponible.",
+    images: [imgProduct],
+    sku: "PAC-FA50",
+    colors: []
   }
 ];
 
