@@ -438,7 +438,7 @@ export default function OfertasPage() {
                     currentPage={currentPage} 
                     totalPages={totalPages} 
                     onPageChange={setCurrentPage}
-                    className="mt-0 hidden md:flex" 
+                    className="mt-0" 
                   />
                 </div>
 

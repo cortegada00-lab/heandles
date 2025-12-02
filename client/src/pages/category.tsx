@@ -180,7 +180,7 @@ export default function CategoryPage() {
                </div>
 
                {/* Sub-category Pills */}
-               <div className="flex overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 gap-1.5 scrollbar-hide snap-x">
+               <div className="hidden md:flex overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 gap-1.5 scrollbar-hide snap-x">
                  {subCategories.map((cat, idx) => (
                    <button 
                      key={cat}
@@ -255,7 +255,7 @@ export default function CategoryPage() {
           {/* Product Grid - Updated to 4 columns max */}
           <div className="flex-1">
             {/* Top Pagination */}
-            <div className="mb-6 hidden md:flex justify-end">
+            <div className="mb-6 flex justify-end">
               <Pagination 
                 currentPage={currentPage} 
                 totalPages={totalPages} 

@@ -394,7 +394,7 @@ export default function NovedadesPage() {
           {/* Products Grid - Updated to 4 columns max */}
           <div className="flex-1">
             {/* Top Pagination */}
-            <div className="mb-6 hidden md:flex justify-end">
+            <div className="mb-6 flex justify-end">
               <Pagination 
                 currentPage={currentPage} 
                 totalPages={totalPages} 
