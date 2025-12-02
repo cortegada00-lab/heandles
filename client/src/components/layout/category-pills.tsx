@@ -1,11 +1,11 @@
 import { Link } from "wouter";
 
 const categories = [
-  { name: "Novedades", href: "/novedades" },
-  { name: "Kits Inicio", href: "/kits" },
-  { name: "Sales Nicotina", href: "/eliquids?type=salts" },
-  { name: "Desechables", href: "/disposables" },
+  { name: "Novedades", href: "/novedades", highlight: true },
+  { name: "Vapers", href: "/kits" },
   { name: "E-Liquids", href: "/eliquids" },
+  { name: "Desechables", href: "/disposables" },
+  { name: "Sales Nicotina", href: "/eliquids?type=salts" },
   { name: "Pods", href: "/pods" },
   { name: "Resistencias", href: "/coils" },
   { name: "Ofertas", href: "/ofertas" },
@@ -19,7 +19,13 @@ export function CategoryPills() {
       <div className="container-custom flex gap-2 px-4 min-w-max">
         {categories.map((cat) => (
           <Link key={cat.name} href={cat.href}>
-            <div className="px-4 py-1.5 bg-gray-50 rounded-full border border-gray-200 text-xs font-bold text-gray-700 whitespace-nowrap hover:bg-primary hover:text-white hover:border-primary transition-colors cursor-pointer">
+            <div 
+              className={`px-4 py-1.5 rounded-full border text-xs font-bold whitespace-nowrap transition-colors cursor-pointer
+                ${cat.highlight 
+                  ? 'bg-black border-black text-white hover:bg-gray-800' 
+                  : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-primary hover:text-white hover:border-primary'
+                }`}
+            >
               {cat.name}
             </div>
           </Link>

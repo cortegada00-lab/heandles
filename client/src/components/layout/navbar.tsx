@@ -52,6 +52,12 @@ export function Navbar() {
                 </div>
 
                 <div className="flex items-center gap-3">
+                  <Link href="/tiendas">
+                     <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700">
+                        <MapPin className="w-5 h-5" />
+                     </div>
+                  </Link>
+
                   {status === "logged_in" && user ? (
                     <Link href="/account">
                       <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700">
