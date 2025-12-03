@@ -6,7 +6,7 @@ import { getDeliveryDate } from "@/lib/shipping";
 import { Product } from "@/lib/mock-data";
 
 interface ProductCardProps {
-  product: Product;
+  product: Product & { discount?: string; endsIn?: string };
   type?: "standard" | "offer" | "new";
   badge?: string;
   className?: string;

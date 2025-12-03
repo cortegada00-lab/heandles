@@ -2,12 +2,13 @@ import subzeroImage from "@assets/generated_images/halo_subzero_e-liquid_bottle_
 import drifterMangoImage from "@assets/image_1764176469258.png";
 
 export interface Product {
-  id: string;
+  id: string | number;
   name: string;
   price: number;
   originalPrice?: number;
   description: string;
   shortDescription?: string;
+  image?: string;
   images: string[];
   brand: string;
   sku: string;
@@ -19,8 +20,8 @@ export interface Product {
   features: string[];
   availabilityStatus: 'in_stock' | 'out_of_stock' | 'pre_order';
   
-  type: 'longfill' | 'hardware' | 'accessory' | 'eliquid' | 'kit' | 'pod' | 'consumable';
-  productCategory?: 'kit' | 'eliquid' | 'hardware';
+  type: 'longfill' | 'hardware' | 'accessory' | 'eliquid' | 'kit' | 'pod' | 'consumable' | string;
+  productCategory?: 'kit' | 'eliquid' | 'hardware' | string;
   flavorProfile?: {
     freshness: number; // 0-100
     sweetness: number; // 0-100
@@ -35,7 +36,10 @@ export interface Product {
     tankCapacity?: string; // "2ml" | "5ml"
     batteryCapacity?: string; // "1000mAh" | "1500mAh"
     drawType?: string; // "MTL" | "DL" | "RDTA"
-  };
+    puffs?: string;
+    activation?: string;
+    [key: string]: any;
+  } | Record<string, any> | any[];
   compatibleAccessories?: {
     id: string;
     name: string;
@@ -61,6 +65,8 @@ export interface Product {
     name: string; // e.g., "0.8Ω Mesh", "0.6Ω Mesh"
     stock: number;
   }[];
+  
+  [key: string]: any; // Allow loose typing for rapid prototyping
 }
 
 // Store Stock Mock Data
