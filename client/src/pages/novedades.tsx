@@ -452,7 +452,7 @@ export default function NovedadesPage() {
                     product={{
                       ...product,
                       attributes: (product.attributes || {}) as Record<string, string | string[]>
-                    }}
+                    } as any}
                     type="new"
                     badge={status.label}
                   />
