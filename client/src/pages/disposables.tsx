@@ -1,12 +1,12 @@
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { ChevronRight, ChevronDown, SlidersHorizontal, X, Zap, Tag, Check, Star, Rocket } from "lucide-react";
+import { ChevronRight, ChevronDown, SlidersHorizontal } from "lucide-react";
 import { Link } from "wouter";
 import { mockCategoryProducts } from "@/lib/mock-data";
 import { SeoHead } from "@/components/shared/seo-head";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { getDeliveryDate } from "@/lib/shipping";
+import { ProductCard } from "@/components/product/product-card";
 import {
   Accordion,
   AccordionContent,
@@ -14,13 +14,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Checkbox } from "@/components/ui/checkbox";
-import { QuickAddPopover } from "@/components/product/quick-add-popover";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -49,20 +46,6 @@ export default function DisposablesPage() {
   const subCategories = [
     "Todos", "Sin Nicotina", "600 Puffs", "Recargables", "Packs Ahorro", "Novedades"
   ];
-
-  // Generate mock variants for color swatches
-  const getVariants = (id: number) => {
-    const colors = [
-      { bg: "bg-red-500", name: "Strawberry" },
-      { bg: "bg-blue-500", name: "Blueberry" },
-      { bg: "bg-green-500", name: "Apple" },
-      { bg: "bg-purple-500", name: "Grape" },
-      { bg: "bg-yellow-400", name: "Lemon" },
-      { bg: "bg-pink-400", name: "Peach" },
-    ];
-    // Randomly return 3-6 variants based on ID
-    return colors.slice(0, 3 + (id % 4));
-  };
 
   const FilterContent = () => (
     <div className="space-y-1 pb-12">
@@ -239,102 +222,27 @@ export default function DisposablesPage() {
             <FilterContent />
           </aside>
 
-          {/* Product Grid - Updated to 3 columns max for larger cards */}
+          {/* Product Grid - Updated to match CategoryPage (4 columns) */}
           <div className="flex-1">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {mockCategoryProducts.map((product) => {
-                const variants = getVariants(product.id);
-                
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {mockCategoryProducts.map((product, i) => {
+                // Simulate disposable specific attributes for the standard card
+                const disposableProduct = {
+                   ...product,
+                   attributes: {
+                      puffs: "600 Puffs",
+                      nicotine: "20mg",
+                      activation: "Auto"
+                   }
+                };
+
                 return (
-                  <div key={product.id} className="group bg-white flex flex-col h-full relative border border-transparent hover:border-gray-100 hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
-                    <Link href="/product" className="flex flex-col flex-1">
-                      {/* Badges Top Left */}
-                      <div className="absolute top-3 left-3 z-10 flex flex-col gap-1 pointer-events-none">
-                        {product.stock < 10 && (
-                           <span className="bg-black text-white text-[10px] font-bold px-2 py-1 uppercase tracking-wider rounded-sm shadow-sm">
-                             Sale
-                           </span>
-                        )}
-                        {product.id % 2 === 0 && (
-                           <div className="flex items-center bg-black text-white px-2 py-1 gap-1 rounded-sm shadow-sm">
-                              <span className="bg-white text-black text-[9px] font-bold px-1 rounded-sm">3</span>
-                              <span className="text-[10px] font-bold uppercase tracking-wider">Packs</span>
-                           </div>
-                        )}
-                      </div>
-
-                      {/* Image Area - Larger */}
-                      <div className="relative aspect-square overflow-hidden bg-gray-50">
-                        <img 
-                          src={product.image} 
-                          alt={product.name} 
-                          className="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110 mix-blend-multiply"
-                        />
-                        
-                        {/* Promo Banner Overlay (Bottom of Image) */}
-                        {product.id % 3 === 0 && (
-                          <div className="absolute bottom-0 left-0 right-0 bg-green-50/90 backdrop-blur-sm text-green-900 text-[11px] font-bold py-2 text-center border-t border-green-100">
-                             2 FREE E-Liquids
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Content */}
-                      <div className="flex flex-col p-5 flex-1">
-                         {/* Brand & Rating */}
-                         <div className="flex justify-between items-center mb-2">
-                            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">{product.brand}</span>
-                            <div className="flex items-center gap-1">
-                              <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                              <span className="text-xs font-medium text-gray-600">4.8</span>
-                            </div>
-                         </div>
-
-                        {/* Title */}
-                        <h3 className="text-lg font-bold text-gray-900 leading-tight group-hover:text-primary transition-colors mb-2 line-clamp-2 min-h-[3.5rem]">
-                          {product.name}
-                        </h3>
-                        
-                        {/* Color Variants */}
-                        <div className="flex gap-1.5 mb-4 min-h-[1rem]">
-                            {variants.map((v, idx) => (
-                              <div 
-                                 key={idx} 
-                                 className={cn("w-4 h-4 rounded-full border border-gray-200 ring-1 ring-transparent hover:ring-gray-300 transition-all cursor-help", v.bg)}
-                                 title={v.name}
-                              ></div>
-                            ))}
-                            {variants.length > 4 && (
-                              <div className="w-4 h-4 flex items-center justify-center text-[9px] text-gray-400 font-bold">+</div>
-                            )}
-                        </div>
-
-                        {/* Technical Tags */}
-                        <div className="flex flex-wrap gap-1.5 mb-4">
-                          <span className="text-[10px] font-medium text-gray-600 bg-gray-100 px-2 py-1 rounded-md">Inhale Activated</span>
-                          <span className="text-[10px] font-medium text-gray-600 bg-gray-100 px-2 py-1 rounded-md">Starter Kit</span>
-                          <span className="text-[10px] font-medium text-gray-600 bg-gray-100 px-2 py-1 rounded-md">{product.id % 2 === 0 ? "2ml" : "MTL"}</span>
-                        </div>
-                        
-                        {/* Price & Action */}
-                        <div className="mt-auto pt-4 border-t border-gray-50 flex items-end justify-between gap-3">
-                          <div className="flex flex-col">
-                            <div className="text-xl font-black leading-none text-gray-900">
-                              {product.price.toFixed(2)}€
-                            </div>
-                            <div className="text-[10px] text-blue-600 font-bold flex items-center gap-1 mt-1">
-                               <Rocket className="w-3 h-3" /> Recíbelo el {getDeliveryDate()}
-                            </div>
-                          </div>
-
-                          {/* Quick Add Button */}
-                          <div onClick={(e) => e.preventDefault()}>
-                            <QuickAddPopover product={product} triggerText="Añadir" minimal />
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  </div>
+                  <ProductCard 
+                    key={product.id || i}
+                    product={disposableProduct}
+                    badge={i % 3 === 0 ? "3x15€" : (i % 5 === 0 ? "NUEVO" : undefined)}
+                    type={i % 3 === 0 ? "offer" : "standard"}
+                  />
                 );
               })}
             </div>
